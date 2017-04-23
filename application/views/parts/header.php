@@ -33,7 +33,7 @@ $mainItems = Common::getMainItemsTransliterated(empty($activeId) ? null : $activ
             ?>
             <a href="<?= Common::getChangeLangLink($lang) ?>"
                class="<?= $class ?>">
-                <?= $lang == 'ru' ? "Рус" : "Eng" ?>
+                <?= $lang ?>
             </a>
             <?php
         }

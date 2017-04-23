@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 $currentMainItem = Common::getCurrentMainItem();
+
+
 $htmlClass = '';
 $moduleOptions = Modules::getOptions($currentMainItem);
 

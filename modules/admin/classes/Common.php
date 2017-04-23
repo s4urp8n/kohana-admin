@@ -293,9 +293,7 @@ class Common
             $items = self::getMainItems();
             foreach ($items as $key => &$item) {
                 $item = [
-                    'active'                           => (!is_null($activeId) && $activeId == $key)
-                        ? true
-                        : false,
+                    'active'                           => (!is_null($activeId) && $activeId == $key) ? true : false,
                     'id'                               => $key,
                     Common::getCurrentLang() . '_name' => $item,
                     'text'                             => $item,
@@ -364,7 +362,7 @@ class Common
 
     public static function getLangs()
     {
-        return ['ru', 'en'];
+        return ['ru', 'en', 'am'];
     }
 
     public static function getDefaultLang()

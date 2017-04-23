@@ -2,27 +2,29 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
+$langs = implode('|', Common::getLangs());
+
 Route::set('admin', 'admin')
      ->defaults(['controller' => 'admin', 'action' => 'menu',]);
 
 Route::set('articles', '<lang>/articles/<id>-(<name>)', [
     'id'   => '\d+',
     'name' => '[^/]+',
-    'lang' => 'ru|en',
+    'lang' => $langs,
 ])
      ->defaults(['controller' => 'articles', 'action' => 'index',]);
 
 Route::set('news', '<lang>/news/<id>-(<name>)', [
-    'lang' => 'ru|en',
     'id'   => '\d+',
     'name' => '[^/]+',
+    'lang' => $langs,
 ])
      ->defaults(['controller' => 'news', 'action' => 'index',]);
 
 Route::set('default', '(<lang>(/<main_item>(/<secondary_item>)))', [
-    'lang'           => 'ru|en',
     'main_item'      => '[^/]+',
     'secondary_item' => '[^/]+',
+    'lang'           => $langs,
 ])
      ->defaults([
                     'controller' => 'welcome',

@@ -45,6 +45,7 @@ class Controller_Welcome extends Controller_Template
                 if (in_array($secondary_item_param, array_column($secondary_items, 'translit'))) {
                     foreach ($secondary_items as $key => $item) {
                         if ($item['translit'] == $secondary_item_param) {
+
                             $secondary_items[$key]['active'] = true;
                             $secondary_item = ORM::factory('SecondaryItem', $key);
 
@@ -87,18 +88,16 @@ class Controller_Welcome extends Controller_Template
                     Common::redirect($childHref);
                 }
 
-                $content = View::factory(
-                    'parts/items_content', [
-                                             'item' => $main_item,
-                                         ]
-                );
+                $content = View::factory('parts/items_content', ['item' => $main_item,]);
 
                 $this->template->keywords = \Zver\StringHelper::load($main_item->get(Common::getCurrentLang() . "_keywords"))
                                                               ->toHTMLEntities()
                                                               ->get();
+
                 $this->template->description = \Zver\StringHelper::load($main_item->get(Common::getCurrentLang() . "_description"))
                                                                  ->toHTMLEntities()
                                                                  ->get();
+
                 $this->template->title = \Zver\StringHelper::load(
                     empty($main_item->get(Common::getCurrentLang() . "_title"))
                         ? $main_item->get(Common::getCurrentLang() . "_name")

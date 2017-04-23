@@ -1,6 +1,11 @@
 <?php
 
-\Zver\FileCache::clearAll();
+\Zver\Common::removeDirectoryContents(\Zver\FileCache::getDirectory());
+
+touch(\Zver\StringHelper::load(\Zver\FileCache::getDirectory())
+                        ->ensureEndingIs(DIRECTORY_SEPARATOR)
+                        ->append('.gitkeep')
+                        ->get());
 
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');

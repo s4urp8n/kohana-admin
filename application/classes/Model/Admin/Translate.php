@@ -20,6 +20,10 @@ class Model_Admin_Translate extends Model_Admin
                 'label' => 'Русский',
                 'type'  => 'editor',
             ],
+            'am'    => [
+                'label' => 'Армянский',
+                'type'  => 'editor',
+            ],
             'strip' => [
                 'label' => 'Убирать теги',
                 'type'  => 'bool',
@@ -64,6 +68,10 @@ class Model_Admin_Translate extends Model_Admin
                   ->select([
                                'ru',
                                'Русский',
+                           ])
+                  ->select([
+                               'am',
+                               'Армянский',
                            ])
                   ->from('translate')
                   ->order_by('_key');

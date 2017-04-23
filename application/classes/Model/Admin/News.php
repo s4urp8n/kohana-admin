@@ -43,12 +43,20 @@ class Model_Admin_News extends Model_Admin
                 'label' => 'НазваниеEN',
                 'type'  => 'text',
             ],
+            'am_caption'     => [
+                'label' => 'НазваниеAM',
+                'type'  => 'text',
+            ],
             'ru_text'        => [
                 'label' => 'СодержаниеRU',
                 'type'  => 'editor',
             ],
             'en_text'        => [
                 'label' => 'СодержаниеEN',
+                'type'  => 'editor',
+            ],
+            'am_text'        => [
+                'label' => 'СодержаниеAM',
                 'type'  => 'editor',
             ],
             '_datetime'      => [
@@ -67,6 +75,10 @@ class Model_Admin_News extends Model_Admin
                 'label' => 'titleEN',
                 'type'  => 'text',
             ],
+            'am_title'       => [
+                'label' => 'titleAM',
+                'type'  => 'text',
+            ],
             'ru_description' => [
                 'label' => 'descriptionRU',
                 'type'  => 'textarea',
@@ -75,12 +87,20 @@ class Model_Admin_News extends Model_Admin
                 'label' => 'descriptionEN',
                 'type'  => 'textarea',
             ],
+            'am_description' => [
+                'label' => 'descriptionAM',
+                'type'  => 'textarea',
+            ],
             'ru_keywords'    => [
                 'label' => 'keywordsRU',
                 'type'  => 'textarea',
             ],
             'en_keywords'    => [
                 'label' => 'keywordsEN',
+                'type'  => 'textarea',
+            ],
+            'am_keywords'    => [
+                'label' => 'keywordsAM',
                 'type'  => 'textarea',
             ],
             'visible'        => [

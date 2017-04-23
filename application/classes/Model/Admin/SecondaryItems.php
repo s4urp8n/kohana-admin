@@ -36,12 +36,20 @@ class Model_Admin_SecondaryItems extends Model_Admin
                 'label' => 'Название менюEN',
                 'type'  => 'text',
             ],
+            'am_name'        => [
+                'label' => 'Название менюAM',
+                'type'  => 'text',
+            ],
             'ru_content'     => [
                 'label' => 'СодержаниеRU',
                 'type'  => 'editor',
             ],
             'en_content'     => [
                 'label' => 'СодержаниеEN',
+                'type'  => 'editor',
+            ],
+            'am_content'     => [
+                'label' => 'СодержаниеAM',
                 'type'  => 'editor',
             ],
             'ru_title'       => [
@@ -52,6 +60,10 @@ class Model_Admin_SecondaryItems extends Model_Admin
                 'label' => 'titleEN',
                 'type'  => 'textarea',
             ],
+            'am_title'       => [
+                'label' => 'titleAM',
+                'type'  => 'textarea',
+            ],
             'ru_keywords'    => [
                 'label' => 'keywordsRU',
                 'type'  => 'textarea',
@@ -60,12 +72,20 @@ class Model_Admin_SecondaryItems extends Model_Admin
                 'label' => 'keywordsEN',
                 'type'  => 'textarea',
             ],
+            'am_keywords'    => [
+                'label' => 'keywordsAM',
+                'type'  => 'textarea',
+            ],
             'ru_description' => [
                 'label' => 'descriptionRU',
                 'type'  => 'textarea',
             ],
             'en_description' => [
                 'label' => 'descriptionEN',
+                'type'  => 'textarea',
+            ],
+            'am_description' => [
+                'label' => 'descriptionAM',
                 'type'  => 'textarea',
             ],
             'module'         => [

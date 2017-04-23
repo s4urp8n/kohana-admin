@@ -42,6 +42,10 @@ class Model_Admin_IndexGallery extends Model_Admin
                 'label' => 'ЗаголовокEN',
                 'type'  => 'text',
             ],
+            'am_caption' => [
+                'label' => 'ЗаголовокAM',
+                'type'  => 'text',
+            ],
             'link'       => [
                 'label' => 'Ссылка',
                 'type'  => 'text',
