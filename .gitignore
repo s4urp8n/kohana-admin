@@ -4,9 +4,9 @@
 /vendor
 /composer.lock
 /inc/system/previews/
-/application/cache/
+/application/cache/*
 !/application/cache/.gitkeep
-/application/logs/
+/application/logs/*
 !/application/logs/.gitkeep
 /application/config/database.php
 /node_modules/
