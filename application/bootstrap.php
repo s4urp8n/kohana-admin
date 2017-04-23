@@ -39,61 +39,6 @@ Kohana::init(
     ]
 );
 
-function getAssetsVersion()
-{
-    return file_get_contents(DOCROOT . 'version.txt');
-}
-
-function ___($key)
-{
-
-    $translate = ORM::factory('Translate')
-                    ->where('_key', '=', $key)
-                    ->find();
-
-    if (empty($translate->id)) {
-        $row = new Model_Translate();
-        $row->_key = $key;
-        $row->save();
-    } else {
-        $text = $translate->get(Common::getCurrentLang());
-        if (!empty($text)) {
-            if ($translate->strip == 1) {
-                return strip_tags($text);
-            }
-
-            return $text;
-        }
-    }
-
-    return $key;
-}
-
-function getFileContent($path)
-{
-    return file_get_contents(\Zver\Common::replaceSlashesToPlatformSlashes(DOCROOT . $path));
-}
-
-function printDie()
-{
-
-    $args = func_get_args();
-
-    foreach ($args as $arg) {
-        echo "<pre>";
-
-        if (is_array($arg)) {
-            print_r($arg);
-        } elseif (is_object($arg)) {
-            var_dump($arg);
-        } else {
-            echo $arg;
-        }
-        echo "</pre>";
-    }
-    die();
-}
-
 Cookie::$salt = "mKNB&F(T*фываьц3а23прафыадьзвGHMP<";
 
 \Zver\FileCache::setDirectory(APPPATH . 'cache' . DIRECTORY_SEPARATOR);

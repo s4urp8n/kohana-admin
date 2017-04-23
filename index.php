@@ -9,6 +9,7 @@ $system = 'system';
 define('EXT', '.php');
 
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 define('DOCROOT', realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR);
 

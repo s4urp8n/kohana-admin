@@ -101,8 +101,11 @@ gulp.task('updateVersion', ['clearBefore'], function () {
 });
 
 gulp.task('clearBefore', function () {
-    return gulp.src([buildDirectory + '/**'])
-        .pipe(clean());
+    if (fs.existsSync(buildDirectory)) {
+        return gulp.src([buildDirectory + '/**.js', buildDirectory + '/**.css'])
+            .pipe(clean());
+    }
+    return false;
 });
 
 gulp.task('watch', ['default'], function () {

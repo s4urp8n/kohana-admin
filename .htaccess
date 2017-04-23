@@ -7,7 +7,7 @@ RewriteBase /
 	Deny From All
 </Files>
 
-RewriteRule ^(?:application|system|modules|composer)\b.* index.php/$0 [L]
+RewriteRule ^(?:application|system|modules|vendor)\b.* index.php/$0 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php/$0 [PT]
