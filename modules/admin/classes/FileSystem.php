@@ -5,15 +5,13 @@
  */
 abstract class FileSystem
 {
-    
+
     public static function removeDirectoryContent($directory)
     {
-        if (file_exists($directory))
-        {
+        if (file_exists($directory)) {
             $temp = '';
             $files = array_diff(scandir($directory), ['.', '..']);
-            foreach ($files as $file)
-            {
+            foreach ($files as $file) {
                 $temp = $directory . '/' . $file;
                 (is_dir($temp))
                     ? static::removeDirectory($temp)
@@ -21,17 +19,16 @@ abstract class FileSystem
             }
         }
     }
-    
+
     public static function removeDirectory($directory)
     {
-        if (file_exists($directory))
-        {
+        if (file_exists($directory)) {
             static::removeDirectoryContent($directory);
-            
+
             return rmdir($directory);
         }
     }
-    
+
     public static function getFileContents($file_name)
     {
         $handle = fopen($file_name, 'r');
@@ -39,10 +36,10 @@ abstract class FileSystem
         $value = fread($handle, filesize($file_name));
         flock($handle, LOCK_UN);
         fclose($handle);
-        
+
         return $value;
     }
-    
+
     public static function setFileContents($file_name, $content, $mode = 'w')
     {
         $handle = fopen($file_name, $mode);
@@ -51,5 +48,5 @@ abstract class FileSystem
         flock($handle, LOCK_UN);
         fclose($handle);
     }
-    
+
 }

@@ -4,54 +4,49 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Articles extends Model_Admin
 {
-    
+
     public function getUploadsClass()
     {
         return 'inlineBlock';
     }
-    
+
     public function getOutputFunctions()
     {
         return [
-            'Изображение' => function ($row)
-            {
-                
+            'Изображение' => function ($row) {
+
                 $model = new self();
                 $uploadsKeys = $this->getUploadsParams();
                 $uploadsKeys = array_keys($uploadsKeys);
                 $uploads = [];
-                
-                foreach ($uploadsKeys as $key)
-                {
+
+                foreach ($uploadsKeys as $key) {
                     $uploads = array_merge($uploads, $model->getSharedModelUploads($model, $row['id'], $key));
                 }
-                
+
                 //only images
-                foreach ($uploads as $key => $upload)
-                {
-                    if (Admin::isImageFile($upload))
-                    {
+                foreach ($uploads as $key => $upload) {
+                    if (Admin::isImageFile($upload)) {
                         ?>
                         <img src="<?= ImagePreview::getPreview($upload, 100, 100) ?>"/>
                         <?php
                     }
                     break;
                 }
-                
+
             },
         ];
     }
-    
+
     public static function getUploadsParams($primary = null)
     {
         $sizes = ORM::factory('Sizes')
                     ->where('visible', '=', 1)
                     ->find_all();
-        
+
         $result = [];
-        
-        foreach ($sizes as $size)
-        {
+
+        foreach ($sizes as $size) {
             $result[$size->width . 'x' . $size->height] = [
                 'directory'         => __CLASS__ . DIRECTORY_SEPARATOR . ($size->width . 'x' . $size->height)
                                        . DIRECTORY_SEPARATOR . (is_null($primary)
@@ -61,23 +56,23 @@ class Model_Admin_Articles extends Model_Admin
                 'allowedExtensions' => ['jpeg', 'jpg', 'png'],
             ];
         }
-        
+
         return $result;
     }
-    
+
     public function getUnfilteredColumns()
     {
         return [
             'Изображение',
         ];
     }
-    
+
     public function getUploadsText()
     {
         return 'Загружать картинки нужно соблюдая пропорции!<br/>
         Например: картину размером 45х30см надо грузить 450х300 пикселей.';
     }
-    
+
     public function getInsertColumns()
     {
         return [
@@ -103,20 +98,19 @@ class Model_Admin_Articles extends Model_Admin
             ),
         ];
     }
-    
+
     public static function getCommonColumns()
     {
-        
+
         $bagsPickerImages = [
-            'getImage' => function ($id)
-            {
+            'getImage' => function ($id) {
                 $bag = ORM::factory('Bags', $id);
                 $image = $bag->getPicture(true);
-                
+
                 return ['data-img-src' => $image];
             },
         ];
-        
+
         return [
             'article'      => [
                 'label' => 'Артикул',
@@ -153,7 +147,7 @@ class Model_Admin_Articles extends Model_Admin
             ),
         ];
     }
-    
+
     public function getEditData($primary)
     {
         return [
@@ -180,12 +174,12 @@ class Model_Admin_Articles extends Model_Admin
             ),
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function getInfo()
     {
         return [
@@ -194,7 +188,7 @@ class Model_Admin_Articles extends Model_Admin
             'group'   => 'dicts',
         ];
     }
-    
+
     public function deleteData($id = null)
     {
         parent::deleteUploads($this, $id);
@@ -211,10 +205,10 @@ class Model_Admin_Articles extends Model_Admin
           ->where('id_article', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $categoriesSelect = '(select GROUP_CONCAT(name ORDER BY name SEPARATOR ", " ) from secondary_items where id in
             (select
               id_category
@@ -223,7 +217,7 @@ class Model_Admin_Articles extends Model_Admin
             where
               articles_categories.id_article=articles.id)
         )';
-        
+
         $data = DB::select('id')
                   ->select(['id', 'Изображение'])
                   ->select(['article', 'Номер'])
@@ -231,9 +225,9 @@ class Model_Admin_Articles extends Model_Admin
                   ->select(['visible', 'Видимость'])
                   ->from('articles')
                   ->order_by('article');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
 }

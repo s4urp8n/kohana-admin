@@ -28,60 +28,60 @@ class Model_Admin_MainItems extends Model_Admin
     public static function getCommonColumns()
     {
         return [
-            'ru_name'      => [
+            'ru_name'        => [
                 'label' => 'КатегорияРусский',
                 'type'  => 'text',
             ],
-            'en_name'      => [
+            'en_name'        => [
                 'label' => 'КатегорияАнглийский',
                 'type'  => 'text',
             ],
-            'ru_content'   => [
+            'ru_content'     => [
                 'label' => 'СодержаниеРусский',
                 'type'  => 'editor',
             ],
-            'en_content'   => [
+            'en_content'     => [
                 'label' => 'СодержаниеАнглийский',
                 'type'  => 'editor',
             ],
-            'module'       => [
+            'module'         => [
                 'label'   => 'Модуль',
                 'type'    => 'select',
                 'options' => Modules::getModulesKeys(),
             ],
-            'ru_title'        => [
+            'ru_title'       => [
                 'label' => 'titleRU',
                 'type'  => 'textarea',
             ],
-            'en_title'        => [
+            'en_title'       => [
                 'label' => 'titleEN',
                 'type'  => 'textarea',
             ],
-            'ru_keywords'     => [
+            'ru_keywords'    => [
                 'label' => 'keywordsRU',
                 'type'  => 'textarea',
             ],
-            'en_keywords'     => [
+            'en_keywords'    => [
                 'label' => 'keywordsEN',
                 'type'  => 'textarea',
             ],
-            'ru_description'  => [
+            'ru_description' => [
                 'label' => 'descriptionRU',
                 'type'  => 'textarea',
             ],
-            'en_description'  => [
+            'en_description' => [
                 'label' => 'descriptionEN',
                 'type'  => 'textarea',
             ],
-            'go_child'     => [
+            'go_child'       => [
                 'label' => 'Переходить на первую дочернюю категорию',
                 'type'  => 'bool',
             ],
-            'show_caption' => [
+            'show_caption'   => [
                 'label' => 'Показывать заголовок',
                 'type'  => 'bool',
             ],
-            'visible'      => [
+            'visible'        => [
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],

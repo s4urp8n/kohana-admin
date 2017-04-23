@@ -4,10 +4,9 @@
               AdminHREF::getFullCurrentHREF()
           ) ?>'
           method="post">
-        
+
         <?php
-        if (!empty($embed))
-        {
+        if (!empty($embed)) {
             ?>
             <div class="alert alert-info">
                 Для оформления заказа войдите на сайт или зарегистрируйтесь
@@ -15,10 +14,9 @@
             <?php
         }
         ?>
-        
+
         <?php
-        if (empty($embed))
-        {
+        if (empty($embed)) {
             ?>
             <div class="form-group">
                 <h4 class="text-center">
@@ -29,10 +27,9 @@
             <?php
         }
         ?>
-        
+
         <?php
-        if (!empty($error))
-        {
+        if (!empty($error)) {
             echo AdminHTML::renderMessage($error, 'danger');
         }
         ?>
@@ -40,7 +37,7 @@
             <label for="login" class="control-label">
                 Имя пользователя:
             </label>
-            
+
             <div>
                 <input type="text"
                        name="login"
@@ -56,7 +53,7 @@
             <label for="password" class="control-label">
                 Пароль:
             </label>
-            
+
             <div>
                 <input name='password'
                        type="password"
@@ -87,8 +84,7 @@
             </div>
         </div>
         <?php
-        if (empty($embed))
-        {
+        if (empty($embed)) {
             ?>
             <div class="form-group">
                 <div>

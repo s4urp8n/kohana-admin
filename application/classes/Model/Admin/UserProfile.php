@@ -4,7 +4,7 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_UserProfile extends Model_Admin
 {
-    
+
     public function getEditData($primary)
     {
         return [
@@ -13,7 +13,7 @@ class Model_Admin_UserProfile extends Model_Admin
             'columns'   => self::getCommonColumns(),
         ];
     }
-    
+
     public static function getCommonColumns()
     {
         return [
@@ -31,15 +31,15 @@ class Model_Admin_UserProfile extends Model_Admin
             ],
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri(
-            'dataEdit', $this->getShortName(), Auth::instance()
-                                                   ->get_user()
-        ) . '?ref=' . urlencode(AdminHREF::getFullCurrentHREF());
+                'dataEdit', $this->getShortName(), Auth::instance()
+                                                       ->get_user()
+            ) . '?ref=' . urlencode(AdminHREF::getFullCurrentHREF());
     }
-    
+
     public function getInfo()
     {
         return [
@@ -48,7 +48,7 @@ class Model_Admin_UserProfile extends Model_Admin
             'group'   => 'content',
         ];
     }
-    
+
     public function getAllowedRoles()
     {
         $primary = Request::initial()
@@ -56,22 +56,21 @@ class Model_Admin_UserProfile extends Model_Admin
         if ($primary == Auth::instance()
                             ->get_user()
             || is_null($primary)
-        )
-        {
+        ) {
             return ['admin', 'user'];
         }
-        
+
         return ['admin'];
     }
-    
+
     public function getDeletionRoles()
     {
         return $this->getAllowedRoles();
     }
-    
+
     public function getModifyingRoles()
     {
         return $this->getAllowedRoles();
     }
-    
+
 }

@@ -30,8 +30,8 @@ class Model_Admin_Translate extends Model_Admin
     public function deleteData($id = null)
     {
         DB::delete('translate')
-                ->where('id', '=', $id)
-                ->execute();
+          ->where('id', '=', $id)
+          ->execute();
     }
 
     public function getEditData($primary)
@@ -52,24 +52,24 @@ class Model_Admin_Translate extends Model_Admin
     {
 
         $data = DB::select()
-                ->select('id')
-                ->select([
-                    '_key',
-                    'Название',
-                ])
-                ->select([
-                    'en',
-                    'Английский',
-                ])
-                ->select([
-                    'ru',
-                    'Русский',
-                ])
-                ->from('translate')
-                ->order_by('_key');
+                  ->select('id')
+                  ->select([
+                               '_key',
+                               'Название',
+                           ])
+                  ->select([
+                               'en',
+                               'Английский',
+                           ])
+                  ->select([
+                               'ru',
+                               'Русский',
+                           ])
+                  ->from('translate')
+                  ->order_by('_key');
 
         return $data->execute()
-                        ->as_array();
+                    ->as_array();
     }
 
     public function getInfo()

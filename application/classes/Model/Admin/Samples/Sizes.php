@@ -4,7 +4,7 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Sizes extends Model_Admin
 {
-    
+
     public function getInsertColumns()
     {
         return [
@@ -12,7 +12,7 @@ class Model_Admin_Sizes extends Model_Admin
             'columns'   => self::getCommonColumns(),
         ];
     }
-    
+
     public static function getCommonColumns()
     {
         return [
@@ -35,7 +35,7 @@ class Model_Admin_Sizes extends Model_Admin
             ],
         ];
     }
-    
+
     public function getEditData($primary)
     {
         return [
@@ -44,12 +44,12 @@ class Model_Admin_Sizes extends Model_Admin
             'columns'   => self::getCommonColumns(),
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function getInfo()
     {
         return [
@@ -58,17 +58,17 @@ class Model_Admin_Sizes extends Model_Admin
             'group'   => 'dicts',
         ];
     }
-    
+
     public function deleteData($id = null)
     {
         DB::delete('sizes')
           ->where('id', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $data = DB::select('id')
                   ->select(['width', 'Ширина'])
                   ->select(['height', 'Высота'])
@@ -77,9 +77,9 @@ class Model_Admin_Sizes extends Model_Admin
                   ->from('sizes')
                   ->order_by('width')
                   ->order_by('height');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
 }

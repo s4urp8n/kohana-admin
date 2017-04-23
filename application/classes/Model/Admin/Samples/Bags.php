@@ -4,43 +4,39 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Bags extends Model_Admin
 {
-    
+
     public function getUploadsClass()
     {
         return 'inlineBlock';
     }
-    
+
     public function getOutputFunctions()
     {
         return [
-            'Изображения' => function ($row)
-            {
-                
+            'Изображения' => function ($row) {
+
                 $model = new self();
                 $uploadsKeys = $this->getUploadsParams();
                 $uploadsKeys = array_keys($uploadsKeys);
                 $uploads = [];
-                
-                foreach ($uploadsKeys as $key)
-                {
+
+                foreach ($uploadsKeys as $key) {
                     $uploads = array_merge($uploads, $model->getSharedModelUploads($model, $row['id'], $key));
                 }
-                
+
                 //only images
-                foreach ($uploads as $key => $upload)
-                {
-                    if (Admin::isImageFile($upload))
-                    {
+                foreach ($uploads as $key => $upload) {
+                    if (Admin::isImageFile($upload)) {
                         ?>
                         <img src="<?= $upload ?>"/>
                         <?php
                     }
                 }
-                
+
             },
         ];
     }
-    
+
     public static function getUploadsParams($primary = null)
     {
         return [
@@ -73,14 +69,14 @@ class Model_Admin_Bags extends Model_Admin
             ],
         ];
     }
-    
+
     public function getUnfilteredColumns()
     {
         return [
             'Изображения',
         ];
     }
-    
+
     public function getUploadsText()
     {
         return '<strong>Заполнение</strong> - это повторяющийся участок багета, в данном случае верхняя его часть.<br/>
@@ -89,7 +85,7 @@ class Model_Admin_Bags extends Model_Admin
                 То есть заполнение багета шириной 2 см должно быть 20 пикселей в высоту и необходимой для повторения ширины, а уголок должен быть 40х40 пикселей
                 с прозрачным фоном.';
     }
-    
+
     public function getInsertColumns()
     {
         return [
@@ -99,20 +95,18 @@ class Model_Admin_Bags extends Model_Admin
             'uploadsDirs' => self::getUploadsParams(),
         ];
     }
-    
+
     public function getValidatePost()
     {
-        return function ($post)
-        {
-            if (empty($post['number']))
-            {
+        return function ($post) {
+            if (empty($post['number'])) {
                 return 'Название не должно быть пустым';
             }
-            
+
             return true;
         };
     }
-    
+
     public static function getCommonColumns()
     {
         return [
@@ -126,7 +120,7 @@ class Model_Admin_Bags extends Model_Admin
             ],
         ];
     }
-    
+
     public function getEditData($primary)
     {
         return [
@@ -137,12 +131,12 @@ class Model_Admin_Bags extends Model_Admin
             'columns'     => self::getCommonColumns(),
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function getInfo()
     {
         return [
@@ -151,7 +145,7 @@ class Model_Admin_Bags extends Model_Admin
             'group'   => 'dicts',
         ];
     }
-    
+
     public function deleteData($id = null)
     {
         parent::deleteUploads($this, $id);
@@ -159,10 +153,10 @@ class Model_Admin_Bags extends Model_Admin
           ->where('id', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $data = DB::select('id')
                   ->select(['number', 'Номер'])
                   ->select(['id', 'Изображения'])
@@ -174,9 +168,9 @@ class Model_Admin_Bags extends Model_Admin
                   )
                   ->from('bags')
                   ->order_by('number');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
 }

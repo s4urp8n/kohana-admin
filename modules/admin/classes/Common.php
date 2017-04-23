@@ -364,7 +364,7 @@ class Common
 
     public static function getLangs()
     {
-        return ['ru', 'en'];
+        return ['ru', 'en', 'am', 'fr'];
     }
 
     public static function getDefaultLang()

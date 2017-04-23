@@ -4,7 +4,7 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_SecondaryItems extends Model_Admin
 {
-    
+
     public function getInsertColumns()
     {
         return [
@@ -13,7 +13,7 @@ class Model_Admin_SecondaryItems extends Model_Admin
             'validate'  => $this->getValidatePost(),
         ];
     }
-    
+
     public static function getCommonColumns()
     {
         $options = DB::select('id', 'ru_name')
@@ -21,82 +21,80 @@ class Model_Admin_SecondaryItems extends Model_Admin
                      ->order_by('ru_name')
                      ->execute()
                      ->as_array('id', 'ru_name');
-        
+
         return [
-            'main_item_id' => [
+            'main_item_id'   => [
                 'label'   => 'Категория',
                 'type'    => 'select',
                 'options' => $options,
             ],
-            'ru_name'         => [
+            'ru_name'        => [
                 'label' => 'Название менюRU',
                 'type'  => 'text',
             ],
-            'en_name'         => [
+            'en_name'        => [
                 'label' => 'Название менюEN',
                 'type'  => 'text',
             ],
-            'ru_content'      => [
+            'ru_content'     => [
                 'label' => 'СодержаниеRU',
                 'type'  => 'editor',
             ],
-            'en_content'      => [
+            'en_content'     => [
                 'label' => 'СодержаниеEN',
                 'type'  => 'editor',
             ],
-            'ru_title'        => [
+            'ru_title'       => [
                 'label' => 'titleRU',
                 'type'  => 'textarea',
             ],
-            'en_title'        => [
+            'en_title'       => [
                 'label' => 'titleEN',
                 'type'  => 'textarea',
             ],
-            'ru_keywords'     => [
+            'ru_keywords'    => [
                 'label' => 'keywordsRU',
                 'type'  => 'textarea',
             ],
-            'en_keywords'     => [
+            'en_keywords'    => [
                 'label' => 'keywordsEN',
                 'type'  => 'textarea',
             ],
-            'ru_description'  => [
+            'ru_description' => [
                 'label' => 'descriptionRU',
                 'type'  => 'textarea',
             ],
-            'en_description'  => [
+            'en_description' => [
                 'label' => 'descriptionEN',
                 'type'  => 'textarea',
             ],
-            'module'       => [
+            'module'         => [
                 'label'   => 'Модуль',
                 'type'    => 'select',
                 'options' => Modules::getModulesKeys(),
             ],
-            'show_caption' => [
+            'show_caption'   => [
                 'label' => 'Показывать заголовок',
                 'type'  => 'bool',
             ],
-            'visible'      => [
+            'visible'        => [
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],
         ];
     }
-    
+
     public function getValidatePost()
     {
-        return function ($post)
-        {
-            if (empty($post['ru_name']) || empty($post['en_name']))
-            {
+        return function ($post) {
+            if (empty($post['ru_name']) || empty($post['en_name'])) {
                 return 'Название не должно быть пустым';
             }
-            
+
             return true;
         };
     }
-    
+
     public function getEditData($primary)
     {
         return [
@@ -106,27 +104,27 @@ class Model_Admin_SecondaryItems extends Model_Admin
             'columns'   => self::getCommonColumns(),
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function getAllowedRoles()
     {
         return ['admin'];
     }
-    
+
     public function getDeletionRoles()
     {
         return ['admin'];
     }
-    
+
     public function getModifyingRoles()
     {
         return ['admin'];
     }
-    
+
     public function getInfo()
     {
         return [
@@ -135,22 +133,22 @@ class Model_Admin_SecondaryItems extends Model_Admin
             'group'   => 'content',
         ];
     }
-    
+
     public function getUnfilteredColumns()
     {
         return ['Содержание'];
     }
-    
+
     public function deleteData($id = null)
     {
         DB::delete('secondary_items')
           ->where('id', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $data = DB::select('secondary_items.id')
                   ->select(
                       [
@@ -164,9 +162,9 @@ class Model_Admin_SecondaryItems extends Model_Admin
                   ->on('main_items.id', '=', 'secondary_items.main_item_id')
                   ->order_by('main_items.ru_name')
                   ->order_by('secondary_items.ru_name');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
 }

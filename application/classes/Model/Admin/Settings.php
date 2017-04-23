@@ -7,19 +7,19 @@ class Model_Admin_Settings extends Model_Admin
     public static function getCommonColumns()
     {
         return [
-            'contact_email'      => [
+            'contact_email'     => [
                 'label' => 'Контактный_EMAIL',
                 'type'  => 'email',
             ],
-            'contact_phone'      => [
+            'contact_phone'     => [
                 'label' => 'Контактный_Телефон',
                 'type'  => 'text',
             ],
-            'contact_latitude'   => [
+            'contact_latitude'  => [
                 'label' => 'Широта',
                 'type'  => 'text',
             ],
-            'contact_longitude'  => [
+            'contact_longitude' => [
                 'label' => 'Долгота',
                 'type'  => 'text',
             ],

@@ -7,17 +7,16 @@
             </h4>
         </div>
         <?php
-        if (!empty($error))
-        {
+        if (!empty($error)) {
             echo AdminHTML::renderMessage($error, 'danger');
         }
         ?>
         <div class="form-group">
-            
+
             <label for="email" class="control-label">
                 Email:
             </label>
-            
+
             <div>
                 <input type="email"
                        name="email"
@@ -29,11 +28,11 @@
             </div>
         </div>
         <div class="form-group">
-            
+
             <label for="password" class="control-label">
                 Пароль:
             </label>
-            
+
             <div>
                 <input name='password'
                        type="password"
@@ -45,11 +44,11 @@
             </div>
         </div>
         <div class="form-group">
-            
+
             <label for="password" class="control-label">
                 Проверочный код с картинки:
             </label>
-            
+
             <div>
                 <?= Captcha::instance()
                            ->render() ?>

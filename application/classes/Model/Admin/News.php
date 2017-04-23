@@ -4,7 +4,7 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_News extends Model_Admin
 {
-    
+
     public function getInsertColumns()
     {
         return [
@@ -13,7 +13,7 @@ class Model_Admin_News extends Model_Admin
             'columns'     => self::getCommonColumns(),
         ];
     }
-    
+
     public static function getUploadsParams($primary = null)
     {
         return [
@@ -31,7 +31,7 @@ class Model_Admin_News extends Model_Admin
             ],
         ];
     }
-    
+
     public static function getCommonColumns()
     {
         return [
@@ -43,19 +43,19 @@ class Model_Admin_News extends Model_Admin
                 'label' => 'НазваниеEN',
                 'type'  => 'text',
             ],
-            'ru_text'       => [
+            'ru_text'        => [
                 'label' => 'СодержаниеRU',
                 'type'  => 'editor',
             ],
-            'en_text'       => [
+            'en_text'        => [
                 'label' => 'СодержаниеEN',
                 'type'  => 'editor',
             ],
-            '_datetime'   => [
+            '_datetime'      => [
                 'label' => 'Дата',
                 'type'  => 'date',
             ],
-            'videos'      => [
+            'videos'         => [
                 'label' => 'Видео с youtube(вставлять ссылку)',
                 'type'  => 'youtube',
             ],
@@ -83,13 +83,13 @@ class Model_Admin_News extends Model_Admin
                 'label' => 'keywordsEN',
                 'type'  => 'textarea',
             ],
-            'visible'     => [
+            'visible'        => [
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],
         ];
     }
-    
+
     public function getEditData($primary)
     {
         return [
@@ -99,27 +99,27 @@ class Model_Admin_News extends Model_Admin
             'columns'     => self::getCommonColumns(),
         ];
     }
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function getAllowedRoles()
     {
         return ['admin'];
     }
-    
+
     public function getDeletionRoles()
     {
         return ['admin'];
     }
-    
+
     public function getModifyingRoles()
     {
         return ['admin'];
     }
-    
+
     public function getInfo()
     {
         return [
@@ -128,7 +128,7 @@ class Model_Admin_News extends Model_Admin
             'group'   => 'content',
         ];
     }
-    
+
     public function deleteData($id = null)
     {
         parent::deleteUploads($this, $id);
@@ -136,10 +136,10 @@ class Model_Admin_News extends Model_Admin
           ->where('id', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $data = DB::select('id')
                   ->select(['ru_caption', 'Название'])
                   ->select(
@@ -151,9 +151,9 @@ class Model_Admin_News extends Model_Admin
                   ->from('news')
                   ->order_by('_datetime', 'desc')
                   ->order_by('ru_caption');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
 }

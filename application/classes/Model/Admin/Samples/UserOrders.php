@@ -4,22 +4,22 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_UserOrders extends Model_Admin_Orders
 {
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
-    
+
     public function deleteData($id = null)
     {
         DB::delete('orders')
           ->where('id', '=', $id)
           ->execute();
     }
-    
+
     public function getData()
     {
-        
+
         $data = DB::select('id')
                   ->select(['cart', 'Заказ'])
                   ->select(['date', 'Дата'])
@@ -33,11 +33,11 @@ class Model_Admin_UserOrders extends Model_Admin_Orders
                   ->order_by('completed', 'asc')
                   ->order_by('date', 'desc')
                   ->order_by('time', 'desc');
-        
+
         return $data->execute()
                     ->as_array();
     }
-    
+
     public function getInfo()
     {
         return [
@@ -46,20 +46,20 @@ class Model_Admin_UserOrders extends Model_Admin_Orders
             'group'   => 'content',
         ];
     }
-    
+
     public function getAllowedRoles()
     {
         return ['user'];
     }
-    
+
     public function getDeletionRoles()
     {
         return ['admin'];
     }
-    
+
     public function getModifyingRoles()
     {
         return ['admin'];
     }
-    
+
 }

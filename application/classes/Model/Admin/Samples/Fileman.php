@@ -4,12 +4,12 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Fileman extends Model_Admin
 {
-    
+
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('fileman', 'Fileman');
     }
-    
+
     public function getInfo()
     {
         return [
@@ -18,5 +18,5 @@ class Model_Admin_Fileman extends Model_Admin
             'group'   => 'upload',
         ];
     }
-    
+
 }

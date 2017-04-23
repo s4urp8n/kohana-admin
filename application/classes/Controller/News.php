@@ -23,13 +23,13 @@ class Controller_News extends Controller_Template
                                          ]
             );
 
-            $activeId= ORM::factory('MainItem')
-                          ->where('module', '=', Modules::$MOD_NEWS)
-                          ->find()->id;
+            $activeId = ORM::factory('MainItem')
+                           ->where('module', '=', Modules::$MOD_NEWS)
+                           ->find()->id;
 
             $this->template->header = View::factory(
                 'parts/header', [
-                                  'activeId' =>$activeId,
+                                  'activeId' => $activeId,
                               ]
             );
             $this->template->footer = View::factory('parts/footer');
