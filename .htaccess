@@ -1,0 +1,27 @@
+RewriteEngine On
+
+RewriteBase /
+
+<Files .*>
+	Order Deny,Allow
+	Deny From All
+</Files>
+
+RewriteRule ^(?:application|system|modules|composer)\b.* index.php/$0 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php/$0 [PT]
+
+<IfModule expires_module>
+    ExpiresActive On
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType application/x-shockwave-flash "access 1 year"
+</IfModule>
+
+<IfModule pagespeed_module>
+    ModPagespeed Off
+</IfModule>
+

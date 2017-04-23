@@ -1,0 +1,12 @@
+{
+  "--version--.css": [
+    "inc/assets/styles/font-awesome.scss",
+    "inc/assets/fotorama-4.6.4/fotorama.css",
+    "inc/assets/styles/app.scss"
+  ],
+  "--version--.js": [
+    "inc/assets/scripts/jquery-3.1.1.min.js",
+    "inc/assets/fotorama-4.6.4/fotorama.min.js",
+    "inc/assets/scripts/app.js"
+  ]
+}

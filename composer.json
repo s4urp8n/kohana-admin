@@ -1,0 +1,17 @@
+{
+  "name": "s4urp8n/kohana-admin",
+  "description": "kohana admin site template",
+  "minimum-stability": "stable",
+  "config": {
+    "optimize-autoloader": true
+  },
+  "require": {
+    "zver/string-helper": "^2.1",
+    "zver/directory-walker": "^1.0",
+    "zver/array-helper": "^1.0",
+    "imagine/imagine": "^0.6.3",
+    "swiftmailer/swiftmailer": "^5.4",
+    "fzaninotto/faker": "^1.6",
+    "zver/file-cache": "^1.1"
+  }
+}

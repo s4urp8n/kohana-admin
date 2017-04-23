@@ -1,0 +1,33 @@
+$columns: 100;
+$columnsByMax: 10;
+
+$defaultFontFamily: "Open Sans";
+$defaultHeadingFontFamily: "Roboto Condensed";
+$defaultFontSize: 16px;
+$defaultColor: #555;
+$defaultHeadingsColor: #000;
+$headerFontSizeStep: $defaultFontSize/5;
+$defaultLineHeight: 1.2;
+
+$defaultAlign: left;
+$defaultVerticalAlign: top;
+
+$defaultOffset: 10px;
+
+$fontsPath: "/inc/assets/fonts";
+
+$minWidth: 1000px;
+$maxWidth: 1100px;
+
+$bodyPadding: 40px 40px 0 40px;
+
+@import "partials/mixins";
+@import "partials/fonts/Roboto";
+@import "partials/fonts/OpenSans";
+@import "partials/fonts/RobotoCondensed";
+@import "partials/base";
+@import "partials/typo";
+@import "partials/style";
+@import "partials/print";
+
+

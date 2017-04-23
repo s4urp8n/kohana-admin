@@ -1,0 +1,469 @@
+$borderSize: 1px;
+$passiveColor: #E0E1E3;
+$hoverColor: #F0F1F3;
+$activeColor: #5a7fd5;
+
+.wrapper {
+  display: table;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  table-layout: auto;
+  &-top,
+  &-bottom {
+    display: table-row;
+  }
+  &-top {
+    height: auto;
+    vertical-align: top;
+  }
+  &-bottom {
+    vertical-align: bottom;
+    height: 1%;
+  }
+}
+
+.header {
+  display: block;
+  width: 100%;
+  text-align: center;
+  height: auto;
+  &-logo {
+    display: block;
+    float: left;
+    text-align: left;
+    &-logo {
+      float: left;
+      display: block;
+      svg {
+        width: 85px;
+        height: 74px;
+        display: block;
+      }
+    }
+    &-slogan {
+      float: left;
+      display: block;
+      margin: 5px 0 0 10px;
+      &-name {
+        font-family: "Open Sans";
+        font-weight: 700;
+        font-size: 170%;
+        color: $activeColor;
+        text-transform: uppercase;
+      }
+      &-slogan {
+        font-size: 75%;
+        max-width: 210px;
+      }
+    }
+  }
+  &-contacts {
+    text-align: right;
+    display: block;
+    float: right;
+    &-phone,
+    &-email,
+    &-address {
+      display: block;
+      text-decoration: none;
+    }
+    &-phone {
+      font-weight: bold;
+      font-size: 190%;
+      color: $activeColor;
+    }
+    &-email,
+    &-address {
+      color: $activeColor;
+      font-size: 80%;
+    }
+  }
+  &-langs {
+    text-align: center;
+    display: inline-block;
+    margin: 25px 0 0 0;
+    &-lang {
+      display: block;
+      float: left;
+      width: auto;
+      text-decoration: none;
+      padding: 5px 8px;
+      border-bottom: $borderSize solid #fff;
+      border: $borderSize solid $activeColor;
+      &--active {
+        background: $activeColor;
+        @include linearGradient(to bottom, lighten($activeColor, 10%), $activeColor);
+        color: #fff;
+      }
+    }
+  }
+}
+
+.navigation {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: $borderSize solid $activeColor;
+  margin: 20px 0 0 0;
+  overflow: hidden;
+  @include boxShadow(0 0 1px #ccc);
+  &-inner {
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    margin: auto;
+    &-item {
+      display: table-cell;
+      text-decoration: none;
+      font-family: "Roboto Condensed";
+      width: auto;
+      color: #000;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      font-weight: 700;
+      word-break: keep-all;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      &:hover {
+        background: $hoverColor;
+      }
+      &--active,
+      &--active:hover {
+        background: $activeColor;
+        @include linearGradient(to bottom, lighten($activeColor, 10%), $activeColor);
+        color: #fff;
+      }
+    }
+  }
+}
+
+.footer {
+  border-top: $borderSize solid $activeColor;
+  display: block;
+  width: 100%;
+  margin: 40px 0 0 0;
+  &-texts,
+  &-nav,
+  &-links {
+    padding-top: 30px;
+    padding-bottom: 60px;
+  }
+  &-texts {
+    float: left;
+    width: 25%;
+    display: block;
+    padding-right: 20px;
+    text-align: left;
+    padding-top: 40px;
+    &-block {
+      font-size: 85%;
+      p {
+        font-size: inherit;
+        margin: 0;
+      }
+      margin: 0 0 15px 0;
+    }
+  }
+  &-nav {
+    float: left;
+    width: 19%;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+    &-item {
+      display: block;
+      padding: 5px 8px;
+      margin: 5px 0;
+      text-decoration: none;
+    }
+  }
+  &-links {
+    text-align: right;
+    padding-left: 20px;
+    display: block;
+    width: 37%;
+    float: right;
+    &-item {
+      display: block;
+      text-align: center;
+      float: left;
+      width: 25%;
+      @include boxSizing();
+      img, svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.content-block {
+  width: 100%;
+  display: block;
+  margin: 20px 0;
+  &-content {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  &-panel {
+    display: block;
+    float: left;
+    width: 20%;
+    .content-block-panel-item {
+      display: block;
+      width: 100%;
+      padding: 13px 8px;
+      text-decoration: none;
+      border: $borderSize solid transparent;
+      &:hover {
+        border-color: $passiveColor;
+      }
+      &--active,
+      &--active:hover {
+        border-color: $activeColor;
+        @include linearGradient(to bottom, lighten($activeColor, 10%), $activeColor);
+        color: #fff;
+      }
+    }
+  }
+  &--with-panel {
+    .content-block-content {
+      float: left;
+      width: 80%;
+      padding: 0 0 0 40px;
+      > h1:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.newsForm {
+  margin: 20px 0;
+  display: block;
+  .left {
+    float: left;
+    width: 50%;
+    text-align: left;
+    h1 {
+      margin: 0;
+    }
+  }
+  .right {
+    width: 50%;
+    text-align: right;
+    float: right;
+    select {
+      padding: 5px;
+      display: inline-block;
+      width: auto;
+    }
+  }
+}
+
+.news-list {
+  &-item {
+    display: block;
+    border: $borderSize solid $passiveColor;
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    text-decoration: none;
+    &-date {
+      display: block;
+      font-size: 90%;
+    }
+    &-caption {
+      display: block;
+      font-weight: 700;
+      font-size: 120%;
+      margin: 3px 0;
+    }
+    &-text {
+      display: block;
+    }
+    &-dummy,
+    &-image {
+      display: block;
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: gray;
+      margin: 0 20px 0 0;
+    }
+    &-dummy {
+    }
+    &-image {
+
+    }
+    &:hover {
+      border-color: $activeColor;
+      border-style: solid;
+    }
+  }
+}
+
+.breadcrumbs {
+  margin: 20px 0;
+  &-item,
+  &-sep,
+  &-current {
+    text-overflow: ellipsis;
+    text-decoration: none;
+    white-space: nowrap;
+    max-width: 200px;
+    float: left;
+    padding: 5px;
+  }
+  &-sep {
+
+  }
+  &-item {
+
+  }
+  &-current {
+
+  }
+}
+
+.news-navigation {
+  display: block;
+  margin: 30px 0;
+  padding: 0;
+  &-prev,
+  &-next {
+    width: 350px;
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    &:hover {
+      background: $hoverColor;
+    }
+    &-image {
+      display: block;
+      width: 30px;
+      height: 50px;
+      .arrow {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+    &-text {
+      width: 300px;
+      display: block;
+      padding: 7px 0 0 0;
+      &-caption,
+      &-date {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      &-caption {
+        font-weight: 700;
+      }
+      &-date {
+        font-size: 90%;
+      }
+    }
+  }
+  &-prev {
+    &,
+    &-image,
+    &-text {
+      float: left;
+    }
+    &-text {
+      text-align: left;
+      padding-left: 20px;
+    }
+  }
+  &-next {
+    &,
+    &-image,
+    &-text {
+      float: right;
+    }
+    &-text {
+      text-align: right;
+      padding-right: 20px;
+    }
+  }
+}
+
+.new-content {
+  .new-content-caption-block {
+    margin: 20px 0;
+    .new-content-date {
+      float: right;
+      width: 200px;
+      text-align: right;
+    }
+    .new-content-caption {
+      float: left;
+      margin: 0;
+      width: 600px;
+    }
+  }
+}
+
+.fotorama__select {
+  .galleryBlock {
+    width: 600px;
+    max-width: 600px;
+    height: 300px;
+    display: table;
+    vertical-align: middle;
+    text-align: left;
+    .galleryCaption {
+      vertical-align: middle;
+      display: table-cell;
+      padding: 40px;
+      font-size: 200%;
+      font-weight: 700;
+      font-family: 'Roboto Condensed';
+      color: #fff;
+      text-shadow: 0 4px 20px #000;
+    }
+  }
+}
+
+.indexPage {
+  &-left {
+    float: left;
+    width: 60%;
+    padding-right: 40px;
+  }
+  &-right {
+    width: 40%;
+    float: right;
+    .news-list {
+      &-item {
+        &-image,
+        &-dummy {
+          width: 50px;
+          height: 50px;
+        }
+        .right {
+          .news-list-item-date {
+
+          }
+          .news-list-item-caption {
+            font-size: 100%;
+          }
+          .news-list-item-text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

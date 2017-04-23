@@ -1,0 +1,10 @@
+/.idea
+/.idea/*
+/nbproject
+/vendor
+/composer.lock
+/inc/system/previews/
+/application/cache/
+/application/logs/
+/application/config/database.php
+/node_modules/

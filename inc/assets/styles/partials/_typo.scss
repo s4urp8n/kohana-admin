@@ -1,0 +1,13 @@
+@for $i from 1 to 7 {
+  h#{$i},
+  .h#{$i} {
+    display: block;
+    width: 100%;
+    font-family: $defaultHeadingFontFamily;
+    font-size: $defaultFontSize+(7-$i)*$headerFontSizeStep;
+    font-weight: 700;
+    font-style: normal;
+    margin: $defaultOffset+(7-$i) 0;
+    color: $defaultHeadingsColor;
+  }
+}

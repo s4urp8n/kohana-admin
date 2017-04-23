@@ -1,0 +1,56 @@
+.youtube_input {
+  width   : 80%;
+  display : inline-block;
+}
+
+.youtube_button {
+  width       : 18%;
+  margin-left : 1%;
+  display     : inline-block;
+}
+
+.youtube_preview button {
+  width         : auto;
+  display       : block;
+  background    : #D8D8D8;
+  text-align    : center;
+  margin        : auto;
+  visibility    : hidden;
+  border        : 0;
+  padding       : 5px 10px;
+  border-radius : 4px;
+  color         : #FF0066;
+}
+
+.youtube_previews {
+  padding       : 20px;
+  overflow      : hidden;
+  background    : #CCCCCC;
+  margin-top    : 10px;
+  border-radius : 3px;
+}
+
+.youtube_preview {
+  float              : left;
+  width              : 49.5%;
+  height             : auto;
+  box-sizing         : border-box;
+  -webkit-box-sizing : border-box;
+  -moz-box-sizing    : border-box;
+  margin-right       : 1%;
+  margin-bottom      : 1%;
+  padding            : 10px;
+}
+
+.youtube_preview:hover {
+  background : #FFFFFF;
+  box-shadow : 0 0 30px #999999;
+}
+
+.youtube_preview:hover button {
+  visibility : visible;
+}
+
+.youtube_preview:nth-of-type(even) {
+  margin-right : 0;
+}

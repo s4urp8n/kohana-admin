@@ -1,0 +1,11 @@
+<svg  class="arrow"
+      viewBox="0 0 192 320"
+      enable-background="new 0 0 192 320"
+      width="192"
+      height="320"
+      xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <title>Layer 1</title>
+        <polygon fill="#3f3f3f" id="polygon10" points="192,160 192,160 32.29998779296875,320 0,287.6000061035156 127.30000305175781,160 0,32.399993896484375 32.29998779296875,0 192,160 "/>
+    </g>
+</svg>
