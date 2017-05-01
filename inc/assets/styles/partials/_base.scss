@@ -37,9 +37,8 @@ body {
 }
 
 body {
-  max-width: $maxWidth;
+  max-width: 100%;
   margin: auto;
-  padding: $bodyPadding;
   text-align: $defaultAlign;
   font-weight: normal;
   font-style: normal;

@@ -2,13 +2,31 @@
 <?php
 $currentMainItem = Common::getCurrentMainItem();
 
-
 $htmlClass = '';
 $moduleOptions = Modules::getOptions($currentMainItem);
 
 if (!empty($moduleOptions['no_content'])) {
     $htmlClass = 'no_content';
 }
+
+if (!empty($moduleOptions['html_class'])) {
+    $htmlClass = $htmlClass . ' ' . $moduleOptions['html_class'];
+}
+
+switch (Common::getCurrentColor()) {
+    case Common::COLOR_BLUE: {
+        $htmlClass .= ' blue_color';
+        break;
+    }
+    case Common::COLOR_YELLOW: {
+        $htmlClass .= ' yellow_color';
+        break;
+    }
+    default: {
+        $htmlClass .= ' green_color';
+    }
+}
+
 ?>
 <html lang="<?= Common::getCurrentLang() ?>" class="<?= $htmlClass ?>">
 <head>
@@ -73,7 +91,6 @@ if (!empty($moduleOptions['no_content'])) {
 </head>
 
 <body>
-
 <div class="wrapper">
     <div class="wrapper-top">
         <?php
@@ -82,11 +99,15 @@ if (!empty($moduleOptions['no_content'])) {
         }
         ?>
 
-        <?php
-        if (!empty($content)) {
-            echo $content;
-        }
-        ?>
+        <?= View::factory('parts/big-bread') ?>
+
+        <div class="page-container">
+            <?php
+            if (!empty($content)) {
+                echo $content;
+            }
+            ?>
+        </div>
     </div>
     <div class="wrapper-bottom">
         <?php
@@ -96,7 +117,5 @@ if (!empty($moduleOptions['no_content'])) {
         ?>
     </div>
 </div>
-
-
 </body>
 </html>

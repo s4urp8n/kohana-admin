@@ -72,6 +72,33 @@ class FieldString
         return strtr($m, $ru);
     }
 
+    public static function translateMonthToArmenian($month)
+    {
+        $m = \Zver\StringHelper::load($month)
+                               ->toLowerCase();
+
+        $ru = [
+            'январ(я|ь)'   => 'հունվարի',
+            'феврал(я|ь)'  => 'փետրվար',
+            'марта?'       => 'երթ',
+            'апрел(я|ь)'   => 'ապրիլ',
+            'ма(я|й)'      => 'մայիս',
+            'июн(я|ь)'     => 'հունիսի',
+            'июл(я|ь)'     => 'հուլիսի',
+            'августа?'     => 'օգոստոս',
+            'сентябр(я|ь)' => 'սեպտեմբեր',
+            'октябр(я|ь)'  => 'հոկտեմբեր',
+            'ноябр(я|ь)'   => 'նոյեմբեր',
+            'декабр(я|ь)'  => 'դեկտեմբեր',
+        ];
+
+        foreach ($ru as $pattern => $replace) {
+            $m->replace($pattern, $replace);
+        }
+
+        return $m->get();
+    }
+
     public static function translateMonthToEnglish($month)
     {
         $m = \Zver\StringHelper::load($month)

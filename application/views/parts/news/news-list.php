@@ -1,8 +1,39 @@
-<?php
-if (count($news) > 0) {
-    ?>
-    <div class="news-list">
-        <?php
+<div class="news-list">
+    <?php
+
+    $request = Request::initial();
+
+    $pagination = \Zver\Pagination::create();
+
+    $pagination->setItems($news);
+    $pagination->setItemsPerPage(5);
+
+    $pagination->setPageUrlCallback(function ($number) {
+        $item = ORM::factory('MainItem')
+                   ->where('module', '=', Modules::$MOD_NEWS)
+                   ->find();
+
+        return $item->getHref() . '?page=' . $number;
+    });
+
+    $pagination->setCurrentPageCallback(function () use ($request, $pagination) {
+
+        $page = $request->query('page');
+
+        if (empty($page)) {
+            $page = 1;
+        }
+
+        $pagesCount = $pagination->getPagesCount();
+
+        if ($page > $pagesCount) {
+            $page = $pagesCount;
+        }
+
+        return $page;
+    });
+
+    $pagination->showItems(function ($news, \Zver\Pagination $pagination) {
         foreach ($news as $new) {
             ?>
 
@@ -33,6 +64,10 @@ if (count($news) > 0) {
                                 $date = FieldString::translateMonthToEnglish($date);
                             }
 
+                            if (Common::getCurrentLang() == 'am') {
+                                $date = FieldString::translateMonthToArmenian($date);
+                            }
+
                             echo $date;
                             ?>
 
@@ -44,7 +79,7 @@ if (count($news) > 0) {
                         <span class="news-list-item-text">
                             <?= \Zver\StringHelper::load($new->get(Common::getCurrentLang() . '_text'))
                                                   ->removeTags()
-                                                  ->getFirstChars(250) . '...' ?>
+                                                  ->getFirstChars(200) . '...' ?>
                         </span>
                     </span>
                 <span class="clearfix"></span>
@@ -52,14 +87,15 @@ if (count($news) > 0) {
 
             <?php
         }
-        ?>
-    </div>
-    <?php
-} else {
+    });
+
+    $pagination->showPages(function ($pages, \Zver\Pagination $pagination) {
+
+        echo View::factory('pagination/scroll', [
+            'pagination' => $pagination,
+        ]);
+
+    });
+
     ?>
-    <div class="alert alert-info">
-        <?= ___('НовостейПокаНет') ?>
-    </div>
-    <?php
-}
-?>
+</div>

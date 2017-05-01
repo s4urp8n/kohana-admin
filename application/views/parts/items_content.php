@@ -7,6 +7,7 @@ $moduleOptions = Modules::getOptions($item);
 if (!empty($moduleOptions['no_content'])) {
     echo Modules::render($item);
 } else {
+
     if ($sec->count() > 0) {
         ?>
         <div class="content-block content-block--with-panel">
@@ -17,7 +18,9 @@ if (!empty($moduleOptions['no_content'])) {
             ]) ?>
 
             <?= View::factory('parts/items_content_content', ['item' => $item]) ?>
+
             <div class="clearfix"></div>
+
         </div>
         <?php
     } else {

@@ -3,6 +3,9 @@
 class Common
 {
 
+    const GARDEN = 'garden';
+    const HOME = 'home';
+
     public static function redirect($url)
     {
         header('Location:' . $url);
@@ -235,6 +238,27 @@ class Common
         return false;
     }
 
+    const COLOR_GREEN = 'green';
+    const COLOR_YELLOW = 'yellow';
+    const COLOR_BLUE = 'blue';
+
+    public static function getCurrentColor()
+    {
+        $main = static::getCurrentMainItem();
+
+        if ($main) {
+            if ($main->module == Modules::$MOD_SHOP) {
+                return static::COLOR_YELLOW;
+            }
+            if ($main->module == Modules::$MOD_ARTICLES) {
+                return static::COLOR_BLUE;
+            }
+        }
+
+        return static::COLOR_GREEN;
+
+    }
+
     public static function getCurrentMainItem()
     {
         $request = Request::initial();
@@ -362,7 +386,11 @@ class Common
 
     public static function getLangs()
     {
-        return ['ru', 'en', 'am'];
+        return [
+            'am',
+            'en',
+            'ru',
+        ];
     }
 
     public static function getDefaultLang()
