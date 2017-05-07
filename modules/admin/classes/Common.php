@@ -264,6 +264,7 @@ class Common
         $request = Request::initial();
         $main_item_param = $request->param('main_item');
         $main_items = self::getMainItemsTransliterated();
+
         if (!empty($main_item_param)) {
             if (in_array($main_item_param, array_column($main_items, 'translit'))) {
                 foreach ($main_items as $key => $item) {
@@ -272,8 +273,27 @@ class Common
                     }
                 }
             }
+        } else {
+
+            /**
+             * DETECT MODULES
+             */
+
+            /** @var Route $route */
+            $route = Route::name($request->route());
+
+            switch ($route) {
+                case 'news': {
+                    return ORM::factory('MainItem')
+                              ->where('module', '=', Modules::$MOD_NEWS)
+                              ->find();
+                }
+            }
         }
 
+        /**
+         * Return first main item (index) if not found
+         */
         foreach ($main_items as $key => $item) {
             return ORM::factory('MainItem', $key);
         }
@@ -436,6 +456,15 @@ class Common
         }
 
         return $url;
+    }
+
+    public static function getNews()
+    {
+        return ORM::factory('News')
+                  ->where('visible', '=', 1)
+                  ->order_by('_datetime', 'desc')
+                  ->find_all()
+                  ->as_array();
     }
 
 }

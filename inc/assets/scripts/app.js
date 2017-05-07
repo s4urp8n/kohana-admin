@@ -18,16 +18,34 @@ $(document).ready(
         $('.index_page body').vegas({
             timer: false,
             shuffle: true,
+            overlay: true,
             delay: 7000,
             slides: [
                 {src: '/inc/images/index/1.jpg'},
-                {src: '/inc/images/index/2.jpg'},
                 {src: '/inc/images/index/3.jpg'},
                 {src: '/inc/images/index/4.jpg'},
                 {src: '/inc/images/index/5.jpg'},
                 {src: '/inc/images/index/6.jpg'}
             ]
         });
+
+        var isOperaMini = (navigator.userAgent.indexOf("Opera Mini") > -1);
+        if (!isOperaMini) {
+
+            var photoboxParams={
+                time: 1000,
+                autoplay: false,
+                history: true,
+                loop: true,
+                thumbs: true,
+                hideFlash: true,
+                counter: true,
+            };
+
+            $(".photobox_container").photobox("a", photoboxParams);
+            $(".articlePhotobox").photobox("a", photoboxParams);
+            setTimeout(window._photobox.history.load, 10);
+        }
 
     }
 );

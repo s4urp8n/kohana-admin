@@ -99,6 +99,18 @@ class FieldString
         return $m->get();
     }
 
+    public static function translateMonth($month)
+    {
+        if (Common::getCurrentLang() == 'en') {
+            return static::translateMonthToEnglish($month);
+        }
+        if (Common::getCurrentLang() == 'am') {
+            return static::translateMonthToArmenian($month);
+        }
+
+        return self::translateMonthRuEn($month);
+    }
+
     public static function translateMonthToEnglish($month)
     {
         $m = \Zver\StringHelper::load($month)

@@ -9,11 +9,7 @@ $module = ORM::factory('MainItem')
              ->where('module', '=', Modules::$MOD_NEWS)
              ->find();
 
-$news = ORM::factory('News')
-           ->where('visible', '=', 1)
-           ->order_by('_datetime', 'desc')
-           ->find_all()
-           ->as_array();
+$news = Common::getNews();
 
 ?>
 <h1><?= $module->get(Common::getCurrentLang() . '_name') ?></h1>

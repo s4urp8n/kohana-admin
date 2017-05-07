@@ -278,6 +278,9 @@ $yellowColor: #e7c03d;
         color: #000;
         background: $greenColor;
       }
+      .nav-helper {
+        font-weight: bold;
+      }
     }
   }
   &--with-panel {
@@ -288,6 +291,18 @@ $yellowColor: #e7c03d;
         margin-top: 0;
       }
     }
+  }
+}
+
+.new-content {
+  text-align: left;
+  .new-content-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .new-content-date {
+    text-transform: lowercase;
   }
 }
 
@@ -327,112 +342,6 @@ $yellowColor: #e7c03d;
   }
 }
 
-//.breadcrumbs {
-//  margin: 20px 0;
-//  &-item,
-//  &-sep,
-//  &-current {
-//    text-overflow: ellipsis;
-//    text-decoration: none;
-//    white-space: nowrap;
-//    max-width: 200px;
-//    float: left;
-//    padding: 5px;
-//  }
-//  &-sep {
-//
-//  }
-//  &-item {
-//
-//  }
-//  &-current {
-//
-//  }
-//}
-
-//.news-navigation {
-//  display: block;
-//  margin: 30px 0;
-//  padding: 0;
-//  &-prev,
-//  &-next {
-//    width: 350px;
-//    display: block;
-//    text-decoration: none;
-//    padding: 10px;
-//    &:hover {
-//      background: $hoverColor;
-//    }
-//    &-image {
-//      display: block;
-//      width: 30px;
-//      height: 50px;
-//      .arrow {
-//        display: block;
-//        width: 100%;
-//        height: auto;
-//      }
-//    }
-//    &-text {
-//      width: 300px;
-//      display: block;
-//      padding: 7px 0 0 0;
-//      &-caption,
-//      &-date {
-//        display: block;
-//        width: 100%;
-//        white-space: nowrap;
-//        text-overflow: ellipsis;
-//        overflow: hidden;
-//      }
-//      &-caption {
-//        font-weight: 700;
-//      }
-//      &-date {
-//        font-size: 90%;
-//      }
-//    }
-//  }
-//  &-prev {
-//    &,
-//    &-image,
-//    &-text {
-//      float: left;
-//    }
-//    &-text {
-//      text-align: left;
-//      padding-left: 20px;
-//    }
-//  }
-//  &-next {
-//    &,
-//    &-image,
-//    &-text {
-//      float: right;
-//    }
-//    &-text {
-//      text-align: right;
-//      padding-right: 20px;
-//    }
-//  }
-//}
-//
-//.new-content {
-//  .new-content-caption-block {
-//    margin: 20px 0;
-//    .new-content-date {
-//      float: right;
-//      width: 200px;
-//      text-align: right;
-//    }
-//    .new-content-caption {
-//      float: left;
-//      margin: 0;
-//      width: 600px;
-//    }
-//  }
-//}
-
 //.fotorama__select {
 //  .galleryBlock {
 //    width: 600px;
@@ -450,38 +359,6 @@ $yellowColor: #e7c03d;
 //      font-family: 'Roboto Condensed';
 //      color: #fff;
 //      text-shadow: 0 4px 20px #000;
-//    }
-//  }
-//}
-
-//.indexPage {
-//  &-left {
-//    float: left;
-//    width: 60%;
-//    padding-right: 40px;
-//  }
-//  &-right {
-//    width: 40%;
-//    float: right;
-//    .news-list {
-//      &-item {
-//        &-image,
-//        &-dummy {
-//          width: 50px;
-//          height: 50px;
-//        }
-//        .right {
-//          .news-list-item-date {
-//
-//          }
-//          .news-list-item-caption {
-//            font-size: 100%;
-//          }
-//          .news-list-item-text {
-//            display: none;
-//          }
-//        }
-//      }
 //    }
 //  }
 //}
@@ -525,6 +402,31 @@ $yellowColor: #e7c03d;
   }
 }
 
+.photobox_container {
+  display: block;
+  padding: 40px 0;
+  width: 100%;
+  a {
+    display: block;
+    float: left;
+    width: 19.2%;
+    margin: 0 1% 1% 0;
+    text-decoration: none;
+    img {
+      display: block;
+      margin: auto;
+      width: 100%;
+      height: auto;
+    }
+    &[rel='video'] {
+
+    }
+    &:nth-child(5n+5) {
+      margin-right: 0;
+    }
+  }
+}
+
 //html[lang='am'] {
 //  * {
 //    font-family: Tahoma !important;
@@ -560,5 +462,145 @@ html.yellow_color {
 .index_page {
   .big-breads {
     display: none;
+  }
+}
+
+$radialSize: 240px;
+$radialOffset: 30px;
+$mainFontsize: 36px;
+$linkFontsize: 20px;
+$borderOffset: 20px;
+$indexHoverColor: rgba(35, 59, 39, 0.7);
+
+.radialContainers {
+  display: block;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  height: $radialSize*2;
+  line-height: $radialSize*2;
+  position: relative;
+  .radialContainer {
+    display: block;
+    width: $radialSize;
+    height: $radialSize;
+    position: absolute;
+    top: 50%;
+    margin-top: -($radialSize/2);
+    border-radius: 50%;
+    border: 2px dashed #fff;
+    .radialContainer-link {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: $radialSize;
+      margin-left: -($radialSize/2);
+      text-align: center;
+      padding: 10px;
+      margin-top: -20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: $linkFontsize;
+      line-height: $linkFontsize;
+      overflow: hidden;
+    }
+    .radialContainer-link-main {
+      text-decoration: none;
+      text-align: center;
+      width: $radialSize - $borderOffset;
+      height: $radialSize - $borderOffset;
+      margin-top: $borderOffset/2;
+      margin-left: $borderOffset/2;
+      display: block;
+      color: #fff;
+      text-transform: capitalize;
+      font-size: $mainFontsize;
+      line-height: $radialSize - $mainFontsize;
+      border-radius: 50%;
+    }
+    &--1 {
+      left: 50%;
+      .radialContainer-link {
+        @for $number from 1 through 3 {
+          &.radialContainer-link-#{$number} {
+            text-align: right;
+            @if $number==1 {
+              left: -$radialOffset;
+              top: -$radialOffset;
+            } @else if $number==2 {
+              left: -$radialSize/2 - $radialOffset;
+              top: $radialSize/2;
+            } @else if $number==3 {
+              left: $radialOffset - $radialOffset;
+              top: $radialSize + $radialOffset;
+            }
+          }
+        }
+      }
+    }
+    &--2 {
+      right: 50%;
+      .radialContainer-link {
+        @for $number from 1 through 3 {
+          &.radialContainer-link-#{$number} {
+            text-align: left;
+            @if $number==1 {
+              left: $radialSize + $radialOffset;
+              top: -$radialOffset;
+            } @else if $number==2 {
+              left: $radialSize+$radialSize/2 + $radialOffset;
+              top: $radialSize/2;
+            } @else if $number==3 {
+              left: $radialSize + $radialOffset;
+              top: $radialSize + $radialOffset;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-left,
+  &-right {
+    height: $radialSize*2;
+    line-height: $radialSize*2;
+    position: relative;
+    display: block;
+    float: left;
+    width: 50%;
+    overflow: hidden;
+    .radialContainer-link,
+    .radialContainer-link-main,
+    .radialContainer {
+      transition: all 0.2s ease-in !important;
+    }
+    .radialContainer-link {
+      opacity: 0;
+    }
+    &:hover {
+      .radialContainer {
+        transform: scale(1.1);
+      }
+      .radialContainer-link-main {
+        background: $indexHoverColor;
+      }
+      .radialContainer-link {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.index_page {
+  .wrapper-top {
+    & > .page-container {
+      vertical-align: middle;
+      height: $radialSize*3 !important;
+      line-height: $radialSize*3 !important;
+      .radialContainers {
+        padding-top: $radialSize/2.5;
+      }
+    }
   }
 }

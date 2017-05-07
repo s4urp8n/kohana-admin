@@ -1,5 +1,6 @@
 var buildDirectory = 'inc/build';
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
@@ -61,7 +62,9 @@ gulp.task('compile', ['updateVersion'], function () {
 
         for (var partFile in sourceMap[outputFileName]) {
             outputStream.queue(gulp.src(sourceMap[outputFileName][partFile], {buffer: true})
-                //JS
+                    //SWALLOW ERRORs
+                    .pipe(plumber())
+                    //JS
                     .pipe(gulpIf(['*.js', '!*.min.js'], jsmin())) //minify js
                     // Coffee
                     .pipe(gulpIf(['*.coffee'], coffee())) //compile coffee
@@ -90,6 +93,7 @@ gulp.task('compile', ['updateVersion'], function () {
         }
 
         outputStream.done()
+            .pipe(plumber())
             .pipe(concat(outputFileName.replace('--version--', getVersion())))
             .pipe(gulp.dest(buildDirectory));
     }
@@ -103,6 +107,7 @@ gulp.task('updateVersion', ['clearBefore'], function () {
 gulp.task('clearBefore', function () {
     if (fs.existsSync(buildDirectory)) {
         return gulp.src([buildDirectory + '/**.js', buildDirectory + '/**.css'])
+            .pipe(plumber())
             .pipe(clean());
     }
     return false;

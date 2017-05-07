@@ -26,7 +26,6 @@ switch (Common::getCurrentColor()) {
         $htmlClass .= ' green_color';
     }
 }
-
 ?>
 <html lang="<?= Common::getCurrentLang() ?>" class="<?= $htmlClass ?>">
 <head>

@@ -3,6 +3,8 @@
 class Model_News extends ORM
 {
 
+    use Helper;
+
     protected $_table_name = 'news';
 
     public function getHref()

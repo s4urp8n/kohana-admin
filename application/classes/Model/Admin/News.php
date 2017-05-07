@@ -29,6 +29,18 @@ class Model_Admin_News extends Model_Admin
                     'png',
                 ],
             ],
+            'Галерея'     => [
+                'directory'         => 'news-gallery' . DIRECTORY_SEPARATOR . (is_null($primary)
+                        ? '<primary>'
+                        : $primary) . DIRECTORY_SEPARATOR,
+                'uploadMaxSize'     => 100 * 1024 * 1024,
+                'allowedExtensions' => [
+                    'jpg',
+                    'jpeg',
+                    'bmp',
+                    'png',
+                ],
+            ],
         ];
     }
 
