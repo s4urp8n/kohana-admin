@@ -104,15 +104,12 @@ $homeSecondaries = [];
             </a>
             <a href="" class="radialContainer-link radialContainer-link-1">
                 Натуральная еда
-                <span class="radialBorder"></span>
             </a>
             <a href="" class="radialContainer-link radialContainer-link-2">
                 Ресторан
-                <span class="radialBorder"></span>
             </a>
             <a href="" class="radialContainer-link radialContainer-link-3">
                 Оранжерея
-                <span class="radialBorder"></span>
             </a>
         </div>
     </div>
@@ -124,15 +121,12 @@ $homeSecondaries = [];
             </a>
             <a href="" class="radialContainer-link radialContainer-link-1">
                 Проектирование
-                <span class="radialBorder"></span>
             </a>
             <a href="" class="radialContainer-link radialContainer-link-2">
                 Строительство
-                <span class="radialBorder"></span>
             </a>
             <a href="" class="radialContainer-link radialContainer-link-3">
                 Производство
-                <span class="radialBorder"></span>
             </a>
         </div>
     </div>

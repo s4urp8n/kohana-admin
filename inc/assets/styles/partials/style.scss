@@ -465,8 +465,8 @@ html.yellow_color {
   }
 }
 
-$radialSize: 240px;
-$radialOffset: 30px;
+$radialSize: 200px;
+$radialOffset: 10px;
 $mainFontsize: 36px;
 $linkFontsize: 20px;
 $borderOffset: 20px;
@@ -499,11 +499,10 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       text-align: center;
       padding: 10px;
       margin-top: -20px;
-      text-decoration: none;
       color: #fff;
       font-size: $linkFontsize;
       line-height: $linkFontsize;
-      overflow: hidden;
+      text-decoration: underline;
     }
     .radialContainer-link-main {
       text-decoration: none;
@@ -519,41 +518,80 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       line-height: $radialSize - $mainFontsize;
       border-radius: 50%;
     }
+
     &--1 {
-      left: 50%;
+      left: 55%;
       .radialContainer-link {
         @for $number from 1 through 3 {
           &.radialContainer-link-#{$number} {
             text-align: right;
             @if $number==1 {
-              left: -$radialOffset;
-              top: -$radialOffset;
+              left: -$radialOffset*4;
+              top: -$radialOffset*4;
             } @else if $number==2 {
-              left: -$radialSize/2 - $radialOffset;
+              left: -$radialSize/2 - $radialOffset*4;
               top: $radialSize/2;
             } @else if $number==3 {
-              left: $radialOffset - $radialOffset;
-              top: $radialSize + $radialOffset;
+              left: -$radialOffset*4;
+              top: $radialSize + $radialOffset*4;
+            }
+            &:before {
+              display: block;
+              position: absolute;
+              width: $radialOffset*3;
+              border-top: 2px dashed #fff;
+              content: '';
+              @if $number==1 {
+                right: -$radialOffset;
+                bottom: -$radialOffset;
+                transform: rotate(45deg);
+              } @else if $number==2 {
+                right: -$radialOffset*3.5;
+                bottom: $radialOffset*1.7;
+              } @else if $number==3 {
+                transform: rotate(-45deg);
+                right: -$radialOffset;
+                top: -$radialOffset;
+              }
             }
           }
         }
       }
     }
     &--2 {
-      right: 50%;
+      right: 55%;
       .radialContainer-link {
         @for $number from 1 through 3 {
           &.radialContainer-link-#{$number} {
             text-align: left;
             @if $number==1 {
-              left: $radialSize + $radialOffset;
-              top: -$radialOffset;
+              left: $radialSize + $radialOffset*4;
+              top: -$radialOffset*4;
             } @else if $number==2 {
-              left: $radialSize+$radialSize/2 + $radialOffset;
+              left: $radialSize+$radialSize/2 + $radialOffset*4;
               top: $radialSize/2;
             } @else if $number==3 {
-              left: $radialSize + $radialOffset;
-              top: $radialSize + $radialOffset;
+              left: $radialSize + $radialOffset*4;
+              top: $radialSize + $radialOffset*4;
+            }
+            &:before {
+              display: block;
+              position: absolute;
+              width: $radialOffset*3;
+              border-top: 2px dashed #fff;
+              content: '';
+              @if $number==1 {
+                left: -$radialOffset;
+                bottom: -$radialOffset;
+                transform: rotate(-45deg);
+              } @else if $number==2 {
+                left: -$radialOffset*3.5;
+                bottom: $radialOffset*1.7;
+              } @else if $number==3 {
+                transform: rotate(45deg);
+                left: -$radialOffset;
+                top: -$radialOffset;
+              }
             }
           }
         }
@@ -580,7 +618,7 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
     }
     &:hover {
       .radialContainer {
-        transform: scale(1.1);
+        transform: scale(1.2);
       }
       .radialContainer-link-main {
         background: $indexHoverColor;
