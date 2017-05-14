@@ -28,6 +28,12 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
 ?>
 
 <div class="radialContainers">
+
+    <div class="radialContainers-logo">
+        <img src="/inc/images/lusin_group_green.svg"/>
+        <div class="slogan"><?= ___('ПриветствиеНаГлавнойСтраницеТекст') ?></div>
+    </div>
+
     <div class="radialContainers-left">
         <div class="radialContainer radialContainer--1">
             <a href="<?= $garden->getHref() ?>" class="radialContainer-link-main">

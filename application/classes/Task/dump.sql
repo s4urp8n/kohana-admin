@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.55, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Win64 (x86_64)
 --
--- Host: localhost    Database: lusin
+-- Host: localhost    Database: kohanaadmin
 -- ------------------------------------------------------
--- Server version	5.5.55-0+deb8u1-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -350,7 +350,7 @@ CREATE TABLE `translate` (
   `strip` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `key` (`_key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,7 +359,7 @@ CREATE TABLE `translate` (
 
 LOCK TABLES `translate` WRITE;
 /*!40000 ALTER TABLE `translate` DISABLE KEYS */;
-INSERT INTO `translate` VALUES (13,'НазваниеФирмыПодвал',NULL,NULL,NULL,0),(14,'Следующая новость',NULL,NULL,NULL,0),(15,'Предыдущая новость',NULL,NULL,NULL,0),(16,'ОшибкаЗаголовок',NULL,NULL,NULL,0),(17,'ОшибкаТекст',NULL,NULL,NULL,0);
+INSERT INTO `translate` VALUES (13,'НазваниеФирмыПодвал','<p>Lusin LLC<br></p>','<p>Lusin LLC</p>','<p>Lusin LLC<br></p>',1),(14,'Следующая новость',NULL,NULL,NULL,0),(15,'Предыдущая новость',NULL,NULL,NULL,0),(16,'ОшибкаЗаголовок',NULL,NULL,NULL,0),(17,'ОшибкаТекст',NULL,NULL,NULL,0),(18,'ПриветствиеНаГлавнойСтраницеТекст','<p>Мы рады приветствовать Вас!</p>','<p>We are happy to greet you!<br></p>','<p>Մենք ողջունում ենք ձեզ!<br></p>',1);
 /*!40000 ALTER TABLE `translate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +403,7 @@ CREATE TABLE `user_tokens` (
   `created` int(10) unsigned NOT NULL,
   `expires` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +412,7 @@ CREATE TABLE `user_tokens` (
 
 LOCK TABLES `user_tokens` WRITE;
 /*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
-INSERT INTO `user_tokens` VALUES (1,1,'e04fa4defbc4072365d285487bb677c189ac21ed','5237371b18d30106098bc7b63026c446d6cd435a',1492953326,1498137326),(2,1,'e04fa4defbc4072365d285487bb677c189ac21ed','6adfad6de7ba360b801a3e1a530c2d51bf1df3aa',1493753283,1498937283),(3,1,'8b671fd9bd48f0d429c2eb72a533e87ef2eaf804','9346cb9b3300cb2c259b00cca0744efb7e1b9f98',1494752426,1499936426);
+INSERT INTO `user_tokens` VALUES (1,1,'e04fa4defbc4072365d285487bb677c189ac21ed','5237371b18d30106098bc7b63026c446d6cd435a',1492953326,1498137326),(2,1,'e04fa4defbc4072365d285487bb677c189ac21ed','6adfad6de7ba360b801a3e1a530c2d51bf1df3aa',1493753283,1498937283),(3,1,'8b671fd9bd48f0d429c2eb72a533e87ef2eaf804','9346cb9b3300cb2c259b00cca0744efb7e1b9f98',1494752426,1499936426),(4,1,'8b671fd9bd48f0d429c2eb72a533e87ef2eaf804','3ca09ba490b37627d336ceb9f3452aa3348b6225',1494762209,1499946209);
 /*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,7 +450,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','7904532eec6591d71d09652f68690db5',NULL,NULL,NULL,6,NULL,'2017-05-14 12:00:26','',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'admin','7904532eec6591d71d09652f68690db5',NULL,NULL,NULL,7,NULL,'2017-05-14 14:43:29','',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -463,4 +463,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-14 12:02:06
+-- Dump completed on 2017-05-14 16:28:47

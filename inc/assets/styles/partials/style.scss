@@ -468,12 +468,67 @@ html.blue_color {
   .footer {
     border-color: $blueColor;
   }
+  .content {
+    &-block {
+      &-panel {
+        &-item {
+          color: #000 !important;
+          font-weight: bold;
+          &--active,
+          &--active:hover {
+            background: $blueColor !important;
+            color: #000 !important;
+          }
+        }
+        &-child {
+          font-weight: normal;
+          font-style: italic;
+          padding-left: 20px !important;
+          color: #555 !important;
+          &--active,
+          &--active:hover {
+            background: $blueColor !important;
+            color: #555 !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 html.yellow_color {
+
   .footer {
     border-color: $yellowColor;
   }
+
+  .content {
+    &-block {
+      &-panel {
+        &-item {
+          color: #000 !important;
+          font-weight: bold;
+          &--active,
+          &--active:hover {
+            background: $yellowColor !important;
+            color: #000 !important;
+          }
+        }
+        &-child {
+          font-weight: normal;
+          font-style: italic;
+          padding-left: 20px !important;
+          color: #555 !important;
+          &--active,
+          &--active:hover {
+            background: $yellowColor !important;
+            color: #555 !important;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 .index_page {
@@ -680,6 +735,33 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       }
     }
   }
+  &-logo {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 140px;
+      height: 140px;
+    }
+    .slogan {
+      display: inline-block;
+      vertical-align: middle;
+      width: auto;
+      max-width: 300px;
+      padding: 5px 0 5px 40px;
+      margin-left: 30px;
+      color: #fff;
+      font-size: 28px;
+      text-align: left;
+      border-left: 2px dashed #fff;
+      line-height: 1.1;
+    }
+  }
 }
 
 .index_page {
@@ -695,3 +777,4 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
     }
   }
 }
+

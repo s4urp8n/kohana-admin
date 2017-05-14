@@ -5,6 +5,21 @@ class Model_ShopCategories extends ORM
 
     protected $_table_name = 'shop_categories';
 
+    public static function getCurrentCategory()
+    {
+        $request = Request::initial();
+
+        $category = $request->query('category');
+
+        $orm = ORM::factory('ShopCategories', $category);
+
+        if ($orm->id) {
+            return $category;
+        }
+
+        return false;
+    }
+
     public static function getList($onlyVisible = false)
     {
         $relations = [];
@@ -31,8 +46,9 @@ class Model_ShopCategories extends ORM
     public function getHref()
     {
         return Common::getShopMainItem()
-                     ->getHref() . "?category=" . \Zver\StringHelper::load($this->en_name)
+                     ->getHref() . "?category=" . \Zver\StringHelper::load($this->id)
                                                                     ->slugify();
     }
 
 }
+;
