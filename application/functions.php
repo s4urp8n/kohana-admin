@@ -166,3 +166,10 @@ if (!function_exists('array_column')) {
     }
 
 }
+
+function consoleDump($object)
+{
+    echo "<script>";
+    echo 'console.log(' . json_encode($object, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . ')';
+    echo "</script>";
+}

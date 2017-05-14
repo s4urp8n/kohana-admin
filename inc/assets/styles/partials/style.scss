@@ -410,16 +410,33 @@ $yellowColor: #e7c03d;
     display: block;
     float: left;
     width: 19.2%;
+    height: 19.2%;
     margin: 0 1% 1% 0;
     text-decoration: none;
-    img {
-      display: block;
-      margin: auto;
-      width: 100%;
-      height: auto;
+    &,
+    &[rel='video'] {
+      position: relative;
+      img {
+        display: block;
+        margin: auto;
+        width: 130px;
+        height: 130px;
+      }
     }
     &[rel='video'] {
-
+      &:after {
+        content: '\25BA';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #FFFFFF;
+        background: #000000;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+        display: inline-block;
+        box-shadow: 0 0 5px #000000;
+      }
     }
     &:nth-child(5n+5) {
       margin-right: 0;
@@ -472,6 +489,18 @@ $linkFontsize: 20px;
 $borderOffset: 20px;
 $indexHoverColor: rgba(35, 59, 39, 0.7);
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .radialContainers {
   display: block;
   width: 100%;
@@ -488,7 +517,6 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
     top: 50%;
     margin-top: -($radialSize/2);
     border-radius: 50%;
-    border: 2px dashed #fff;
     .radialContainer-link {
       display: block;
       position: absolute;
@@ -598,7 +626,6 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       }
     }
   }
-
   &-left,
   &-right {
     height: $radialSize*2;
@@ -608,10 +635,29 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
     float: left;
     width: 50%;
     overflow: hidden;
+    cursor: pointer;
     .radialContainer-link,
     .radialContainer-link-main,
     .radialContainer {
-      transition: all 0.2s ease-in !important;
+      transition: all 0.3s ease-in-out;
+    }
+    .radialContainer {
+      &:after {
+        content: '';
+        display: block;
+        width: $radialSize;
+        height: $radialSize;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        border: 2px dashed #fff;
+        animation-name: rotate;
+        animation-duration: 10s;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
     }
     .radialContainer-link {
       opacity: 0;
@@ -626,6 +672,12 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       .radialContainer-link {
         opacity: 1;
       }
+      .radialContainer-link-2 {
+        transition-delay: 0.25s;
+      }
+      .radialContainer-link-3 {
+        transition-delay: 0.45s;
+      }
     }
   }
 }
@@ -633,11 +685,12 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
 .index_page {
   .wrapper-top {
     & > .page-container {
-      vertical-align: middle;
-      height: $radialSize*3 !important;
-      line-height: $radialSize*3 !important;
+      position: relative;
       .radialContainers {
-        padding-top: $radialSize/2.5;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -$radialSize
       }
     }
   }

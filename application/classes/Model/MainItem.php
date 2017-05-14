@@ -2,7 +2,7 @@
 
 class Model_MainItem extends ORM
 {
-
+    use Helper;
     protected $_table_name = 'main_items';
 
     public function getHref()

@@ -284,9 +284,7 @@ class Common
 
             switch ($route) {
                 case 'news': {
-                    return ORM::factory('MainItem')
-                              ->where('module', '=', Modules::$MOD_NEWS)
-                              ->find();
+                    return static::getNewsMainItem();
                 }
             }
         }
@@ -456,6 +454,27 @@ class Common
         }
 
         return $url;
+    }
+
+    public static function getShopMainItem()
+    {
+        return ORM::factory('MainItem')
+                  ->where('module', '=', Modules::$MOD_SHOP)
+                  ->find();
+    }
+
+    public static function getArticlesMainItem()
+    {
+        return ORM::factory('MainItem')
+                  ->where('module', '=', Modules::$MOD_ARTICLES)
+                  ->find();
+    }
+
+    public static function getNewsMainItem()
+    {
+        return ORM::factory('MainItem')
+                  ->where('module', '=', Modules::$MOD_NEWS)
+                  ->find();
     }
 
     public static function getNews()

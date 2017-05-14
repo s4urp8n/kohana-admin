@@ -19,6 +19,14 @@
         <div>
             <?= $item->get(Common::getCurrentLang() . '_content') ?>
         </div>
+
+
+        <?php
+        if (method_exists($item, 'renderGallery')) {
+            $item->renderGallery();
+        }
+        ?>
+
         <?php
     }
     ?>

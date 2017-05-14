@@ -13,6 +13,7 @@
     "swiftmailer/swiftmailer": "^5.4",
     "fzaninotto/faker": "^1.6",
     "zver/file-cache": "^1.1",
-    "zver/pagination": "^1.0"
+    "zver/pagination": "^1.0",
+    "zver/adjacency-list": "^1.0"
   }
 }

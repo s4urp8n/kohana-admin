@@ -788,22 +788,3 @@
   }
 }
 
-.photos a[rel=video]:after {
-  content: '\25BA';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #FFFFFF;
-  background: #000000;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-  display: inline-block;
-  box-shadow: 0 0 5px #000000;
-}
-
-.photos a[rel=video] {
-  display: inline-block;
-  position: relative;
-}
-

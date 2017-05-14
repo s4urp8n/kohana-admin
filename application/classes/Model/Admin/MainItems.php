@@ -5,12 +5,33 @@ defined('SYSPATH') or die('No direct script access.');
 class Model_Admin_MainItems extends Model_Admin
 {
 
+    protected static $tableName = 'main_items';
+
     public function getInsertColumns()
     {
         return [
-            'tableName' => 'main_items',
-            'validate'  => $this->getValidatePost(),
-            'columns'   => self::getCommonColumns(),
+            'tableName'   => static::$tableName,
+            'validate'    => $this->getValidatePost(),
+            'columns'     => self::getCommonColumns(),
+            'uploadsDirs' => self::getUploadsParams(),
+        ];
+    }
+
+    public static function getUploadsParams($primary = null)
+    {
+        return [
+            'Галерея' => [
+                'directory'         => __CLASS__ . DIRECTORY_SEPARATOR . (is_null($primary)
+                        ? '<primary>'
+                        : $primary) . DIRECTORY_SEPARATOR,
+                'uploadMaxSize'     => 100 * 1024 * 1024,
+                'allowedExtensions' => [
+                    'jpg',
+                    'jpeg',
+                    'bmp',
+                    'png',
+                ],
+            ],
         ];
     }
 
@@ -51,6 +72,10 @@ class Model_Admin_MainItems extends Model_Admin
             'am_content'     => [
                 'label' => 'СодержаниеAM',
                 'type'  => 'editor',
+            ],
+            'videos'         => [
+                'label' => 'Видео с youtube(вставлять ссылку)',
+                'type'  => 'youtube',
             ],
             'module'         => [
                 'label'   => 'Модуль',
@@ -111,31 +136,17 @@ class Model_Admin_MainItems extends Model_Admin
     public function getEditData($primary)
     {
         return [
-            'tableName' => 'main_items',
-            'primary'   => 'id',
-            'validate'  => $this->getValidatePost(),
-            'columns'   => self::getCommonColumns(),
+            'tableName'   => static::$tableName,
+            'primary'     => 'id',
+            'validate'    => $this->getValidatePost(),
+            'columns'     => self::getCommonColumns(),
+            'uploadsDirs' => self::getUploadsParams($primary),
         ];
     }
 
     public function getHREF()
     {
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
-    }
-
-    public function getAllowedRoles()
-    {
-        return ['admin'];
-    }
-
-    public function getDeletionRoles()
-    {
-        return ['admin'];
-    }
-
-    public function getModifyingRoles()
-    {
-        return ['admin'];
     }
 
     public function getInfo()
@@ -147,18 +158,10 @@ class Model_Admin_MainItems extends Model_Admin
         ];
     }
 
-    public function getUnfilteredColumns()
-    {
-        return ['Содержание'];
-    }
-
     public function deleteData($id = null)
     {
-        DB::delete('main_items')
+        DB::delete(static::$tableName)
           ->where('id', '=', $id)
-          ->execute();
-        DB::delete('secondary_items')
-          ->where('main_item_id', '=', $id)
           ->execute();
     }
 

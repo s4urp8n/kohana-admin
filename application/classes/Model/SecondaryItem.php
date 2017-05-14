@@ -3,6 +3,8 @@
 class Model_SecondaryItem extends ORM
 {
 
+    use Helper;
+
     protected $_table_name = 'secondary_items';
 
     public function getHref()

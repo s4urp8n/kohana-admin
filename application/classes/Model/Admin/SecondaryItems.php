@@ -8,9 +8,10 @@ class Model_Admin_SecondaryItems extends Model_Admin
     public function getInsertColumns()
     {
         return [
-            'tableName' => 'secondary_items',
-            'columns'   => self::getCommonColumns(),
-            'validate'  => $this->getValidatePost(),
+            'tableName'   => 'secondary_items',
+            'columns'     => self::getCommonColumns(),
+            'validate'    => $this->getValidatePost(),
+            'uploadsDirs' => self::getUploadsParams(),
         ];
     }
 
@@ -51,6 +52,10 @@ class Model_Admin_SecondaryItems extends Model_Admin
             'am_content'     => [
                 'label' => 'СодержаниеAM',
                 'type'  => 'editor',
+            ],
+            'videos'         => [
+                'label' => 'Видео с youtube(вставлять ссылку)',
+                'type'  => 'youtube',
             ],
             'ru_title'       => [
                 'label' => 'titleRU',
@@ -118,10 +123,29 @@ class Model_Admin_SecondaryItems extends Model_Admin
     public function getEditData($primary)
     {
         return [
-            'validate'  => $this->getValidatePost(),
-            'tableName' => 'secondary_items',
-            'primary'   => 'id',
-            'columns'   => self::getCommonColumns(),
+            'validate'    => $this->getValidatePost(),
+            'tableName'   => 'secondary_items',
+            'primary'     => 'id',
+            'columns'     => self::getCommonColumns(),
+            'uploadsDirs' => self::getUploadsParams($primary),
+        ];
+    }
+
+    public static function getUploadsParams($primary = null)
+    {
+        return [
+            'Галерея' => [
+                'directory'         => __CLASS__ . DIRECTORY_SEPARATOR . (is_null($primary)
+                        ? '<primary>'
+                        : $primary) . DIRECTORY_SEPARATOR,
+                'uploadMaxSize'     => 100 * 1024 * 1024,
+                'allowedExtensions' => [
+                    'jpg',
+                    'jpeg',
+                    'bmp',
+                    'png',
+                ],
+            ],
         ];
     }
 

@@ -5,28 +5,49 @@ defined('SYSPATH') or die('No direct script access.');
 class Model_Admin_ShopCategories extends Model_Admin
 {
 
+    protected static $tableName = 'shop_categories';
+
     public function getInsertColumns()
     {
         return [
-            'tableName' => 'shop_categories',
+            'tableName' => static::$tableName,
             'columns'   => self::getCommonColumns(),
             'validate'  => $this->getValidatePost(),
         ];
     }
 
+    public static function getRecursiveCategories()
+    {
+        $list = Model_ShopCategories::getList();
+
+        $data = [];
+
+        $list->walk(function ($item) use (&$data) {
+            $data[] = [
+                'id'      => $item->getId(),
+                'name'    => implode(' > ', $item->getRecursiveDataProperty('ru_name')),
+                'visible' => $item->getDataProperty('visible'),
+            ];
+        });
+
+        return $data;
+    }
+
     public static function getCommonColumns()
     {
-        $options = DB::select('id', 'ru_name')
-                     ->from('main_items')
-                     ->order_by('ru_name')
-                     ->execute()
-                     ->as_array('id', 'ru_name');
+        $options = [null => null];
+
+        \Zver\ArrayHelper::load(static::getRecursiveCategories())
+                         ->map(function ($value, $key) use (&$options) {
+                             $options[$value['id']] = $value['name'];
+                         })
+                         ->get();
 
         return [
-            'parent_id'   => [
+            'id_parent'      => [
                 'label'   => 'Родительская категория',
                 'type'    => 'select',
-                'options' => $options,
+                'options' => [null => null] + $options,
             ],
             'ru_name'        => [
                 'label' => 'Название менюRU',
@@ -39,18 +60,6 @@ class Model_Admin_ShopCategories extends Model_Admin
             'am_name'        => [
                 'label' => 'Название менюAM',
                 'type'  => 'text',
-            ],
-            'ru_content'     => [
-                'label' => 'СодержаниеRU',
-                'type'  => 'editor',
-            ],
-            'en_content'     => [
-                'label' => 'СодержаниеEN',
-                'type'  => 'editor',
-            ],
-            'am_content'     => [
-                'label' => 'СодержаниеAM',
-                'type'  => 'editor',
             ],
             'ru_title'       => [
                 'label' => 'titleRU',
@@ -88,15 +97,6 @@ class Model_Admin_ShopCategories extends Model_Admin
                 'label' => 'descriptionAM',
                 'type'  => 'textarea',
             ],
-            'module'         => [
-                'label'   => 'Модуль',
-                'type'    => 'select',
-                'options' => Modules::getModulesKeys(),
-            ],
-            'show_caption'   => [
-                'label' => 'Показывать заголовок',
-                'type'  => 'bool',
-            ],
             'visible'        => [
                 'label' => 'Видимость',
                 'type'  => 'bool',
@@ -107,7 +107,11 @@ class Model_Admin_ShopCategories extends Model_Admin
     public function getValidatePost()
     {
         return function ($post) {
-            if (empty($post['ru_name']) || empty($post['en_name'])) {
+            if (
+                empty($post['ru_name']) ||
+                empty($post['am_name']) ||
+                empty($post['en_name'])
+            ) {
                 return 'Название не должно быть пустым';
             }
 
@@ -119,7 +123,7 @@ class Model_Admin_ShopCategories extends Model_Admin
     {
         return [
             'validate'  => $this->getValidatePost(),
-            'tableName' => 'secondary_items',
+            'tableName' => static::$tableName,
             'primary'   => 'id',
             'columns'   => self::getCommonColumns(),
         ];
@@ -130,38 +134,18 @@ class Model_Admin_ShopCategories extends Model_Admin
         return AdminHREF::getDefaultAdminRouteUri('data', $this->getShortName());
     }
 
-    public function getAllowedRoles()
-    {
-        return ['admin'];
-    }
-
-    public function getDeletionRoles()
-    {
-        return ['admin'];
-    }
-
-    public function getModifyingRoles()
-    {
-        return ['admin'];
-    }
-
     public function getInfo()
     {
         return [
-            'caption' => 'Главное меню (подкатегории)',
+            'caption' => 'Категории товаров',
             'icon'    => '<i class="fa fa-list-alt"></i>',
             'group'   => 'content',
         ];
     }
 
-    public function getUnfilteredColumns()
-    {
-        return ['Содержание'];
-    }
-
     public function deleteData($id = null)
     {
-        DB::delete('secondary_items')
+        DB::delete(static::$tableName)
           ->where('id', '=', $id)
           ->execute();
     }
@@ -169,22 +153,7 @@ class Model_Admin_ShopCategories extends Model_Admin
     public function getData()
     {
 
-        $data = DB::select('secondary_items.id')
-                  ->select(
-                      [
-                          'main_items.ru_name',
-                          'Категория',
-                      ]
-                  )
-                  ->select(['secondary_items.ru_name', 'Подкатегория'])
-                  ->from('secondary_items')
-                  ->join('main_items', 'left')
-                  ->on('main_items.id', '=', 'secondary_items.main_item_id')
-                  ->order_by('main_items.ru_name')
-                  ->order_by('secondary_items.ru_name');
-
-        return $data->execute()
-                    ->as_array();
+        return static::getRecursiveCategories();
     }
 
 }

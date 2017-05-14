@@ -1,16 +1,29 @@
 $(document).ready(
     function () {
 
+        /**
+         * Index page radial containers clicks
+         */
+        $('.radialContainers-left, .radialContainers-right').on('click', function () {
 
-        // /**
-        //  * Wrapper height fix
-        //  */
-        // var footerHeight = $('.footer').height();
-        // var headerHeight = $('.header').height();
-        // var pageHeight = $(document).height();
-        //
-        // $('.wrapper-bottom').height(footerHeight);
-        // $('.wrapper-top > .page-container').height(pageHeight - footerHeight - headerHeight);
+            var mainLink = $(this).find('.radialContainer-link-main').first();
+
+            document.location.href = mainLink.attr('href');
+
+        });
+
+
+        /**
+         * Wrapper height fix
+         */
+        var footerHeight = $('.footer').height();
+        var headerHeight = $('.header').height();
+        var pageHeight = $(document).height();
+
+        $('.wrapper-bottom').height(footerHeight);
+        $('.wrapper-top > .page-container').height(pageHeight - footerHeight - headerHeight);
+
+        console.log('.radial-contaioners')
 
         /**
          * Background image slider
@@ -32,7 +45,7 @@ $(document).ready(
         var isOperaMini = (navigator.userAgent.indexOf("Opera Mini") > -1);
         if (!isOperaMini) {
 
-            var photoboxParams={
+            var photoboxParams = {
                 time: 1000,
                 autoplay: false,
                 history: true,
