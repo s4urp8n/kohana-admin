@@ -82,5 +82,8 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
         </div>
     </div>
     <div class="clearfix"></div>
+
+    <?=View::factory('parts/social')?>
+
 </div>
 

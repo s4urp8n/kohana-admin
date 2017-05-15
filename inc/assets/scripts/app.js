@@ -17,16 +17,6 @@ $(document).ready(
 
 
             /**
-             * Wrapper height fix on INDEX PAGE
-             */
-            var footerHeight = $('.footer').height();
-            var headerHeight = $('.header').height();
-            var pageHeight = $(document).height();
-
-            $('.wrapper-bottom').height(footerHeight);
-            $('.wrapper-top > .page-container').height(pageHeight - footerHeight - headerHeight);
-
-            /**
              * Background image slider
              */
             $('.index_page body').vegas({

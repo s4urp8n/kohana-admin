@@ -64,7 +64,7 @@ $yellowColor: #e7c03d;
     width: auto;
     .navigation-item {
       font-family: 'Open Sans';
-      font-weight: 200;
+      font-weight: 400;
       padding: 10px;
       text-align: center;
       text-decoration: none;
@@ -135,33 +135,7 @@ $yellowColor: #e7c03d;
   margin: 0;
   background: #1b1f20;
   border-top: 4px solid $greenColor;
-  .footerSocial {
-    @include boxSizing();
-    padding: 40px 0;
-    float: left;
-    width: 60%;
-    display: block;
-    &-icons {
-      a {
-        display: inline-block;
-        height: 34px;
-        width: 34px;
-        float: left;
-        margin: 3px;
-        padding: 2px;
-        &:hover {
-          .st0 {
-            fill: #fff;
-          }
-        }
-        svg {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
-  }
+
   .footerRights {
     padding: 40px 0;
     display: block;
@@ -194,6 +168,34 @@ $yellowColor: #e7c03d;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.footerSocial {
+  @include boxSizing();
+  padding: 40px 0;
+  float: left;
+  width: 60%;
+  display: block;
+  &-icons {
+    a {
+      display: inline-block;
+      height: 34px;
+      width: 34px;
+      float: left;
+      margin: 3px;
+      padding: 2px;
+      &:hover {
+        .st0 {
+          fill: #fff;
+        }
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -538,24 +540,15 @@ html.yellow_color {
   }
 }
 
-$radialSize: 200px;
+$radialSize: 195px;
 $radialOffset: 10px;
 $mainFontsize: 36px;
 $linkFontsize: 20px;
 $borderOffset: 20px;
-$indexHoverColor: rgba(35, 59, 39, 0.7);
+$indexHoverColor: darken(rgba(35, 59, 39, 0.5), 10%);
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+$angleOffsetLeft: 40px;
+$angleOffsetTop: 30px;
 
 .radialContainers {
   display: block;
@@ -569,7 +562,6 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
   font-weight: 200;
   .radialContainer {
     display: block;
-
     width: $radialSize;
     height: $radialSize;
     position: absolute;
@@ -616,14 +608,14 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
           &.radialContainer-link-#{$number} {
             text-align: right;
             @if $number==1 {
-              left: -$radialOffset*4;
-              top: -$radialOffset*4;
+              left: -$radialOffset*4 - $angleOffsetLeft;
+              top: -$radialOffset*4 + $angleOffsetTop;
             } @else if $number==2 {
               left: -$radialSize/2 - $radialOffset*4;
               top: $radialSize/2;
             } @else if $number==3 {
-              left: -$radialOffset*4;
-              top: $radialSize + $radialOffset*4;
+              left: -$radialOffset*4 - $angleOffsetLeft;
+              top: $radialSize + $radialOffset*4 - $angleOffsetTop;
             }
             &:before {
               display: block;
@@ -655,14 +647,14 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
           &.radialContainer-link-#{$number} {
             text-align: left;
             @if $number==1 {
-              left: $radialSize + $radialOffset*4;
-              top: -$radialOffset*4;
+              left: $radialSize + $radialOffset*4 + $angleOffsetLeft;
+              top: -$radialOffset*4 + $angleOffsetTop;
             } @else if $number==2 {
               left: $radialSize+$radialSize/2 + $radialOffset*4;
               top: $radialSize/2;
             } @else if $number==3 {
-              left: $radialSize + $radialOffset*4;
-              top: $radialSize + $radialOffset*4;
+              left: $radialSize + $radialOffset*4 + $angleOffsetLeft;
+              top: $radialSize + $radialOffset*4 - $angleOffsetTop;
             }
             &:before {
               display: block;
@@ -710,19 +702,10 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
         width: $radialSize;
         height: $radialSize;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -2px;
+        left: -2px;
         border-radius: 50%;
         border: 2px dotted #fff;
-      }
-      &:hover {
-        &:after {
-          animation-name: rotate;
-          animation-duration: 10s;
-          animation-delay: 0s;
-          animation-iteration-count: infinite;
-          animation-timing-function: linear;
-        }
       }
     }
     .radialContainer-link {
@@ -731,6 +714,13 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
     &:hover {
       .radialContainer {
         transform: scale(1.2);
+        &:after {
+          animation-name: rotate;
+          animation-duration: 10s;
+          animation-delay: 0s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
       }
       .radialContainer-link-main {
         background: $indexHoverColor;
@@ -738,17 +728,20 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       .radialContainer-link {
         opacity: 1;
       }
-      .radialContainer-link-2 {
+      .radialContainer-link-1 {
         transition-delay: 0.25s;
       }
-      .radialContainer-link-3 {
+      .radialContainer-link-2 {
         transition-delay: 0.45s;
+      }
+      .radialContainer-link-3 {
+        transition-delay: 0.65s;
       }
     }
   }
   &-logo {
     position: absolute;
-    top: -120px;
+    top: -130px;
     left: 0;
     width: 100%;
     text-align: center;
@@ -769,8 +762,10 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       color: #fff;
       font-size: 28px;
       text-align: left;
-      border-left: 2px dashed #fff;
+      border-left: 2px dotted #fff;
       line-height: 1.1;
+      font-family: 'Open Sans';
+      font-weight: 200;
     }
   }
 }
@@ -779,12 +774,31 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
   .wrapper-top {
     & > .page-container {
       position: relative;
+      height: $radialSize*3.5;
       .radialContainers {
         position: absolute;
-        top: 50%;
+        top: 55%;
         left: 0;
-        margin-top: -$radialSize
+        margin-top: -$radialSize;
       }
+      .footerSocial {
+        width: 50%;
+        float: none;
+        margin: auto;
+        text-align: center;
+        a {
+          float: none;
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .footer {
+    .footerRights {
+      margin-right: 25%;
+    }
+    .footerSocial {
+      display: none;
     }
   }
 }
