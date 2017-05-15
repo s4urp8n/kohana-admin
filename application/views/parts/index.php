@@ -37,7 +37,9 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
     <div class="radialContainers-left">
         <div class="radialContainer radialContainer--1">
             <a href="<?= $garden->getHref() ?>" class="radialContainer-link-main">
-                <?= $garden->get(Common::getCurrentLang() . '_name') ?>
+                <?= \Zver\StringHelper::load($garden->get(Common::getCurrentLang() . '_name'))
+                                      ->toUpperCaseFirst()
+                                      ->get() ?>
             </a>
 
             <?php
@@ -59,7 +61,9 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
     <div class="radialContainers-right">
         <div class="radialContainer radialContainer--2">
             <a href="<?= $home->getHref() ?>" class="radialContainer-link-main">
-                <?= $home->get(Common::getCurrentLang() . '_name') ?>
+                <?= \Zver\StringHelper::load($home->get(Common::getCurrentLang() . '_name'))
+                                      ->toUpperCaseFirst()
+                                      ->get() ?>
             </a>
 
             <?php

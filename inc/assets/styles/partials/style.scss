@@ -63,7 +63,8 @@ $yellowColor: #e7c03d;
     vertical-align: middle;
     width: auto;
     .navigation-item {
-      font-family: 'Roboto Condensed';
+      font-family: 'Open Sans';
+      font-weight: 200;
       padding: 10px;
       text-align: center;
       text-decoration: none;
@@ -564,8 +565,11 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
   height: $radialSize*2;
   line-height: $radialSize*2;
   position: relative;
+  font-family: 'Open Sans';
+  font-weight: 200;
   .radialContainer {
     display: block;
+
     width: $radialSize;
     height: $radialSize;
     position: absolute;
@@ -585,7 +589,9 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       color: #fff;
       font-size: $linkFontsize;
       line-height: $linkFontsize;
-      text-decoration: underline;
+      text-decoration: none;
+      font-family: 'Open Sans';
+      font-weight: 200;
     }
     .radialContainer-link-main {
       text-decoration: none;
@@ -596,10 +602,11 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
       margin-left: $borderOffset/2;
       display: block;
       color: #fff;
-      text-transform: capitalize;
       font-size: $mainFontsize;
       line-height: $radialSize - $mainFontsize;
       border-radius: 50%;
+      font-family: 'Open Sans';
+      font-weight: 200;
     }
 
     &--1 {
@@ -622,7 +629,7 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
               display: block;
               position: absolute;
               width: $radialOffset*3;
-              border-top: 2px dashed #fff;
+              border-top: 2px dotted #fff;
               content: '';
               @if $number==1 {
                 right: -$radialOffset;
@@ -661,7 +668,7 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
               display: block;
               position: absolute;
               width: $radialOffset*3;
-              border-top: 2px dashed #fff;
+              border-top: 2px dotted #fff;
               content: '';
               @if $number==1 {
                 left: -$radialOffset;
@@ -706,12 +713,16 @@ $indexHoverColor: rgba(35, 59, 39, 0.7);
         top: 0;
         left: 0;
         border-radius: 50%;
-        border: 2px dashed #fff;
-        animation-name: rotate;
-        animation-duration: 10s;
-        animation-delay: 0s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
+        border: 2px dotted #fff;
+      }
+      &:hover {
+        &:after {
+          animation-name: rotate;
+          animation-duration: 10s;
+          animation-delay: 0s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
       }
     }
     .radialContainer-link {

@@ -32,12 +32,14 @@ $(document).ready(
             $('.index_page body').vegas({
                 timer: false,
                 shuffle: true,
-                overlay: true,
+                // overlay: true,
                 delay: 7000,
                 slides: [
+                    {src: '/inc/images/index/1.jpg'},
+                    {src: '/inc/images/index/2.jpg'},
+                    {src: '/inc/images/index/3.jpg'},
                     {src: '/inc/images/index/4.jpg'},
                     {src: '/inc/images/index/5.jpg'},
-                    {src: '/inc/images/index/6.jpg'}
                 ]
             });
         }
