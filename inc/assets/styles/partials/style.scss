@@ -779,6 +779,7 @@ $angleOffsetTop: 30px;
   }
   .wrapper-top {
     & > .page-container {
+      overflow: hidden;
       position: relative;
       height: $radialSize*3.5;
       .radialContainers {
