@@ -773,7 +773,8 @@ $angleOffsetTop: 30px;
 .index_page {
   background-color: #000;
   .animated {
-    &.fadeInDown {
+    &.fadeInDown,
+    &.fadeInUp {
       animation-delay: 1s;
     }
   }

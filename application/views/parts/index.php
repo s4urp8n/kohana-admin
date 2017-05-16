@@ -83,7 +83,7 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
     </div>
     <div class="clearfix"></div>
 
-    <?=View::factory('parts/social')?>
+    <?= View::factory('parts/social', ['animated' => true]) ?>
 
 </div>
 

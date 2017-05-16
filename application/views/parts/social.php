@@ -1,4 +1,6 @@
-<div class="footerSocial">
+<div class="footerSocial <?php if (isset($animated)) {
+    echo "animated fadeInUp";
+} ?>">
     <div class="footerSocial-icons">
         <a target="_blank" href="#">
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
