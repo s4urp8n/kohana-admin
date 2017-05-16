@@ -772,6 +772,11 @@ $angleOffsetTop: 30px;
 
 .index_page {
   background-color: #000;
+  .animated {
+    &.fadeInDown {
+      animation-delay: 1s;
+    }
+  }
   .wrapper-top {
     & > .page-container {
       position: relative;
