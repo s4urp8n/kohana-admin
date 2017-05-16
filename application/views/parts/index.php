@@ -34,7 +34,7 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
         <div class="slogan"><?= ___('ПриветствиеНаГлавнойСтраницеТекст') ?></div>
     </div>
 
-    <div class="radialContainers-left animated fadeInRight">
+    <div class="radialContainers-left animated fadeInLeft">
         <div class="radialContainer radialContainer--1">
             <a href="<?= $garden->getHref() ?>" class="radialContainer-link-main">
                 <?= \Zver\StringHelper::load($garden->get(Common::getCurrentLang() . '_name'))
@@ -58,7 +58,7 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
         </div>
     </div>
 
-    <div class="radialContainers-right animated fadeInLeft">
+    <div class="radialContainers-right animated fadeInRight">
         <div class="radialContainer radialContainer--2">
             <a href="<?= $home->getHref() ?>" class="radialContainer-link-main">
                 <?= \Zver\StringHelper::load($home->get(Common::getCurrentLang() . '_name'))
