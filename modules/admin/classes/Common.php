@@ -263,6 +263,7 @@ class Common
     {
         $request = Request::initial();
         $main_item_param = $request->param('main_item');
+
         $main_items = self::getMainItemsTransliterated();
 
         if (!empty($main_item_param)) {
@@ -280,13 +281,20 @@ class Common
              */
 
             /** @var Route $route */
-            $route = Route::name($request->route());
 
-            switch ($route) {
-                case 'news': {
-                    return static::getNewsMainItem();
+            $route = $request->route();
+
+            if (!empty($route)) {
+
+                $route = Route::name($route);
+
+                switch ($route) {
+                    case 'news': {
+                        return static::getNewsMainItem();
+                    }
                 }
             }
+
         }
 
         /**
@@ -416,10 +424,36 @@ class Common
         return static::getLangs()[0];
     }
 
+    public static function getSessionLang()
+    {
+        $session = Session::instance();
+
+        if (!empty($session->get('lang'))) {
+            return $session->get('lang');
+        }
+
+        return false;
+    }
+
+    public static function getQueryLang()
+    {
+
+        $lang = filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_STRING);
+
+        if (!empty($lang)) {
+            return $lang;
+        }
+
+        return false;
+
+    }
+
     public static function getCurrentLang()
     {
         $langsPriority = [
             static::getCurrentUrlLang(),
+            static::getQueryLang(),
+            static::getSessionLang(),
             static::getDefaultLang(),
         ];
 
@@ -445,15 +479,20 @@ class Common
 
         $params['lang'] = $lang;
 
-        $url = URL::base() . $route->uri($params);
+        if (!empty($route)) {
 
-        $get = http_build_query($_GET);
+            $url = URL::base() . $route->uri($params);
 
-        if (!empty($get)) {
-            $url = $url . "?" . $get;
+            $get = http_build_query($_GET);
+
+            if (!empty($get)) {
+                $url = $url . "?" . $get;
+            }
+
+            return $url;
         }
 
-        return $url;
+        return '/' . $lang;
     }
 
     public static function getShopMainItem()
@@ -474,6 +513,20 @@ class Common
     {
         return ORM::factory('MainItem')
                   ->where('module', '=', Modules::$MOD_NEWS)
+                  ->find();
+    }
+
+    public static function getCabinetMainItem()
+    {
+        return ORM::factory('MainItem')
+                  ->where('module', '=', Modules::$MOD_CABINET)
+                  ->find();
+    }
+
+    public static function getCartMainItem()
+    {
+        return ORM::factory('MainItem')
+                  ->where('module', '=', Modules::$MOD_CART)
                   ->find();
     }
 

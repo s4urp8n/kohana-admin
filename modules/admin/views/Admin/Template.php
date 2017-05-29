@@ -32,6 +32,7 @@ header("Pragma: no-cache");
 
     <?php
     $styles = [
+        '/inc/build/' . getAssetsVersion() . '.css',
         '/' . Admin::getConfig('sharedDir') . '/css/style.css',
     ];
     ?>

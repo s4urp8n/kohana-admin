@@ -13,12 +13,12 @@ defined('SYSPATH') OR die('No direct access allowed.');
  */
 abstract class Kohana_Auth
 {
-    
+
     // Auth instances
     protected static $_instance;
     protected $_session;
     protected $_config;
-    
+
     /**
      * Loads Session and configuration options.
      *
@@ -30,10 +30,10 @@ abstract class Kohana_Auth
     {
         // Save the config in the object
         $this->_config = $config;
-        
+
         $this->_session = Session::instance($this->_config['session_type']);
     }
-    
+
     /**
      * Singleton pattern
      *
@@ -41,30 +41,28 @@ abstract class Kohana_Auth
      */
     public static function instance()
     {
-        if (!isset(Auth::$_instance))
-        {
+        if (!isset(Auth::$_instance)) {
             // Load the configuration for this type
             $config = Kohana::$config->load('auth');
-            
-            if (!$type = $config->get('driver'))
-            {
+
+            if (!$type = $config->get('driver')) {
                 $type = 'file';
             }
-            
+
             // Set the session class name
             $class = 'Auth_' . ucfirst($type);
-            
+
             // Create a new session instance
             Auth::$_instance = new $class($config);
         }
-        
+
         return Auth::$_instance;
     }
-    
+
     abstract public function password($username);
-    
+
     abstract public function check_password($password);
-    
+
     /**
      * Attempt to log in a user by using an ORM object and plain-text password.
      *
@@ -76,16 +74,15 @@ abstract class Kohana_Auth
      */
     public function login($username, $password, $remember = false)
     {
-        if (empty($password))
-        {
+        if (empty($password)) {
             return false;
         }
-        
+
         return $this->_login($username, $password, $remember);
     }
-    
+
     abstract protected function _login($username, $password, $remember);
-    
+
     /**
      * Log out a user by removing the related session variables.
      *
@@ -96,24 +93,22 @@ abstract class Kohana_Auth
      */
     public function logout($destroy = false, $logout_all = false)
     {
-        if ($destroy === true)
-        {
+
+        if ($destroy === true) {
             // Destroy the session completely
             $this->_session->destroy();
-        }
-        else
-        {
+        } else {
             // Remove the user from the session
             $this->_session->delete($this->_config['session_key']);
-            
+
             // Regenerate session_id
             $this->_session->regenerate();
         }
-        
+
         // Double check
         return !$this->logged_in();
     }
-    
+
     /**
      * Check if there is an active session. Optionally allows checking for a
      * specific role.
@@ -126,7 +121,7 @@ abstract class Kohana_Auth
     {
         return ($this->get_user() !== null);
     }
-    
+
     /**
      * Gets the currently logged in user from the session.
      * Returns NULL if no user is currently logged in.
@@ -139,7 +134,7 @@ abstract class Kohana_Auth
     {
         return $this->_session->get($this->_config['session_key'], $default);
     }
-    
+
     /**
      * Creates a hashed hmac password from a plaintext password. This
      * method is deprecated, [Auth::hash] should be used instead.
@@ -152,7 +147,7 @@ abstract class Kohana_Auth
     {
         return $this->hash($password);
     }
-    
+
     /**
      * Perform a hmac hash, using the configured method.
      *
@@ -162,25 +157,24 @@ abstract class Kohana_Auth
      */
     public function hash($str)
     {
-        if (!$this->_config['hash_key'])
-        {
+        if (!$this->_config['hash_key']) {
             throw new Kohana_Exception('A valid hash key must be set in your auth config.');
         }
-        
+
         return hash_hmac($this->_config['hash_method'], $str, $this->_config['hash_key']);
     }
-    
+
     protected function complete_login($user)
     {
         // Regenerate session_id
         $this->_session->regenerate();
-        
+
         // Store username in session
         $this->_session->set($this->_config['session_key'], $user);
-        
+
         return true;
     }
-    
+
 }
 
 // End Auth

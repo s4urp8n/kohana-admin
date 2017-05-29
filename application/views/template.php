@@ -92,6 +92,7 @@ switch (Common::getCurrentColor()) {
 <body>
 <div class="wrapper">
     <div class="wrapper-top">
+
         <?php
         if (!empty($header)) {
             echo $header;

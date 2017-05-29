@@ -1,9 +1,17 @@
 <div class="authFormNew">
     <form role="form" action='<?php echo AdminHREF::getDefaultAdminRouteUri('register'); ?>' method="post">
+
+
+        <?php
+        if (!isset($embed)) {
+            echo View::factory('Admin/authLangs');
+        }
+        ?>
+
         <div class="form-group">
             <h4 class="text-center">
                 <i class="fa fa-lock"></i>
-                Регистрация
+                <?= ___('РегистрацияТекст') ?>
             </h4>
         </div>
         <?php
@@ -23,14 +31,14 @@
                        required
                        class="form-control"
                        id="email"
-                       placeholder="Введите имя пользователя..."
+                       placeholder="<?= ___('ВведитеИмяПользователяТекст') ?>..."
                        value='<?= $email ?>'/>
             </div>
         </div>
         <div class="form-group">
 
             <label for="password" class="control-label">
-                Пароль:
+                <?= ___('ПарольТекст') ?>:
             </label>
 
             <div>
@@ -39,14 +47,14 @@
                        required
                        class="form-control"
                        id="password"
-                       placeholder="Введите пароль..."
+                       placeholder="<?= ___('ВведитеПарольТекст') ?>..."
                        value='<?= $password; ?>'/>
             </div>
         </div>
         <div class="form-group">
 
             <label for="password" class="control-label">
-                Проверочный код с картинки:
+                <?= ___('ПроверочныйКод') ?>:
             </label>
 
             <div>
@@ -56,22 +64,30 @@
                        type="text"
                        required
                        class="form-control"
-                       placeholder="Введите код с картинки..."
+                       placeholder="<?= ___('ВведитеПроверочныйКод') ?>..."
                 />
             </div>
         </div>
         <div class="form-group">
             <div>
                 <button type="submit" class="btn btn-info btn-block">
-                    Зарегистрироваться
+                    <?= ___('ЗарегистрироватьсяКнопка') ?>
                 </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <a href="/admin/auth" class="btn btn-link btn-block">
+                    <i class="fa fa-external-link fa-flip-horizontal"></i>
+                    <?= ___('ВойтиТекст') ?>
+                </a>
             </div>
         </div>
         <div class="form-group">
             <div>
                 <a href="/" class="btn btn-link btn-block">
                     <i class="fa fa-external-link fa-flip-horizontal"></i>
-                    Вернуться на главную
+                    <?= ___('ВернутьсяНаГлавнуюТекст') ?>
                 </a>
             </div>
         </div>

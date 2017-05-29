@@ -6,10 +6,17 @@
           method="post">
 
         <?php
+        if (!isset($embed)) {
+            echo View::factory('Admin/authLangs');
+        }
+        ?>
+
+
+        <?php
         if (!empty($embed)) {
             ?>
             <div class="alert alert-info">
-                Для оформления заказа войдите на сайт или зарегистрируйтесь
+                <?= ___('ДляОформленияЗаказаВойдитеИлиЗарегистрируйтесь') ?>
             </div>
             <?php
         }
@@ -21,7 +28,7 @@
             <div class="form-group">
                 <h4 class="text-center">
                     <i class="fa fa-lock"></i>
-                    Вход на сайт
+                    <?= ___('ВходНаСайтТекст') ?>
                 </h4>
             </div>
             <?php
@@ -35,7 +42,7 @@
         ?>
         <div class="form-group">
             <label for="login" class="control-label">
-                Имя пользователя:
+                <?= ___('ИмяПользователяТекст') ?>:
             </label>
 
             <div>
@@ -43,7 +50,7 @@
                        name="login"
                        class="form-control"
                        id="login"
-                       placeholder="Введите имя пользователя..."
+                       placeholder="<?= ___('ВведитеИмяПользователяТекст') ?>..."
                        value='<?= (empty($login)
                            ? ""
                            : $login) ?>'/>
@@ -51,7 +58,7 @@
         </div>
         <div class="form-group">
             <label for="password" class="control-label">
-                Пароль:
+                <?= ___('ПарольТекст') ?>:
             </label>
 
             <div>
@@ -59,7 +66,7 @@
                        type="password"
                        class="form-control"
                        id="password"
-                       placeholder="Введите пароль..."
+                       placeholder="<?= ___('ВведитеПарольТекст') ?>..."
                        value='<?= (empty($password)
                            ? ""
                            : $password) ?>'/>
@@ -72,15 +79,23 @@
                         ? 'checked'
                         : '') ?>
                            type="checkbox">
-                    Запомнить?
+                    <?= ___('ЗапомнитьМеня') ?>?
                 </label>
             </div>
         </div>
         <div class="form-group">
             <div>
                 <button type="submit" class="btn btn-info btn-block">
-                    Войти
+                    <?= ___('ВойтиТекст') ?>
                 </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <a href="/admin/register" class="btn btn-link btn-block">
+                    <i class="fa fa-external-link fa-flip-horizontal"></i>
+                    <?= ___('РегистрацияТекст') ?>
+                </a>
             </div>
         </div>
         <?php
@@ -90,7 +105,7 @@
                 <div>
                     <a href="/" class="btn btn-link btn-block">
                         <i class="fa fa-external-link fa-flip-horizontal"></i>
-                        Вернуться на главную
+                        <?= ___('ВернутьсяНаГлавнуюТекст') ?>
                     </a>
                 </div>
             </div>

@@ -447,11 +447,11 @@ $yellowColor: #e7c03d;
   }
 }
 
-//html[lang='am'] {
-//  * {
-//    font-family: Tahoma !important;
-//  }
-//}
+html[lang='am'] {
+  * {
+    font-family: Tahoma !important;
+  }
+}
 
 .index_page {
   .wrapper-top {
@@ -811,3 +811,24 @@ $angleOffsetTop: 30px;
   }
 }
 
+.authFormNew {
+  .authLangs {
+    display: table;
+    border: 1px solid #eee;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 0 30px 0;
+    &-lang {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      padding: 5px;
+      text-decoration: none;
+      color: #bbb;
+      &--active {
+        background: #eee;
+        color: #555;
+      }
+    }
+  }
+}

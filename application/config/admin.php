@@ -12,5 +12,5 @@ return [
     'searchQueryParam'     => 's',
     'filterQueryPrefix'    => 'f',
     'sortQueryPrefix'      => 'sc',
-    'SignInSignUp'         => false,
+    'SignInSignUp'         => true,
 ];

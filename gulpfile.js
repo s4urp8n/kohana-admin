@@ -45,7 +45,16 @@ function say(text) {
 }
 
 gulp.task('default', ['clearAfter'], function () {
-    console.log('Compiled!');
+
+    var watches = [
+        "gulp.map.json",
+        "gulpfile.js",
+        "inc/assets/**",
+        "inc/system/**",
+        "inc/images/**"
+    ];
+
+    gulp.watch(watches, ['default']);
 });
 
 gulp.task('clearAfter', ['compile'], function () {
@@ -62,7 +71,7 @@ gulp.task('compile', ['updateVersion'], function () {
 
         for (var partFile in sourceMap[outputFileName]) {
             outputStream.queue(gulp.src(sourceMap[outputFileName][partFile], {buffer: true})
-                    //SWALLOW ERRORs
+                //SWALLOW ERRORs
                     .pipe(plumber())
                     //JS
                     .pipe(gulpIf(['*.js', '!*.min.js'], jsmin())) //minify js
@@ -111,16 +120,4 @@ gulp.task('clearBefore', function () {
             .pipe(clean());
     }
     return false;
-});
-
-gulp.task('watch', ['default'], function () {
-
-    var watches = [
-        "gulp.map.json",
-        "inc/assets/**",
-        "inc/system/**",
-        "inc/images/**"
-    ];
-
-    gulp.watch(watches, ['default']);
 });

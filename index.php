@@ -56,5 +56,12 @@ if (PHP_SAPI == 'cli') {
                                  ->trimSpaces();
 
     echo $request;
+
+    $initial = Request::initial();
+
+    if (!empty($initial->param('lang'))) {
+        Session::instance()
+               ->set('lang', $initial->param('lang'));
+    }
 }
 

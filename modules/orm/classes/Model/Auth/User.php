@@ -12,7 +12,7 @@ defined('SYSPATH') OR die('No direct access allowed.');
  */
 class Model_Auth_User extends ORM
 {
-    
+
     /**
      * A user has many tokens and roles
      *
@@ -22,7 +22,7 @@ class Model_Auth_User extends ORM
         'user_tokens' => ['model' => 'User_Token'],
         'roles'       => ['model' => 'Role', 'through' => 'roles_users'],
     ];
-    
+
     /**
      * Rules for the user model. Because the password is _always_ a hash
      * when it's set,you need to run an additional not_empty rule in your controller
@@ -43,7 +43,7 @@ class Model_Auth_User extends ORM
             ],
         ];
     }
-    
+
     /**
      * Filters to run when data is set in this model. The password filter
      * automatically hashes the password when it's set in the model.
@@ -58,7 +58,7 @@ class Model_Auth_User extends ORM
             ],
         ];
     }
-    
+
     /**
      * Labels for fields in this model
      *
@@ -72,7 +72,7 @@ class Model_Auth_User extends ORM
             'password' => 'password',
         ];
     }
-    
+
     /**
      * Complete the login for a user by incrementing the logins and saving login timestamp
      *
@@ -80,20 +80,19 @@ class Model_Auth_User extends ORM
      */
     public function complete_login()
     {
-        if ($this->_loaded)
-        {
+        if ($this->_loaded) {
             // Update the number of logins
             $this->logins = new Database_Expression('logins + 1');
-            
+
             // Set the last login date
             $now = new DateTime();
             $this->last_login = $now->format('Y-m-d H:i:s');
-            
+
             // Save the user
             $this->update();
         }
     }
-    
+
     /**
      * Tests if a unique key value exists in the database.
      *
@@ -104,12 +103,11 @@ class Model_Auth_User extends ORM
      */
     public function unique_key_exists($value, $field = null)
     {
-        if ($field === null)
-        {
+        if ($field === null) {
             // Automatically determine field by looking at the value
             $field = $this->unique_key($value);
         }
-        
+
         return (bool)DB::select([DB::expr('COUNT(*)'), 'total_count'])
                        ->from($this->_table_name)
                        ->where($field, '=', $value)
@@ -117,7 +115,7 @@ class Model_Auth_User extends ORM
                        ->execute($this->_db)
                        ->get('total_count');
     }
-    
+
     /**
      * Allows a model use both email and username as unique identifiers for login
      *
@@ -131,7 +129,7 @@ class Model_Auth_User extends ORM
             ? 'email'
             : 'username';
     }
-    
+
     /**
      * Create a new user
      *
@@ -154,11 +152,11 @@ class Model_Auth_User extends ORM
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values)
                                       ->rule('password', 'not_empty');
-        
+
         return $this->values($values, $expected)
                     ->create($extra_validation);
     }
-    
+
     /**
      * Password validation for plain passwords.
      *
@@ -172,7 +170,7 @@ class Model_Auth_User extends ORM
                          ->rule('password', 'min_length', [':value', 8])
                          ->rule('password_confirm', 'matches', [':validation', ':field', 'password']);
     }
-    
+
     /**
      * Update an existing user
      *
@@ -198,18 +196,17 @@ class Model_Auth_User extends ORM
      */
     public function update_user($values, $expected = null)
     {
-        if (empty($values['password']))
-        {
+        if (empty($values['password'])) {
             unset($values['password'], $values['password_confirm']);
         }
-        
+
         // Validation for passwords
         $extra_validation = Model_User::get_password_validation($values);
-        
+
         return $this->values($values, $expected)
                     ->update($extra_validation);
     }
-    
+
 }
 
 // End Auth User Model

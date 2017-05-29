@@ -8,6 +8,7 @@ class Modules
     public static $MOD_CART = 2;
     public static $MOD_SHOP = 3;
     public static $MOD_ARTICLES = 4;
+    public static $MOD_CABINET = 5;
 
     final public static function render($item)
     {
@@ -64,6 +65,12 @@ class Modules
                 'options' => [
                     'no_content' => 1,
                     'html_class' => 'index_page',
+                ],
+            ],
+            static::$MOD_CABINET  => [
+                'name' => 'Личный кабинет',
+                'view' => [
+                    'parts/cabinet' => [],
                 ],
             ],
         ];
