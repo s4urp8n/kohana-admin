@@ -818,7 +818,9 @@ class Controller_Admin extends Controller_Template
 
         $this->auth = Auth:: instance();
 
-        if (!$this->auth->logged_in() && $this->request->action() != 'auth' && $this->request->action() != 'register') {
+        $action = $this->request->action();
+
+        if (!$this->auth->logged_in() && !in_array($action, ['auth', 'register', 'restore'])) {
             self::goAuth();
         }
     }
@@ -891,6 +893,61 @@ class Controller_Admin extends Controller_Template
                                      'login'    => $login,
                                      'error'    => $error,
                                  ]
+        );
+    }
+
+    public function action_restore()
+    {
+        if ($this->auth->logged_in()) {
+            self::goMenu();
+        }
+
+        $email = '';
+        $error = '';
+        $captcha = '';
+
+        if (!empty($_POST)) {
+
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+            $captcha = filter_input(INPUT_POST, 'captcha', FILTER_SANITIZE_STRING);
+
+            $user = ORM::factory('User')
+                       ->where('email', '=', $email)
+                       ->find();
+
+            if (!$email) {
+                $error = ___('Введите email правильно.');
+            } elseif (!Captcha::valid($_POST['captcha'])) {
+                $error = ___('Неправильно введен проверочный код.');
+            } elseif (empty($user->id)) {
+                $error = ___('Пользователь с таким адресом электронной почты не найден');
+            } else {
+
+                $newPass = \Zver\StringHelper::load(md5(\Zver\Common::getTimestampMicrotime()))
+                                             ->substring(0, 8)
+                                             ->get();
+
+                $subject = ___('Восстановление доступа к сайту');
+                $text = ___("Уважаемый пользователь, мы сгенерировали для Вас новый пароль: ") .
+                        '<b>' . $newPass . "</b>" . "<br/>" .
+                        ___('Используйте его для входа на сайт.') . "<br/>" .
+                        ___('Вы в любое время можете сменить пароль.') . "<br/><br/><br/>";
+
+                Mailer::send([$email], $subject, $text, 'Lusin Group LLC');
+
+                $user->password = $newPass;
+
+                $user->save();
+
+            }
+
+        }
+
+        $this->template->content = View:: factory(
+            'Admin/Restore/Template', [
+                                        'email' => $email,
+                                        'error' => $error,
+                                    ]
         );
     }
 

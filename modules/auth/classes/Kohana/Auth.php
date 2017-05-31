@@ -139,8 +139,6 @@ abstract class Kohana_Auth
      * Creates a hashed hmac password from a plaintext password. This
      * method is deprecated, [Auth::hash] should be used instead.
      *
-     * @deprecated
-     *
      * @param  string $password Plaintext password
      */
     public function hash_password($password)

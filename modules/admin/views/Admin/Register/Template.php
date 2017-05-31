@@ -85,6 +85,14 @@
         </div>
         <div class="form-group">
             <div>
+                <a href="/admin/restore" class="btn btn-link btn-block">
+                    <i class="fa fa-external-link fa-flip-horizontal"></i>
+                    <?= ___('ВосстановитьПароль') ?>
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
                 <a href="/" class="btn btn-link btn-block">
                     <i class="fa fa-external-link fa-flip-horizontal"></i>
                     <?= ___('ВернутьсяНаГлавнуюТекст') ?>
