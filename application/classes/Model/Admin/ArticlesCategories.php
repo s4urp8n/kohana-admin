@@ -72,7 +72,7 @@ class Model_Admin_ArticlesCategories extends Model_Admin
     {
         return [
             'caption' => 'Категории публикаций',
-            'icon'    => '<i class="fa fa-list-alt"></i>',
+            'icon'    => '<i class="fa fa-th-list"></i>',
             'group'   => 'content',
         ];
     }

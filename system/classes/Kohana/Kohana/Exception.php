@@ -13,7 +13,7 @@ defined('SYSPATH') OR die('No direct script access.');
  */
 class Kohana_Kohana_Exception extends Exception
 {
-    
+
     /**
      * @var  array  PHP error code => human readable name
      */
@@ -28,17 +28,17 @@ class Kohana_Kohana_Exception extends Exception
         E_RECOVERABLE_ERROR => 'Recoverable Error',
         E_DEPRECATED        => 'Deprecated',
     ];
-    
+
     /**
      * @var  string  error rendering view
      */
     public static $error_view = 'kohana/error';
-    
+
     /**
      * @var  string  error view content type
      */
     public static $error_view_content_type = 'text/html';
-    
+
     /**
      * Creates a new translated exception.
      *
@@ -56,15 +56,15 @@ class Kohana_Kohana_Exception extends Exception
     {
         // Set the message
         $message = __($message, $variables);
-        
+
         // Pass the message and integer code to the parent
         parent::__construct($message, (int)$code, $previous);
-        
+
         // Save the unmodified code
         // @link http://bugs.php.net/39615
         $this->code = $code;
     }
-    
+
     /**
      * Inline exception handler, displays the error message, source of the
      * exception, and the stack trace of the error.
@@ -75,17 +75,17 @@ class Kohana_Kohana_Exception extends Exception
      *
      * @return  void
      */
-    public static function handler(Exception $e)
+    public static function handler($e)
     {
         $response = Kohana_Exception::_handler($e);
-        
+
         // Send the response to the browser
         echo $response->send_headers()
                       ->body();
-        
+
         exit(1);
     }
-    
+
     /**
      * Exception handler, logs the exception and generates a Response object
      * for display.
@@ -96,36 +96,34 @@ class Kohana_Kohana_Exception extends Exception
      *
      * @return  Response
      */
-    public static function _handler(Exception $e)
+    public static function _handler($e)
     {
-        try
-        {
+        try {
             // Log the exception
             Kohana_Exception::log($e);
-            
+
             // Generate the response
             $response = Kohana_Exception::response($e);
-            
+
             return $response;
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             /**
              * Things are going *really* badly for us, We now have no choice
              * but to bail. Hard.
              */
             // Clean the output buffer if one exists
             ob_get_level() AND ob_clean();
-            
+
             // Set the Status code to 500, and Content-Type to text/plain.
             header('Content-Type: text/plain; charset=' . Kohana::$charset, true, 500);
-            
+
             echo Kohana_Exception::text($e);
-            
+
             exit(1);
         }
     }
-    
+
     /**
      * Logs an exception.
      *
@@ -136,21 +134,20 @@ class Kohana_Kohana_Exception extends Exception
      *
      * @return  void
      */
-    public static function log(Exception $e, $level = Log::EMERGENCY)
+    public static function log($e, $level = Log::EMERGENCY)
     {
-        if (is_object(Kohana::$log))
-        {
+        if (is_object(Kohana::$log)) {
             // Create a text version of the exception
             $error = Kohana_Exception::text($e);
-            
+
             // Add this exception to the log
             Kohana::$log->add($level, $error, null, ['exception' => $e]);
-            
+
             // Make sure the logs are written
             Kohana::$log->write();
         }
     }
-    
+
     /**
      * Get a Response object representing the exception
      *
@@ -160,10 +157,9 @@ class Kohana_Kohana_Exception extends Exception
      *
      * @return  Response
      */
-    public static function response(Exception $e)
+    public static function response($e)
     {
-        try
-        {
+        try {
             // Get the exception information
             $class = get_class($e);
             $code = $e->getCode();
@@ -171,87 +167,78 @@ class Kohana_Kohana_Exception extends Exception
             $file = $e->getFile();
             $line = $e->getLine();
             $trace = $e->getTrace();
-            
+
             /**
              * HTTP_Exceptions are constructed in the HTTP_Exception::factory()
              * method. We need to remove that entry from the trace and overwrite
              * the variables from above.
              */
-            if ($e instanceof HTTP_Exception AND $trace[0]['function'] == 'factory')
-            {
+            if ($e instanceof HTTP_Exception AND $trace[0]['function'] == 'factory') {
                 extract(array_shift($trace));
             }
-            
-            if ($e instanceof ErrorException)
-            {
+
+            if ($e instanceof ErrorException) {
                 /**
                  * If XDebug is installed, and this is a fatal error,
                  * use XDebug to generate the stack trace
                  */
-                if (function_exists('xdebug_get_function_stack') AND $code == E_ERROR)
-                {
+                if (function_exists('xdebug_get_function_stack') AND $code == E_ERROR) {
                     $trace = array_slice(array_reverse(xdebug_get_function_stack()), 4);
-                    
-                    foreach ($trace as & $frame)
-                    {
+
+                    foreach ($trace as & $frame) {
                         /**
                          * XDebug pre 2.1.1 doesn't currently set the call type key
                          * http://bugs.xdebug.org/view.php?id=695
                          */
-                        if (!isset($frame['type']))
-                        {
+                        if (!isset($frame['type'])) {
                             $frame['type'] = '??';
                         }
-                        
+
                         // XDebug also has a different name for the parameters array
-                        if (isset($frame['params']) AND !isset($frame['args']))
-                        {
+                        if (isset($frame['params']) AND !isset($frame['args'])) {
                             $frame['args'] = $frame['params'];
                         }
                     }
                 }
-                
-                if (isset(Kohana_Exception::$php_errors[$code]))
-                {
+
+                if (isset(Kohana_Exception::$php_errors[$code])) {
                     // Use the human-readable error name
                     $code = Kohana_Exception::$php_errors[$code];
                 }
             }
-            
+
             /**
              * The stack trace becomes unmanageable inside PHPUnit.
              *
              * The error view ends up several GB in size, taking
              * serveral minutes to render.
              */
-            if (defined('PHPUnit_MAIN_METHOD'))
-            {
+            if (defined('PHPUnit_MAIN_METHOD')) {
                 $trace = array_slice($trace, 0, 2);
             }
-            
+
             // Instantiate the error view.
             $view = View::factory(Kohana_Exception::$error_view, get_defined_vars());
-            
+
             // Prepare the response object.
             $response = Response::factory();
-            
+
             // Set the response status
             $response->status(
                 ($e instanceof HTTP_Exception)
                     ? $e->getCode()
                     : 500
             );
-            
+
             // Set the response headers
             $response->headers(
                 'Content-Type', Kohana_Exception::$error_view_content_type . '; charset=' . Kohana::$charset
             );
-            
+
             // Set the response body
             $response->body($view->render());
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             /**
              * Things are going badly for us, Lets try to keep things under control by
              * generating a simpler response object.
@@ -261,10 +248,10 @@ class Kohana_Kohana_Exception extends Exception
             $response->headers('Content-Type', 'text/plain');
             $response->body(Kohana_Exception::text($e));
         }
-        
+
         return $response;
     }
-    
+
     /**
      * Get a single line of text representing the exception:
      *
@@ -274,14 +261,14 @@ class Kohana_Kohana_Exception extends Exception
      *
      * @return  string
      */
-    public static function text(Exception $e)
+    public static function text($e)
     {
         return sprintf(
             '%s [ %s ]: %s ~ %s [ %d ]', get_class($e), $e->getCode(), strip_tags($e->getMessage()),
             Debug::path($e->getFile()), $e->getLine()
         );
     }
-    
+
     /**
      * Magic object-to-string method.
      *
@@ -294,5 +281,5 @@ class Kohana_Kohana_Exception extends Exception
     {
         return Kohana_Exception::text($this);
     }
-    
+
 }

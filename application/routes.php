@@ -30,6 +30,16 @@ Route::set('news', '<lang>/news/<id>-(<name>)', [
                     'action'     => 'index',
                 ]);
 
+Route::set('good', '<lang>/good/<id>-(<name>)', [
+    'id'   => '\d+',
+    'name' => '[^/]+',
+    'lang' => $langs,
+])
+     ->defaults([
+                    'controller' => 'product',
+                    'action'     => 'index',
+                ]);
+
 Route::set('default', '(<lang>(/<main_item>(/<secondary_item>)))', [
     'main_item'      => '[^/]+',
     'secondary_item' => '[^/]+',

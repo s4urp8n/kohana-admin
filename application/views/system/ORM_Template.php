@@ -1,12 +1,12 @@
 <?= '<?php' ?>
 
-class Model_<?= \Str\Str::load($table)
+class Model_<?= \Zver\StringHelper::load($table)
                         ->toLowerCase()
                         ->toUpperCaseFirst()
                         ->get() ?> extends ORM
 {
 
-protected $_table_name = '<?= \Str\Str::load($table)
+protected $_table_name = '<?= \Zver\StringHelper::load($table)
                                       ->toLowerCase()
                                       ->get() ?>';
     

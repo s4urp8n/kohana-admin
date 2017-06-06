@@ -20,6 +20,10 @@ class Model_ShopCategories extends ORM
         return false;
     }
 
+    /**
+     * @param bool $onlyVisible
+     * @return \Zver\AdjacencyList
+     */
     public static function getList($onlyVisible = false)
     {
         $relations = [];
@@ -50,5 +54,22 @@ class Model_ShopCategories extends ORM
                                                                     ->slugify();
     }
 
+    public static function getListArray()
+    {
+        $list = static::getList();
+
+        $array = [];
+
+        $list->walk(function (\Zver\AdjacencyListItem $item) use (&$array) {
+
+            $name = implode(' -> ', $item->getRecursiveDataProperty('ru_name'));
+
+            $array[$item->getId()] = $name;
+
+        });
+
+        return $array;
+
+    }
+
 }
-;

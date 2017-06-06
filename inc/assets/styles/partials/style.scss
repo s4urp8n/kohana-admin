@@ -257,6 +257,9 @@ $yellowColor: #e7c03d;
   text-align: left;
   background: #fff;
   padding: 40px 0;
+  .content-block {
+    padding: 0;
+  }
   &-content {
     display: block;
     float: none;
@@ -829,6 +832,68 @@ $angleOffsetTop: 30px;
         background: #eee;
         color: #555;
       }
+    }
+  }
+}
+
+.products {
+  display: block;
+  width: 100%;
+  &-product {
+    display: block;
+    float: left;
+    width: 32%;
+    text-decoration: none;
+    margin: 0 2% 2% 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #b4b5b9;
+    padding: 15px 30px;
+    &:nth-child(3n+3) {
+      margin-right: 0;
+    }
+    &-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: auto;
+      background: #b4b5b9;
+    }
+    &-title {
+      display: block;
+      width: 100%;
+      color: #000;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &-button {
+      text-align: center;
+      display: block;
+      width: 100%;
+      cursor: pointer;
+      background: #76b543;
+      text-transform: uppercase;
+      padding: 5px;
+      color: #fff;
+      border: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-shadow: none;
+    }
+    &-price {
+      text-align: center;
+      display: block;
+      width: 100%;
+      color: #e49725;
+      padding: 10px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-transform: lowercase;
     }
   }
 }

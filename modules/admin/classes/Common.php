@@ -154,34 +154,29 @@ class Common
         DB::query(Database::INSERT, $createIfNotExists)
           ->execute();
 
-        $modelClassName = \Str\Str::load($table)
-                                  ->remove('^[^_]+_')
-                                  ->toLowerCase()
-                                  ->toUpperCaseFirst()
-                                  ->prepend('Model_')
-                                  ->get();
+        $modelClassName = \Zver\StringHelper::load($table)
+                                            ->remove('^[^_]+_')
+                                            ->toLowerCase()
+                                            ->toUpperCaseFirst()
+                                            ->prepend('Model_')
+                                            ->get();
 
         //creating model file if need
         if (!class_exists($modelClassName)) {
-            $modelPath =
-                APPPATH . 'classes' . DIRECTORY_SEPARATOR . 'Model' . DIRECTORY_SEPARATOR . \Zver\StringHelper::load(
-                    $modelClassName
-                )
-                                                                                                              ->remove(
-                                                                                                                  '^[^_]+_'
-                                                                                                              )
-                                                                                                              ->get()
-                . '.php';
+            $modelPath = APPPATH .
+                         'classes' . DIRECTORY_SEPARATOR .
+                         'Model' . DIRECTORY_SEPARATOR .
+                         \Zver\StringHelper::load($modelClassName)
+                                           ->remove('^[^_]+_')
+                                           ->get() . '.php';
+
             if (!file_exists($modelPath)) {
-                file_put_contents(
-                    $modelPath, View::factory('system/ORM_Template')
-                                    ->set(
-                                        'table', \Zver\StringHelper::load($table)
-                                                                   ->remove('^[^_]+_')
-                                                                   ->toLowerCase()
-                                                                   ->toUpperCaseFirst()
-                                                                   ->get()
-                                    )
+                file_put_contents($modelPath, View::factory('system/ORM_Template')
+                                                  ->set('table', \Zver\StringHelper::load($table)
+                                                                                   ->remove('^[^_]+_')
+                                                                                   ->toLowerCase()
+                                                                                   ->toUpperCaseFirst()
+                                                                                   ->get())
                 );
             }
 
@@ -291,6 +286,9 @@ class Common
                 switch ($route) {
                     case 'news': {
                         return static::getNewsMainItem();
+                    }
+                    case 'good': {
+                        return static::getShopMainItem();
                     }
                 }
             }
