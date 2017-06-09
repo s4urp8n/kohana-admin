@@ -50,7 +50,8 @@ class Task_Translate extends Minion_Task
         $haveLangAlias = 'ru';
 
         $needTranslate = [
-            'articles_categories' => ['name'],
+            'articles_categories' => ['name', 'description'],
+            'articles'            => ['name', 'description'],
             'translate'           => [''],
             'shop_categories'     => ['name', 'description', 'title', 'keywords'],
             'goods'               => ['title', 'description'],

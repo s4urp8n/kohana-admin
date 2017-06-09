@@ -40,6 +40,16 @@ Route::set('good', '<lang>/good/<id>-(<name>)', [
                     'action'     => 'index',
                 ]);
 
+Route::set('article', '<lang>/article/<id>-(<name>)', [
+    'id'   => '\d+',
+    'name' => '[^/]+',
+    'lang' => $langs,
+])
+     ->defaults([
+                    'controller' => 'article',
+                    'action'     => 'index',
+                ]);
+
 Route::set('default', '(<lang>(/<main_item>(/<secondary_item>)))', [
     'main_item'      => '[^/]+',
     'secondary_item' => '[^/]+',

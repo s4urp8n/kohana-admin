@@ -290,6 +290,9 @@ class Common
                     case 'good': {
                         return static::getShopMainItem();
                     }
+                    case 'article': {
+                        return static::getArticlesMainItem();
+                    }
                 }
             }
 

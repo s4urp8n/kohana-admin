@@ -12,13 +12,7 @@
             ?>
 
             <a href="<?= $category->getHref() ?>"
-               class="content-block-panel-item <?php
-
-               if (Model_ArticlesCategories::getCurrentCategory() == $category->id) {
-                   echo " content-block-panel-item--active ";
-               }
-
-               ?>">
+               class="content-block-panel-item">
 
                 <?= $category->get(Common::getCurrentLang() . '_name') ?>
 
@@ -38,7 +32,7 @@
                 <a href="<?= $subCategory->getHref() ?>"
                    class="content-block-panel-item content-block-panel-child  <?php
 
-                   if (Model_ArticlesCategories::getCurrentCategory() == $subCategory->id) {
+                   if ($article->id == $subCategory->id) {
                        echo " content-block-panel-item--active ";
                    }
 
@@ -56,8 +50,7 @@
     </div>
 
     <div class="content-block-content">
-        <?= ORM::factory('ArticlesCategories', Model_ArticlesCategories::getCurrentCategory())
-               ->get(Common::getCurrentLang() . '_description') ?>
+        <?= $article->get(Common::getCurrentLang() . '_description') ?>
     </div>
 
     <div class="clearfix"></div>

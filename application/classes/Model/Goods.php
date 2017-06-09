@@ -9,8 +9,21 @@ class Model_Goods extends ORM
 
     public function getHref()
     {
+
+        $category = '';
+
+        $request = Request::initial();
+
+        $category = $request->query('category');
+
+        if ($category) {
+            $category = '?category=' . $category;
+        } else {
+            $category = '';
+        }
+
         return '/' . Common::getCurrentLang() . '/good/' . \Zver\StringHelper::load($this->id . ' ' . $this->title_ru)
-                                                                             ->slugify();
+                                                                             ->slugify() . $category;
     }
 
     public function getImage()

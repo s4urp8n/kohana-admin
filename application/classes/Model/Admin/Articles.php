@@ -2,10 +2,10 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-class Model_Admin_ArticlesCategories extends Model_Admin
+class Model_Admin_Articles extends Model_Admin
 {
 
-    protected static $tableName = 'articles_categories';
+    protected static $tableName = 'articles';
 
     public function getInsertColumns()
     {
@@ -19,6 +19,14 @@ class Model_Admin_ArticlesCategories extends Model_Admin
     public static function getCommonColumns()
     {
         return [
+            'id_category'    => [
+                'label'   => 'Категория',
+                'type'    => 'select',
+                'options' => DB::select('id', 'ru_name')
+                               ->from('articles_categories')
+                               ->execute()
+                               ->as_array('id', 'ru_name'),
+            ],
             'ru_name'        => [
                 'label' => 'Название менюRU',
                 'type'  => 'text',
@@ -83,8 +91,8 @@ class Model_Admin_ArticlesCategories extends Model_Admin
     public function getInfo()
     {
         return [
-            'caption' => 'Категории публикаций',
-            'icon'    => '<i class="fa fa-th-list"></i>',
+            'caption' => 'Публикации',
+            'icon'    => '<i class="fa fa-book"></i>',
             'group'   => 'content',
         ];
     }
@@ -99,7 +107,7 @@ class Model_Admin_ArticlesCategories extends Model_Admin
     public function getData()
     {
         $data = DB::select('id')
-                  ->select(['ru_name', 'Категория'])
+                  ->select(['ru_name', 'Публикация'])
                   ->from(static::$tableName)
                   ->order_by('ru_name');
 
