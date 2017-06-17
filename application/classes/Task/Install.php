@@ -30,17 +30,26 @@ class Task_Install extends Minion_Task
             DOCROOT . 'application' . DIRECTORY_SEPARATOR . 'cache',
             DOCROOT . 'application' . DIRECTORY_SEPARATOR . 'logs',
             DOCROOT . 'inc' . DIRECTORY_SEPARATOR . 'build',
-            DOCROOT . 'system' . DIRECTORY_SEPARATOR . 'uploads',
-            DOCROOT . 'system' . DIRECTORY_SEPARATOR . 'previews',
+            DOCROOT . 'inc' . DIRECTORY_SEPARATOR . 'system' . DIRECTORY_SEPARATOR . 'uploads',
+            DOCROOT . 'inc' . DIRECTORY_SEPARATOR . 'system' . DIRECTORY_SEPARATOR . 'previews',
         ];
 
-        foreach ($writable as $dir) {
-            chmod($dir, 0777);
-            foreach (\Zver\Common::getDirectoryContentRecursive($dir) as $path) {
-                if (is_dir($path)) {
-                    chmod($path, 0777);
+        try {
+
+            foreach ($writable as $dir) {
+                chmod($dir, 0777);
+                foreach (\Zver\Common::getDirectoryContentRecursive($dir) as $path) {
+                    if (is_dir($path)) {
+                        chmod($path, 0777);
+                    }
                 }
             }
+        }
+        catch (Throwable $e) {
+
+        }
+        catch (Exception $e) {
+
         }
     }
 
