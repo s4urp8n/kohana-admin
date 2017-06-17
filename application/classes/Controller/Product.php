@@ -15,7 +15,9 @@ class Controller_Product extends Controller_Template
         $product = ORM::factory('Goods', $id);
 
         if (empty($product->id) || (!empty($product->id) && $product->visible != 1)) {
+
             throw new HTTP_Exception_404();
+
         } else {
 
             $this->template->content = View::factory('modules/shop-item-content', [

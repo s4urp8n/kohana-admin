@@ -51,6 +51,25 @@
                        value='<?= $password; ?>'/>
             </div>
         </div>
+
+        <div class="form-group">
+
+            <label for="phone" class="control-label">
+                <?= ___('ТелефонТекст') ?>:
+            </label>
+
+            <div>
+                <input name='phone'
+                       type="text"
+                       required
+                       class="form-control"
+                       id="phone"
+                       placeholder="<?= ___('ВведитеТелефонТекст') ?>..."
+                       value='<?= $phone; ?>'/>
+            </div>
+        </div>
+
+
         <div class="form-group">
 
             <label for="password" class="control-label">

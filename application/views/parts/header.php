@@ -67,9 +67,13 @@ $mainItems = Common::getMainItemsTransliterated(empty($activeId) ? null : $activ
                                 ?>
 
                                 <a href="<?= $main_item['href'] ?>"
-                                   class="<?= $class ?>"
+                                   class="<?= $class ?> cart"
                                 >
-                                    <?= ___('Корзина') ?>
+
+                                    <i class="fa fa-shopping-cart"></i>
+
+                                    <?= Cart::getCount() ?>
+
                                 </a>
                                 <?php
 

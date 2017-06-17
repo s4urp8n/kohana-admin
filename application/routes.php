@@ -30,6 +30,11 @@ Route::set('news', '<lang>/news/<id>-(<name>)', [
                     'action'     => 'index',
                 ]);
 
+Route::set('ajax', 'ajax/<action>', [
+    'action' => '[^/]+',
+])
+     ->defaults(['controller' => 'ajax',]);
+
 Route::set('good', '<lang>/good/<id>-(<name>)', [
     'id'   => '\d+',
     'name' => '[^/]+',
@@ -48,6 +53,20 @@ Route::set('article', '<lang>/article/<id>-(<name>)', [
      ->defaults([
                     'controller' => 'article',
                     'action'     => 'index',
+                ]);
+
+Route::set('change-pass', 'change-pass')
+     ->defaults([
+                    'controller' => 'ajax',
+                    'action'     => 'changePass',
+                ]);
+
+Route::set('order', '<lang>/order', [
+    'lang' => $langs,
+])
+     ->defaults([
+                    'controller' => 'welcome',
+                    'action'     => 'order',
                 ]);
 
 Route::set('default', '(<lang>(/<main_item>(/<secondary_item>)))', [

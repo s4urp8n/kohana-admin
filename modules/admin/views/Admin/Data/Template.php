@@ -4,29 +4,26 @@
     $content = AdminHTML::renderNoneFound();
     $data = $model->getData();
     $uniqueValues = [];
-    
-    if (!empty($data))
-    {
-        
+
+    if (!empty($data)) {
+
         $dataFirstKey = array_keys($data)[0];
         $dataKeys = array_keys($data[$dataFirstKey]);
-        
-        foreach ($dataKeys as $dataKey)
-        {
+
+        foreach ($dataKeys as $dataKey) {
             $uniqueValues[$dataKey] = Model_Admin::getDistinctSubArrayKeyValues($data, $dataKey);
         }
-        
+
         Model_Admin::filterData($data, $model);
-        
+
         $countData = count($data);
         $perPage = intval(Admin::getConfig('itemsPerPage'));
         $pages = ceil($countData / $perPage);
         $page = AdminHREF::getPage();
-        if ($page > $pages)
-        {
+        if ($page > $pages) {
             $page = $pages;
         }
-        
+
         $content = View::factory(
             'Admin/Data/List', [
                                  'data'         => array_slice($data, ($page - 1) * $perPage, $perPage),
@@ -34,7 +31,7 @@
                                  'model'        => $model,
                              ]
         );
-        
+
         $pagination = View::factory(
             'Admin/Data/Pagination', [
                                        'pages'     => $pages,
@@ -45,7 +42,7 @@
         );
     }
     ?>
-    
+
     <?php echo $pagination, $content, $pagination; ?>
 
 </form>

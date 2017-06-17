@@ -1,10 +1,8 @@
 <?php
 $filterParams = AdminHREF::getFilterParams();
-if (!empty($filterParams))
-{
+if (!empty($filterParams)) {
     $filt = array_keys($filterParams);
-    foreach ($filt as $key => &$f)
-    {
+    foreach ($filt as $key => &$f) {
         $f = '<span class="filter_tag">' . $f . '</span>';
     }
     unset($f);
@@ -19,53 +17,47 @@ if (!empty($filterParams))
 <?php echo Admin::showMessage(); ?>
 
 <table class="table table-striped table-bordered table-hover">
-    
+
     <?php
     $keys = array_keys($uniqueValues);
     ?>
-    
+
     <?php
     $hiddenColumns = [];
-    if (method_exists($model, 'getHiddenColumns'))
-    {
+    if (method_exists($model, 'getHiddenColumns')) {
         $hiddenColumns = $model->getHiddenColumns();
     }
     ?>
-    
+
     <?php
     $outputFunctions = [];
-    if (method_exists($model, 'getOutputFunctions'))
-    {
+    if (method_exists($model, 'getOutputFunctions')) {
         $outputFunctions = $model->getOutputFunctions();
     }
     ?>
-    
+
     <?php
     $buttons = [];
-    if (method_exists($model, 'getActionButtons'))
-    {
+    if (method_exists($model, 'getActionButtons')) {
         $buttons = $model->getActionButtons();
     }
     ?>
-    
+
     <tr>
-        
+
         <?php
         $buttonsCount = count($buttons);
-        if ($buttonsCount > 0)
-        {
+        if ($buttonsCount > 0) {
             ?>
             <th colspan="<?php echo $buttonsCount; ?>"></th>
             <?php
         }
         ?>
-        
+
         <?php
         $i = 0;
-        foreach ($keys as $value)
-        {
-            if (!in_array($value, $hiddenColumns))
-            {
+        foreach ($keys as $value) {
+            if (!in_array($value, $hiddenColumns)) {
                 ?>
                 <th>
                     <?php
@@ -82,69 +74,57 @@ if (!empty($filterParams))
             }
         }
         ?>
-    
+
     </tr>
-    
+
     <?php
-    if (!empty($data))
-    {
-        ?><?php foreach ($data as $key => $dataArray)
-    { ?>
-        <tr>
-            
-            <?php
-            foreach ($buttons as $key => $value)
-            {
-                ?>
-                <td style="text-align: center;width:25px;">
-                    <?php
-                    echo $value($dataArray);
-                    ?>
-                </td>
+    if (!empty($data)) {
+        ?><?php foreach ($data as $key => $dataArray) { ?>
+            <tr>
+
                 <?php
-            }
-            ?>
-            
-            <?php
-            foreach ($dataArray as $column => $value)
-            {
-                if (!in_array($column, $hiddenColumns))
-                {
+                foreach ($buttons as $key => $value) {
                     ?>
-                    <td<?php
-                    if ($column == 'id')
-                    {
-                        echo " style='width:25px;'";
-                    }
-                    ?>>
-                        <div>
-                            <?php
-                            if (isset($outputFunctions[$column]) && is_callable($outputFunctions[$column]))
-                            {
-                                echo $outputFunctions[$column]($dataArray);
-                            }
-                            else
-                            {
-                                if (mb_strtolower($column) == 'цвет')
-                                {
-                                    ?>
-                                    <span style="background:#<?= $value ?>;width:30px;height:20px;display:inline-block;"></span> <?= $value ?><?php
-                                }
-                                else
-                                {
-                                    echo $value;
-                                }
-                            }
-                            ?>
-                        </div>
+                    <td style="text-align: center;width:25px;">
+                        <?php
+                        echo $value($dataArray);
+                        ?>
                     </td>
                     <?php
                 }
-            }
-            ?>
-        
-        </tr>
-    <?php } ?><?php
+                ?>
+
+                <?php
+                foreach ($dataArray as $column => $value) {
+                    if (!in_array($column, $hiddenColumns)) {
+                        ?>
+                        <td<?php
+                        if ($column == 'id') {
+                            echo " style='width:25px;'";
+                        }
+                        ?>>
+                            <div class="admin-data-list-item">
+                                <?php
+                                if (isset($outputFunctions[$column]) && is_callable($outputFunctions[$column])) {
+                                    echo $outputFunctions[$column]($dataArray);
+                                } else {
+                                    if (mb_strtolower($column) == 'цвет') {
+                                        ?>
+                                        <span style="background:#<?= $value ?>;width:30px;height:20px;display:inline-block;"></span> <?= $value ?><?php
+                                    } else {
+                                        echo $value;
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </td>
+                        <?php
+                    }
+                }
+                ?>
+
+            </tr>
+        <?php } ?><?php
     }
     ?>
 

@@ -24,7 +24,7 @@
     </span>
 
     <span class="products-product-price">
-        <?= $product->price ?> руб/<?= ORM::factory('Units')
+        <?= $product->price ?> /<?= ORM::factory('Units')
                                           ->find($product->unit_id)
                                           ->get(Common::getCurrentLang() . '_name') ?>
     </span>

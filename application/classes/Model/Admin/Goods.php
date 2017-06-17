@@ -142,7 +142,7 @@ class Model_Admin_Goods extends Model_Admin
     {
         return [
             'caption' => 'Товары',
-            'icon'    => '<i class="fa fa-cart-plus"></i>',
+            'icon'    => '<i class="fa fa-shopping-cart"></i>',
             'group'   => 'content',
         ];
     }

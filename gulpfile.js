@@ -44,7 +44,7 @@ function say(text) {
     console.log(text);
 }
 
-gulp.task('default', ['clearAfter'], function () {
+gulp.task('watch', ['default'], function () {
 
     var watches = [
         "gulp.map.json",
@@ -55,6 +55,11 @@ gulp.task('default', ['clearAfter'], function () {
     ];
 
     gulp.watch(watches, ['default']);
+
+});
+
+gulp.task('default', ['clearAfter'], function () {
+
 });
 
 gulp.task('clearAfter', ['compile'], function () {

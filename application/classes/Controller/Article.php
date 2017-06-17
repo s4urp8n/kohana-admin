@@ -15,7 +15,9 @@ class Controller_Article extends Controller_Template
         $article = ORM::factory('Articles', $id);
 
         if (empty($article->id) || (!empty($article->id) && $article->visible != 1)) {
+
             throw new HTTP_Exception_404();
+
         } else {
 
             $this->template->content = View::factory('modules/article-item-content', [

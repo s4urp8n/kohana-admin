@@ -7,6 +7,39 @@ class Controller_Welcome extends Controller_Template
 
     public $template = 'template';
 
+    public function action_order()
+    {
+        if (Cart::getCount() == 0 || !Auth::instance()
+                                          ->logged_in('user')
+        ) {
+            Common::redirect('/' . Common::getCurrentLang() . '/cart');
+        }
+
+        $cart = Cart::get();
+
+        $order = new Model_Orders();
+
+        $order->user_id = Auth::instance()
+                              ->get_user()->id;
+
+        $order->date = \Carbon\Carbon::now()
+                                     ->format('Y-m-d');
+
+        $order->time = \Carbon\Carbon::now()
+                                     ->format('H:i:s');
+
+        $order->status = 0;
+
+        $order->cart = json_encode($cart);
+
+        $order->save();
+
+        Cart::clear();
+
+        Common::redirect('/' . Common::getCurrentLang() . '/cart?success=1');
+
+    }
+
     public function action_index()
     {
 

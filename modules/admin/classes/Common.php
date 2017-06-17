@@ -6,6 +6,25 @@ class Common
     const GARDEN = 'garden';
     const HOME = 'home';
 
+    const STATUS_NEW = 0;
+    const STATUS_READY = 20;
+    const STATUS_PAID = 30;
+    const STATUS_PROCESS = 40;
+    const STATUS_DONE = 50;
+
+    const PHONE_PATTERN = '#^\+\d{11,15}$#';
+
+    public static function getOrderStatuses()
+    {
+        return [
+            static::STATUS_NEW     => ___('ЗаказСозданСтатус'),
+            static::STATUS_PROCESS => ___('ЗаказОбрабатываетсяСтатус'),
+            static::STATUS_READY   => ___('ЗаказСформированСтатус'),
+            static::STATUS_PAID    => ___('ЗаказОплаченСтатус'),
+            static::STATUS_DONE    => ___('ЗаказВыданСтатус'),
+        ];
+    }
+
     public static function redirect($url)
     {
         header('Location:' . $url);
@@ -259,6 +278,8 @@ class Common
         $request = Request::initial();
         $main_item_param = $request->param('main_item');
 
+        $route = $request->route();
+
         $main_items = self::getMainItemsTransliterated();
 
         if (!empty($main_item_param)) {
@@ -276,8 +297,6 @@ class Common
              */
 
             /** @var Route $route */
-
-            $route = $request->route();
 
             if (!empty($route)) {
 

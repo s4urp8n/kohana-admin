@@ -13,6 +13,15 @@ class Controller_Admin extends Controller_Template
 
     public static function goCabinet()
     {
+
+        $referrer = Request::initial()
+                           ->referrer();
+
+        if (Cart::getCount() > 0 && preg_match('#/auth#', $referrer) == 1) {
+            Common::redirect(Common::getCartMainItem()
+                                   ->getHref());
+        }
+
         Common::redirect(Common::getCabinetMainItem()
                                ->getHref());
     }
@@ -955,7 +964,7 @@ class Controller_Admin extends Controller_Template
     {
         if (Common::config(['admin', 'SignInSignUp'])) {
 
-            $email = $password = $error = $captcha = '';
+            $email = $password = $error = $phone = $captcha = '';
 
             if ($this->auth->logged_in()) {
                 self::goMenu();
@@ -969,6 +978,10 @@ class Controller_Admin extends Controller_Template
                                                ->get();
                 }
 
+                if (!empty($_POST['phone'])) {
+                    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+                }
+
                 if (!empty($_POST['password'])) {
                     $password = \Zver\StringHelper::load($_POST['password'])
                                                   ->toHTMLEntities()
@@ -979,7 +992,7 @@ class Controller_Admin extends Controller_Template
                     $captcha = $_POST['captcha'];
                 }
 
-                if (!empty($email) && !empty($password) && !empty($captcha)) {
+                if (!empty($email) && !empty($password) && !empty($captcha) && !empty($phone)) {
 
                     $exist = ORM::factory('User')
                                 ->where('username', '=', $email)
@@ -991,6 +1004,8 @@ class Controller_Admin extends Controller_Template
                         $error = ___('Введите email правильно.');
                     } elseif (!Captcha::valid($_POST['captcha'])) {
                         $error = ___('Неправильно введен проверочный код.');
+                    } elseif (preg_match(Common::PHONE_PATTERN, $phone) !== 1) {
+                        $error = ___('ВведитеТелефонВМеждународномФормате');
                     } else {
 
                         $success = false;
@@ -1002,6 +1017,7 @@ class Controller_Admin extends Controller_Template
                             $user->email = $email;
                             $user->registered = date('Y-m-d H:i:s');
                             $user->password = $password;
+                            $user->phone = $phone;
                             $user->save();
 
                             DB::insert('roles_users')
@@ -1045,6 +1061,7 @@ class Controller_Admin extends Controller_Template
                                              'password' => $password,
                                              'email'    => $email,
                                              'error'    => $error,
+                                             'phone'    => $phone,
                                          ]
             );
         }

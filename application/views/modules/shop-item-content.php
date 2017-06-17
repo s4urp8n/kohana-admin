@@ -31,37 +31,66 @@
                 <?= $product->get('description_' . Common::getCurrentLang()) ?>
             </div>
 
-            <form class="shop-item-content-order-form" action="" method="post">
+            <?php
+            if (Cart::in(Modules::getCartIdentity($product->id))) {
 
-                <label class="shop-item-content--count">
-                    <span class="label"><?= ___('КоличествоТовара') ?></span>
-                    <input class="input" type="number" value="1"/>
-                    <span class="clearfix"></span>
-                </label>
+                ?>
+                <a href="<?= Common::getCartMainItem()
+                                   ->getHref() ?>" class="shop-item-content-order-form-submit">
 
-                <label class="shop-item-content-price">
-                    <span class="label"><?= ___('ЦенаТовара') ?></span>
-                    <span class="shop-item-content-price-price input">
+                    <i class="fa fa-shopping-cart"></i>
+                    <?= ___('УжеВКорзинеКнопка') ?>
+
+                </a>
+                <?php
+
+            } else {
+
+                ?>
+                <form class="shop-item-content-order-form"
+                      action="/ajax/buy"
+                      method="get"
+                >
+
+                    <label class="shop-item-content--count">
+                        <span class="label"><?= ___('КоличествоТовара') ?></span>
+                        <input class="input" name='count' type="number" min="1" max="50" value="1"/>
+                        <span class="clearfix"></span>
+                    </label>
+
+                    <label class="shop-item-content-price">
+                        <span class="label"><?= ___('ЦенаТовара') ?></span>
+                        <span class="shop-item-content-price-price input">
                         <?= $product->price ?>
                     </span>
-                    <span class="clearfix"></span>
-                </label>
+                        <span class="clearfix"></span>
+                    </label>
 
-                <label class="shop-item-content-total">
+                    <label class="shop-item-content-total">
                     <span class="label">
                         <?= ___('ИтогоТовар') ?>
                     </span>
-                    <span class="shop-item-content-total-total input">
+                        <span class="shop-item-content-total-total input">
                        <?= $product->price ?>
                     </span>
-                    <span class="clearfix"></span>
-                </label>
+                        <span class="clearfix"></span>
+                    </label>
 
-                <button class="shop-item-content-order-form-submit" type="submit">
-                    <i class="fa fa-cart-plus"></i> <?= ___('ВКорзинуКнопка') ?>
-                </button>
+                    <button class="shop-item-content-order-form-submit" type="submit">
+                        <i class="fa fa-shopping-cart"></i> <?= ___('ВКорзинуКнопка') ?>
+                    </button>
 
-            </form>
+                    <input type="hidden" name="ref"
+                           value="<?= AdminHREF::getFullCurrentHREF(['id', 'count', 'ref']) ?>"/>
+                    <input type="hidden" name="id" value="<?= $product->id ?>"/>
+
+                </form>
+                <?php
+
+            }
+
+            ?>
+
 
         </div>
 

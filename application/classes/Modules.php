@@ -10,6 +10,12 @@ class Modules
     public static $MOD_ARTICLES = 4;
     public static $MOD_CABINET = 5;
 
+    final public static function getCartIdentity()
+    {
+        return md5(\Zver\StringHelper::load(func_get_args())
+                                     ->get());
+    }
+
     final public static function render($item)
     {
 
