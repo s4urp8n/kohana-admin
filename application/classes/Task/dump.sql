@@ -77,6 +77,33 @@ INSERT INTO `articles_categories` VALUES (1,'Производство','Producti
 UNLOCK TABLES;
 
 --
+-- Table structure for table `currency`
+--
+
+DROP TABLE IF EXISTS `currency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `currency` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `AMD` float NOT NULL,
+  `RUB` float NOT NULL,
+  `EUR` float NOT NULL,
+  `USD` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `currency`
+--
+
+LOCK TABLES `currency` WRITE;
+/*!40000 ALTER TABLE `currency` DISABLE KEYS */;
+INSERT INTO `currency` VALUES (1,1,0.134,0.00189476,0.00209903);
+/*!40000 ALTER TABLE `currency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `goods`
 --
 
@@ -553,7 +580,7 @@ CREATE TABLE `user_tokens` (
   `created` int(10) unsigned NOT NULL,
   `expires` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -562,7 +589,7 @@ CREATE TABLE `user_tokens` (
 
 LOCK TABLES `user_tokens` WRITE;
 /*!40000 ALTER TABLE `user_tokens` DISABLE KEYS */;
-INSERT INTO `user_tokens` VALUES (20,1,'620b9967f06f459a1638197053aa22c2e5e4f25d','1d7f71a7644465b21434db3fecce279e8cf0a973',1496099821,1501283821),(33,1,'8b671fd9bd48f0d429c2eb72a533e87ef2eaf804','bb2d6e0326bd64d2ee69437c472aeea5fd15ecbd',1496619053,1501803053),(34,1,'9ac9c0c2b0a35a8bce87f4ae61142b233b428a89','71b1337654aca4c934683316b579c9d7f833a997',1496695286,1501879286);
+INSERT INTO `user_tokens` VALUES (20,1,'620b9967f06f459a1638197053aa22c2e5e4f25d','1d7f71a7644465b21434db3fecce279e8cf0a973',1496099821,1501283821),(33,1,'8b671fd9bd48f0d429c2eb72a533e87ef2eaf804','bb2d6e0326bd64d2ee69437c472aeea5fd15ecbd',1496619053,1501803053),(34,1,'9ac9c0c2b0a35a8bce87f4ae61142b233b428a89','71b1337654aca4c934683316b579c9d7f833a997',1496695286,1501879286),(35,1,'e4e5902fc42ad5e198b207d76af1d82e7056cb82','38a1fa85c4ce9d5167c6a915b3c79ac6ef667957',1498954142,1504138142);
 /*!40000 ALTER TABLE `user_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +627,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','7904532eec6591d71d09652f68690db5',NULL,NULL,NULL,41,NULL,'2017-06-18 00:44:17','',NULL,NULL,NULL),(4,'s4urp8n@yandex.ru','6209e62dd7614a54dc67ddab9f7687fc','s4urp8n@yandex.ru',NULL,NULL,2,'2017-06-18 01:27:09','2017-06-18 01:46:35','+79528118446',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'admin','7904532eec6591d71d09652f68690db5',NULL,NULL,NULL,43,NULL,'2017-07-02 03:09:02','',NULL,NULL,NULL),(4,'s4urp8n@yandex.ru','6209e62dd7614a54dc67ddab9f7687fc','s4urp8n@yandex.ru',NULL,NULL,2,'2017-06-18 01:27:09','2017-06-18 01:46:35','+79528118446',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -613,4 +640,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-18  1:54:34
+-- Dump completed on 2017-07-02  3:09:47
