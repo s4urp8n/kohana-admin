@@ -93,9 +93,15 @@ $noInteract = !empty($noInteract);
                         ?>
                     </td>
                     <td class="cartPrice" price="<?= $item['price'] ?>">
-                        <?= $item['price'] * $item['count'] ?><?php
+
+                        <?= $item['price'] * $item['count'] ?> <?= Common::getDefaultCurrency() ?>
+
+                        <?= View::factory('parts/currency', ['sum' => $item['price'] * $item['count']]) ?>
+
+                        <?php
                         $totalSum += $item['price'] * $item['count'];
                         ?>
+
                     </td>
 
                     <?php
@@ -126,7 +132,9 @@ $noInteract = !empty($noInteract);
                 <?= $totalCount ?>
             </td>
             <td class="cartTotalSum">
-                <?= $totalSum ?>
+                <?= $totalSum ?> <?= Common::getDefaultCurrency() ?>
+
+                <?= View::factory('parts/currency', ['sum' => $totalSum]) ?>
             </td>
 
             <?php

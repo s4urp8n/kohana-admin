@@ -14,6 +14,25 @@ class Common
 
     const PHONE_PATTERN = '#^\+\d{11,15}$#';
 
+    public static function getDefaultCurrency()
+    {
+        return 'amd';
+    }
+
+    public static function getCurrencyValue($currency, $price)
+    {
+        return round(static::getCurrencyRatio($currency) * $price, 2);
+    }
+
+    public static function getCurrencyRatio($currency)
+    {
+        return ORM::factory('Currency')
+                  ->find()
+                  ->get(\Zver\StringHelper::load($currency)
+                                          ->toUpperCase()
+                                          ->get());
+    }
+
     public static function getOrderStatuses()
     {
         return [

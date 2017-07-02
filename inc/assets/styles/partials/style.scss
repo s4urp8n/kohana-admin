@@ -883,6 +883,7 @@ $angleOffsetTop: 30px;
       background: #76b543;
       text-transform: uppercase;
       padding: 5px;
+      margin: 10px 0;
       color: #fff;
       border: none;
       overflow: hidden;
@@ -895,7 +896,7 @@ $angleOffsetTop: 30px;
       display: block;
       width: 100%;
       color: #e49725;
-      padding: 10px 0;
+      padding: 10px 0 0 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -951,7 +952,7 @@ $angleOffsetTop: 30px;
       .label {
         display: block;
         float: left;
-        max-width: 50%;
+        max-width: 30%;
         width: auto;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -960,7 +961,7 @@ $angleOffsetTop: 30px;
         color: #98999b;
       }
       .input {
-        max-width: 30%;
+        max-width: 70%;
         width: auto;
         display: block;
         float: right;
@@ -1109,4 +1110,31 @@ i.fa {
   background: none;
 }
 
+.currencies {
+  display: block;
+  text-align: center;
+  margin: 5px 0;
+  .currency {
+    text-align: center;
+    display: inline-block;
+    padding-right: 5px;
+    width: auto;
+  }
+}
 
+.shop-item-content-total-total {
+  display: inline-block;
+  width: auto;
+  text-align: right;
+  .currencies {
+    display: inline-block;
+    width: auto;
+    text-align: right;
+    font-size: 12px;
+    .currency {
+      width: auto;
+      display: inline-block;
+      color: inherit !important;
+    }
+  }
+}

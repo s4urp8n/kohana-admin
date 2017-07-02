@@ -61,18 +61,19 @@
                     <label class="shop-item-content-price">
                         <span class="label"><?= ___('ЦенаТовара') ?></span>
                         <span class="shop-item-content-price-price input">
-                        <?= $product->price ?>
+                        <?= $product->price ?> <?= Common::getDefaultCurrency() ?>
                     </span>
                         <span class="clearfix"></span>
                     </label>
 
                     <label class="shop-item-content-total">
-                    <span class="label">
-                        <?= ___('ИтогоТовар') ?>
-                    </span>
+                        <span class="label">
+                            <?= ___('ИтогоТовар') ?>
+                        </span>
                         <span class="shop-item-content-total-total input">
-                       <?= $product->price ?>
-                    </span>
+                            <?= $product->price ?> <?= Common::getDefaultCurrency() ?>
+                            <?= View::factory('parts/currency', ['sum' => $product->price]) ?>
+                        </span>
                         <span class="clearfix"></span>
                     </label>
 

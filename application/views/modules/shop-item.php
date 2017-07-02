@@ -17,6 +17,7 @@
             <?php
         }
         ?>
+
     />
 
     <span class="products-product-title">
@@ -24,10 +25,15 @@
     </span>
 
     <span class="products-product-price">
-        <?= $product->price ?> /<?= ORM::factory('Units')
-                                          ->find($product->unit_id)
-                                          ->get(Common::getCurrentLang() . '_name') ?>
+        <?= $product->price ?> <?= \Zver\StringHelper::load(Common::getDefaultCurrency())
+                                                     ->toUpperCase()
+                                                     ->get() ?>/<?= \Zver\StringHelper::load(ORM::factory('Units')
+                                                                                                ->find($product->unit_id)
+                                                                                                ->get(Common::getCurrentLang() . '_name'))
+                                                                                      ->toUpperCase() ?>
     </span>
+
+    <?= View::factory('parts/currency', ['sum' => $product->price]) ?>
 
     <button class="products-product-button">
         <?= ___('ЗаказатьКнопка') ?>

@@ -46,6 +46,7 @@ $(document).ready(function () {
      * Update cart summary
      */
     var updateSummary = function () {
+
         var count = 0;
         $('.cartTable .numberChanger li.active span').each(function () {
             count = count + parseInt($(this).html(), 10);
@@ -56,7 +57,35 @@ $(document).ready(function () {
             sum = sum + parseInt($(this).html(), 10);
         });
 
-        $('.cartTotalSum').html(sum);
+        var curHtml = $('.cartTable .cartPrice .currencies')[0].outerHTML + '';
+
+        var defaultCur = $(curHtml).attr('default');
+
+        var newHtml = '';
+
+        $(curHtml).find('.currency').each(function (index, item) {
+
+            var currencyString = $(item).html().replace(/\s+/g, '');
+
+            var matches = /^([\d\.]+)(\D+)$/.exec(currencyString);
+
+            var value = matches[1];
+            var label = matches[2];
+            var ratio = $(item).attr('ratio');
+
+            var html = parseFloat(sum * ratio).toFixed(2) + '' + label;
+
+            $(item).html(html);
+
+            newHtml += $(item)[0].outerHTML;
+
+        });
+
+        curHtml = $(curHtml).html('')[0].outerHTML;
+
+        curHtml = $(curHtml).html(newHtml)[0].outerHTML;
+
+        $('.cartTotalSum').html(sum + ' ' + defaultCur + curHtml);
         $('.cartTotalCount').html(count);
     };
 
@@ -124,9 +153,27 @@ $(document).ready(function () {
         var count = $(this).val();
         var price = parseFloat($(this).parents('form').find('.shop-item-content-price-price').html(), 10);
 
+        var defaultCur = $('.shop-item-content-total-total .currencies').attr('default');
+
+        $('.shop-item-content-total-total .currency').each(function (index, item) {
+
+            var currencyString = $(item).html().replace(/\s+/g, '');
+
+            var matches = /^([\d\.]+)(\D+)$/.exec(currencyString);
+
+            var value = matches[1];
+            var label = matches[2];
+            var ratio = $(item).attr('ratio');
+
+            $(item).html(parseFloat(price * ratio * count).toFixed(2) + '' + label);
+
+        });
+
+        var currenciesHtml = $('.shop-item-content-total-total.input .currencies')[0].outerHTML;
+
         var total = price * count;
 
-        $('.shop-item-content-total-total.input').html(total);
+        $('.shop-item-content-total-total.input').html(total + ' ' + defaultCur + currenciesHtml);
 
     });
 
@@ -167,12 +214,32 @@ $(document).ready(function () {
             }
 
             price = parseFloat($(this).parents('tr').find('.cartPrice').attr('price'), 10) * value;
+            var defaultCur = $(this).parents('tr').find('.cartPrice .currencies').attr('default');
+
+
+            $(this).parents('tr').find('.cartPrice .currency').each(function (index, item) {
+
+                var currencyString = $(item).html().replace(/\s+/g, '');
+
+                var matches = /^([\d\.]+)(\D+)$/.exec(currencyString);
+
+                var value = matches[1];
+                var label = matches[2];
+                var ratio = $(item).attr('ratio');
+
+
+                $(item).html(parseFloat(price * ratio).toFixed(2) + '' + label);
+
+            });
+
+            var curHtml = $(this).parents('tr').find('.cartPrice .currencies')[0].outerHTML;
+
 
             var that = $(this);
 
             $.ajax(href, {}).done(function () {
                 that.parents('ul').find('li span').html(value + unit);
-                that.parents('tr').find('td:eq(4)').html(price);
+                that.parents('tr').find('td:eq(4)').html(price + ' ' + defaultCur + curHtml);
                 updateSummary();
                 blockA = 0;
             });

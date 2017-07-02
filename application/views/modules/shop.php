@@ -44,7 +44,7 @@
             } else {
                 ?>
 
-                <div class="alert">
+                <div class="alert alert-info">
                     <?= ___('ВДаннойКатегорииПокаНетТоваров') ?>
                 </div>
 
