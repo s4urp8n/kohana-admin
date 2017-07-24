@@ -11,6 +11,7 @@
     "inc/assets/fotorama-4.6.4/fotorama.min.js",
     "inc/assets/scripts/vegas.js",
     "inc/assets/scripts/jquery.photobox.js",
+    "inc/assets/scripts/mobile-navigation.js",
     "inc/assets/scripts/app.js"
   ]
 }
