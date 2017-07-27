@@ -1138,3 +1138,27 @@ i.fa {
     }
   }
 }
+
+$mobileTurn: 900px;
+
+@media (max-width: $mobileTurn) {
+
+  .big-breads,
+  .header {
+    display: none;
+  }
+
+}
+
+@media (min-width: $mobileTurn) {
+
+  .big-breads,
+  .header {
+    display: block;
+  }
+
+  .mobile-navigation {
+    display: none;
+  }
+
+}

@@ -23,6 +23,12 @@ $marginTopBars: 25px;
   min-width: 300px;
   margin: 0;
 
+  &,
+  & * {
+    box-sizing: border-box;
+    text-align: left;
+  }
+
   &__logo {
 
     display: inline-block;
@@ -51,11 +57,12 @@ $marginTopBars: 25px;
 
     &__label {
 
+      box-sizing: content-box;
       display: block;
       width: 40px;
       height: 35px;
       padding: 5px;
-      margin-top: $marginTopBars;
+      margin: $marginTopBars 0 0 0;
       text-align: center;
       cursor: pointer;
       float: right;

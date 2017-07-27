@@ -151,3 +151,5 @@ $mainItems = Common::getMainItemsTransliterated(empty($activeId) ? null : $activ
 
 </div>
 
+<?= View::factory('parts/mobile') ?>
+
