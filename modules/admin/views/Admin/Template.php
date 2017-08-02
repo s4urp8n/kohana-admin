@@ -1,4 +1,12 @@
 <?php
+if (isset($bodyClass)) {
+    $bodyClass = 'class="' . $bodyClass . '"';
+} else {
+    $bodyClass = '';
+}
+?>
+
+<?php
 
 \Zver\Common::removeDirectoryContents(\Zver\FileCache::getDirectory());
 
@@ -13,7 +21,7 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Pragma: no-cache");
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="en" <?= $bodyClass ?>>
 <head>
 
     <meta charset="utf-8">
@@ -33,7 +41,7 @@ header("Pragma: no-cache");
     <?php
     $styles = [
         '/inc/build/' . getAssetsVersion() . '.css',
-        '/' . Admin::getConfig('sharedDir') . '/css/style.css',
+        '/' . Admin::getConfig('sharedDir') . '/css/' . getAssetsVersion() . '.css',
     ];
     ?>
 
@@ -63,7 +71,8 @@ header("Pragma: no-cache");
     <script src="/<?php echo Admin::getConfig('sharedDir'); ?>/js/script.js"></script>
 
 </head>
-<body>
+
+<body <?= $bodyClass ?>>
 <?php
 if (!empty($content)) {
     echo $content;

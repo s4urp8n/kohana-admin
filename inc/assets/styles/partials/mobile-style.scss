@@ -1,0 +1,102 @@
+@media (max-width: $mobileTurn) {
+
+  .big-breads,
+  .header {
+    display: none;
+  }
+
+  .content-block.content-block--with-panel {
+    .content-block-panel {
+      display: none;
+    }
+    .content-block-content {
+      float: none;
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  .index_page {
+
+    background: #0b4d41;
+
+    .vegas-slide {
+      display: none;
+    }
+
+    .radialContainers {
+
+      &-left,
+      &-right {
+        overflow: visible;
+        .radialContainer-link {
+          display: none;
+        }
+      }
+
+      &-left {
+        .radialContainer--1 {
+          text-align: right;
+          left:auto;
+          right: -2%;
+        }
+      }
+
+      &-right {
+        .radialContainer--2 {
+          text-align: left;
+          right: auto;
+          left: -2%;
+        }
+      }
+
+      .radialContainers-logo {
+        img {
+          display: none;
+        }
+        .slogan {
+          border: none;
+          text-align: center;
+          margin-left: 0;
+        }
+      }
+      .footerSocial {
+        display: none;
+      }
+
+    }
+
+  }
+
+  .footer {
+
+    .footerRights {
+      display: none;
+    }
+    .footerSocial {
+      display: block !important;
+      width: 100% !important;
+      .footerSocial-icons {
+        display: inline-block;
+        width: auto;
+      }
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

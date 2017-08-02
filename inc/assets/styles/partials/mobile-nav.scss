@@ -5,7 +5,8 @@ html, body {
   height: 100%;
 }
 
-$padding: 5px 30px;
+$paddingTop: 8px;
+$paddingLeft: 30px;
 $marginBottom: 5px;
 $logoAlign: left;
 $logoW: 80px;
@@ -19,8 +20,7 @@ $marginTopBars: 25px;
   width: 100%;
   box-sizing: border-box;
   background: #0b4d41;
-  padding: $padding;
-  min-width: 300px;
+  min-width: 450px;
   margin: 0;
 
   &,
@@ -37,6 +37,12 @@ $marginTopBars: 25px;
     min-width: $logoW;
     height: $logoH;
     cursor: pointer;
+    margin-left: $paddingLeft;
+    padding-top: $paddingTop;
+    padding-bottom: $paddingTop;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 
     &__img {
       display: block;
@@ -49,6 +55,8 @@ $marginTopBars: 25px;
   &__content {
     display: none;
     width: 100%;
+    background: #fff;
+    padding: $paddingTop $paddingLeft;
   }
 
   &__checkbox {
@@ -62,7 +70,7 @@ $marginTopBars: 25px;
       width: 40px;
       height: 35px;
       padding: 5px;
-      margin: $marginTopBars 0 0 0;
+      margin: $marginTopBars $paddingLeft 0 0;
       text-align: center;
       cursor: pointer;
       float: right;
@@ -105,6 +113,53 @@ $marginTopBars: 25px;
       }
     }
 
+  }
+
+  &__langs {
+
+    display: block;
+    text-align: center;
+    border: 2px dashed #3b8641;
+    padding: 3px;
+    margin: 5px 0;
+
+    .header-langs-lang {
+      float: none;
+      display: inline-block;
+      width: auto;
+      color: #0b4d43;
+      background: none;
+      padding: 10px 15px;
+      vertical-align: baseline;
+      &--active {
+        background: #0b4d43;
+        color: #fff;
+      }
+
+      .flag {
+        width: 30px;
+        vertical-align: baseline;
+      }
+      .lang {
+        color: inherit;
+        vertical-align: baseline;
+      }
+    }
+
+  }
+
+  .header-navigation {
+    display: block;
+    width: 100%;
+    .navigation-item {
+      display: block;
+      width: 100%;
+      float: none;
+      text-align: left;
+      font-size: 100%;
+      padding: 15px;
+      margin-bottom: 5px;
+    }
   }
 
 }

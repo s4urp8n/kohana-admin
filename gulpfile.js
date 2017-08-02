@@ -50,8 +50,7 @@ gulp.task('watch', ['default'], function () {
         "gulp.map.json",
         "gulpfile.js",
         "inc/assets/**",
-        "inc/system/**",
-        "inc/images/**"
+        "inc/system/css/**.scss"
     ];
 
     gulp.watch(watches, ['default']);
@@ -59,6 +58,17 @@ gulp.task('watch', ['default'], function () {
 });
 
 gulp.task('default', ['clearAfter'], function () {
+
+    gulp.src('inc/system/css/style.scss')
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(cssmin())
+        .pipe(concat(getVersion() + '.css'))
+        .pipe(gulp.dest('inc/system/css'));
 
 });
 
@@ -118,11 +128,22 @@ gulp.task('updateVersion', ['clearBefore'], function () {
     return fs.writeFileSync(getVersionFileName(), Math.floor(Date.now() / 1000), 'utf8');
 });
 
-gulp.task('clearBefore', function () {
+
+gulp.task('clearBefore', ['clearBeforeBefore'], function () {
+
     if (fs.existsSync(buildDirectory)) {
-        return gulp.src([buildDirectory + '/**.js', buildDirectory + '/**.css'])
+        return gulp.src([buildDirectory + '/*.js', buildDirectory + '/*.css'])
             .pipe(plumber())
             .pipe(clean());
     }
+
     return false;
+});
+
+gulp.task('clearBeforeBefore', function () {
+
+    return gulp.src("inc/system/css/*.css")
+        .pipe(plumber())
+        .pipe(clean());
+
 });

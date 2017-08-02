@@ -895,6 +895,8 @@ class Controller_Admin extends Controller_Template
             }
         }
 
+        $this->template->bodyClass = 'auth-body';
+
         $this->template->content = View:: factory(
             'Admin/Auth/Template', [
                                      'password' => $password,
@@ -951,6 +953,8 @@ class Controller_Admin extends Controller_Template
             }
 
         }
+
+        $this->template->bodyClass = 'auth-body';
 
         $this->template->content = View:: factory(
             'Admin/Restore/Template', [
@@ -1055,6 +1059,8 @@ class Controller_Admin extends Controller_Template
                     }
                 }
             }
+
+            $this->template->bodyClass = 'auth-body';
 
             $this->template->content = View:: factory(
                 'Admin/Register/Template', [

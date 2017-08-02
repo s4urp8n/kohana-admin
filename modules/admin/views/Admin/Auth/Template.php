@@ -1,3 +1,7 @@
+<a href="/" class="auth__logo">
+    <img src="/inc/images/logo-m.svg" alt="logo" class="auth__logo__img">
+</a>
+
 <div class="authFormNew">
     <form role="form"
           action='<?php echo AdminHREF::getDefaultAdminRouteUri('auth'); ?>?ref=<?= urlencode(

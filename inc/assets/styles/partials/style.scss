@@ -112,9 +112,10 @@ $yellowColor: #e7c03d;
     display: table-cell;
     text-align: right;
     width: auto;
+    white-space: nowrap;
     &-inner {
       display: block;
-      width: 120px;
+      width: 100%;
       text-align: right;
       float: right;
     }
@@ -122,8 +123,9 @@ $yellowColor: #e7c03d;
       text-decoration: none;
       display: block;
       float: right;
-      font-size: 90%;
-      padding: 10px;
+      font-size: 75%;
+      padding: 9px 7px;
+      white-space: nowrap;
       &:hover {
         background: lighten(#9a9b8d, 5%);
       }
@@ -131,6 +133,18 @@ $yellowColor: #e7c03d;
       &--active:hover {
         background: #050608;
         color: #fff;
+      }
+
+      & > .flag {
+        display: inline-block;
+        width: 20px;
+        height: auto;
+        margin: auto;
+        padding: 0;
+      }
+      & > .lang {
+        display: inline-block;
+        color: inherit;
       }
     }
   }
@@ -431,8 +445,8 @@ $yellowColor: #e7c03d;
       img {
         display: block;
         margin: auto;
-        width: 130px;
-        height: 130px;
+        width: 100%;
+        height: auto;
       }
     }
     &[rel='video'] {
@@ -1139,26 +1153,7 @@ i.fa {
   }
 }
 
-$mobileTurn: 900px;
+$mobileTurn: 1150px;
 
-@media (max-width: $mobileTurn) {
-
-  .big-breads,
-  .header {
-    display: none;
-  }
-
-}
-
-@media (min-width: $mobileTurn) {
-
-  .big-breads,
-  .header {
-    display: block;
-  }
-
-  .mobile-navigation {
-    display: none;
-  }
-
-}
+@import "mobile-style";
+@import "desktop-style";
