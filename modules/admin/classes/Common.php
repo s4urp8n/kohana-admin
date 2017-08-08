@@ -4,13 +4,13 @@ class Common
 {
 
     const GARDEN = 'garden';
-    const HOME = 'home';
+    const HOME   = 'home';
 
-    const STATUS_NEW = 0;
-    const STATUS_READY = 20;
-    const STATUS_PAID = 30;
+    const STATUS_NEW     = 0;
+    const STATUS_READY   = 20;
+    const STATUS_PAID    = 30;
     const STATUS_PROCESS = 40;
-    const STATUS_DONE = 50;
+    const STATUS_DONE    = 50;
 
     const PHONE_PATTERN = '#^\+\d{11,15}$#';
 
@@ -271,9 +271,9 @@ class Common
         return false;
     }
 
-    const COLOR_GREEN = 'green';
+    const COLOR_GREEN  = 'green';
     const COLOR_YELLOW = 'yellow';
-    const COLOR_BLUE = 'blue';
+    const COLOR_BLUE   = 'blue';
 
     public static function getCurrentColor()
     {

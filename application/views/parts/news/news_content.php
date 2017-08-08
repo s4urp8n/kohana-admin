@@ -48,6 +48,7 @@
                     $date = FieldString::translateMonth($date);
 
                     echo $date;
+
                     ?>
                 </p>
 

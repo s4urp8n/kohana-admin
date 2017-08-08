@@ -39,7 +39,7 @@ if (!\Zver\StringHelper::load($currentMainItem)
 
 ?>
 
-<div class="big-breads">
+<div class="big-breads user-select-none">
     <div class="big-breads-inner">
         <a class="big-breads-logo" href="<?= $href ?>">
             <?= $logo ?>

@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer user-select-none">
 
     <div class="page-container">
 

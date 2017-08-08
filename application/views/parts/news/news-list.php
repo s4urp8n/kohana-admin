@@ -9,6 +9,7 @@
     $pagination->setItemsPerPage(5);
 
     $pagination->setPageUrlCallback(function ($number) {
+
         $item = ORM::factory('MainItem')
                    ->where('module', '=', Modules::$MOD_NEWS)
                    ->find();

@@ -1,3 +1,22 @@
+@media (max-width: 800px) {
+  .content-block-content.shop-item-content {
+
+    .content-block-content-left {
+      display: block;
+      width: 100%;
+      float: none;
+      margin: 0;
+    }
+    .content-block-content-right {
+      display: block;
+      width: 100%;
+      float: none;
+      margin: 0;
+    }
+
+  }
+}
+
 @media (max-width: $mobileTurn) {
 
   .big-breads,
@@ -37,7 +56,7 @@
       &-left {
         .radialContainer--1 {
           text-align: right;
-          left:auto;
+          left: auto;
           right: -2%;
         }
       }
@@ -82,7 +101,6 @@
       }
     }
   }
-
 }
 
 

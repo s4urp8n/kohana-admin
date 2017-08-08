@@ -1153,7 +1153,21 @@ i.fa {
   }
 }
 
+.shop-item-content {
+  .content-block-content-left {
+    .shop-item-content-img--big,
+    .photobox_container > a > img {
+      border: 1px solid #b4b5b9;
+    }
+    .photobox_container {
+      margin-top: 5px;
+      padding-top: 0;
+    }
+  }
+}
+
 $mobileTurn: 1150px;
 
 @import "mobile-style";
 @import "desktop-style";
+

@@ -27,7 +27,7 @@ $homeSecondaries = ORM::factory('ArticlesCategories')
 
 ?>
 
-<div class="radialContainers">
+<div class="radialContainers user-select-none">
 
     <div class="radialContainers-logo animated fadeInDown">
         <img src="/inc/images/lusin_group_green.svg"/>

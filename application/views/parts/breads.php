@@ -5,7 +5,7 @@ if (!empty($breads)) {
     $last = $breads
         ->getLastValueUnset();
     ?>
-    <div class="breadcrumbs">
+    <div class="breadcrumbs user-select-none">
         <?php
         foreach ($breads as $href => $name) {
             ?>

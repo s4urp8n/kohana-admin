@@ -1,4 +1,4 @@
-<div class="footerSocial <?php if (isset($animated)) {
+<div class="footerSocial user-select-none <?php if (isset($animated)) {
     echo "animated fadeInUp";
 } ?>">
     <div class="footerSocial-icons">

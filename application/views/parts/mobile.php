@@ -1,4 +1,4 @@
-<div class="mobile-navigation">
+<div class="mobile-navigation user-select-none">
 
     <a href="/" class="mobile-navigation__logo">
         <img src="/inc/images/logo-m.svg" alt="logo" class="mobile-navigation__logo__img"/>

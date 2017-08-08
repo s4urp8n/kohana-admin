@@ -1,7 +1,7 @@
 <div class="header">
     <div class="page-container">
 
-        <div class="header-row">
+        <div class="header-row user-select-none">
             <?= View::factory('parts/navigation', ['activeId' => empty($activeId) ? null : $activeId]) ?>
 
             <div class="header-langs">
@@ -22,5 +22,5 @@
 
 </div>
 
-<?= View::factory('parts/mobile') ?>
+<?= View::factory('parts/mobile', ['activeId' => empty($activeId) ? null : $activeId]) ?>
 

@@ -4,7 +4,7 @@ $mainItems = Common::getMainItemsTransliterated(empty($activeId) ? null : $activ
 
 if (!empty($mainItems)) {
     ?>
-    <div class="header-navigation">
+    <div class="header-navigation user-select-none">
         <?php
         foreach ($mainItems as $main_item) {
 

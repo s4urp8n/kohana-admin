@@ -19,6 +19,16 @@
 
             <img src="<?= $img ?>" alt="" class="shop-item-content-img--big"/>
 
+            <?php
+
+            $images = $product->getGalleryImages();
+
+            echo View::factory('parts/photos', [
+                'images' => $images,
+            ]);
+
+            ?>
+
 
         </div>
         <div class="content-block-content-right">

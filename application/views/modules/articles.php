@@ -56,8 +56,27 @@
     </div>
 
     <div class="content-block-content">
-        <?= ORM::factory('ArticlesCategories', Model_ArticlesCategories::getCurrentCategory())
-               ->get(Common::getCurrentLang() . '_description') ?>
+
+
+        <?php
+        $currentCategory = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_NUMBER_INT);
+
+        $currentCategory = Model_ShopCategories::getList()
+                                               ->find($currentCategory);
+
+        if ($currentCategory === false) {
+
+            echo ___('HomeИнтроТекст');
+
+        } else {
+
+            echo ORM::factory('ArticlesCategories', Model_ArticlesCategories::getCurrentCategory())
+                    ->get(Common::getCurrentLang() . '_description');
+
+        }
+
+        ?>
+
     </div>
 
     <div class="clearfix"></div>

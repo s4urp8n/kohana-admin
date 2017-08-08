@@ -22,6 +22,7 @@ class Model_ShopCategories extends ORM
 
     /**
      * @param bool $onlyVisible
+     *
      * @return \Zver\AdjacencyList
      */
     public static function getList($onlyVisible = false)

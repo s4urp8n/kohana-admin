@@ -1,6 +1,6 @@
 <?= View::factory('parts/carousel') ?>
 
-<div class="indexPage">
+<div class="indexPage user-select-none">
     <div class="indexPage-left">
         <?= ___('ТекстНаГлавной') ?>
     </div>

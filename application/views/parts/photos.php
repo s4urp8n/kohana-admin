@@ -1,4 +1,4 @@
-<div class="photobox">
+<div class="photobox user-select-none">
 
     <?php
     if (empty($w)) {
