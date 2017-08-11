@@ -162,4 +162,12 @@ $marginTopBars: 25px;
     }
   }
 
+  .navigation-item--sub {
+    padding-left: 30px !important;
+  }
+  .navigation-item--active {
+    &:before {
+      content: "→" !important;
+    }
+  }
 }

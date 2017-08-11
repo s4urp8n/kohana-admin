@@ -18,7 +18,10 @@
             <?= View::factory('parts/langs', ['noreverse' => 1]) ?>
         </div>
 
-        <?= View::factory('parts/navigation', ['activeId' => empty($activeId) ? null : $activeId]) ?>
+        <?= View::factory('parts/navigation', [
+            'mobile'   => true,
+            'activeId' => empty($activeId) ? null : $activeId,
+        ]) ?>
 
     </div>
 

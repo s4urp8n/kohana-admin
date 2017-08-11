@@ -9,12 +9,17 @@ class Model_ArticlesCategories extends ORM
     {
         $request = Request::initial();
 
-        $category = $request->query('category');
+        $url = $request->url();
 
-        $orm = ORM::factory('ArticlesCategories', $category);
+        if (preg_match('#/home#i', $url) == 1) {
 
-        if ($orm->id) {
-            return $category;
+            $category = $request->query('category');
+
+            $orm = ORM::factory('ArticlesCategories', $category);
+
+            if ($orm->id) {
+                return $category;
+            }
         }
 
         return false;

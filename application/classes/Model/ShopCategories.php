@@ -11,10 +11,15 @@ class Model_ShopCategories extends ORM
 
         $category = $request->query('category');
 
-        $orm = ORM::factory('ShopCategories', $category);
+        $url = $request->url();
 
-        if ($orm->id) {
-            return $category;
+        if (preg_match('#/garden#i', $url) == 1) {
+
+            $orm = ORM::factory('ShopCategories', $category);
+
+            if ($orm->id) {
+                return $category;
+            }
         }
 
         return false;

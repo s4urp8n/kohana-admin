@@ -1,3 +1,5 @@
+require('events').EventEmitter.prototype._maxListeners = 9999;
+
 var buildDirectory = 'inc/build';
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
@@ -43,6 +45,7 @@ function getVersion() {
 function say(text) {
     console.log(text);
 }
+
 
 gulp.task('watch', ['default'], function () {
 

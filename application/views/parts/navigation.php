@@ -1,5 +1,7 @@
 <?php
 
+$mobile = isset($mobile);
+
 $mainItems = Common::getMainItemsTransliterated(empty($activeId) ? null : $activeId);
 
 if (!empty($mainItems)) {
@@ -17,6 +19,8 @@ if (!empty($mainItems)) {
                     Modules::$MOD_INDEX,
                     Modules::$MOD_CABINET,
                     Modules::$MOD_CART,
+                    Modules::$MOD_ARTICLES,
+                    Modules::$MOD_SHOP,
                 ])
                 ) {
 
@@ -24,22 +28,6 @@ if (!empty($mainItems)) {
 
                     if ($main_item['active']) {
                         $class = $class . ' ' . $class . '--active';
-                    }
-
-                    if ($stringItem->getClone()
-                                   ->toLowerCase()
-                                   ->trimSpaces()
-                                   ->isEquals(Common::GARDEN)
-                    ) {
-
-                        $class = $class . ' garden-item';
-
-                    } elseif ($stringItem->getClone()
-                                         ->toLowerCase()
-                                         ->trimSpaces()
-                                         ->isEquals(Common::HOME)
-                    ) {
-                        $class = $class . ' home-item';
                     }
 
                     ?>
@@ -97,6 +85,96 @@ if (!empty($mainItems)) {
                     </a>
 
                     <?php
+                } elseif ($ormItem->module == Modules::$MOD_ARTICLES) {
+
+                    $class = "navigation-item";
+
+                    if ($main_item['active']) {
+                        $class = $class . ' ' . $class . '--active';
+                    }
+                    ?>
+
+                    <a href="<?= $main_item['href'] ?>"
+                       class="<?= $class ?> home-item"
+                    >
+                        <?= $stringItem->getClone()
+                                       ->toUpperCaseFirst()
+                                       ->get() ?>
+                    </a>
+                    <?php
+
+                    if ($mobile) {
+
+                        $categories = ORM::factory('ArticlesCategories')
+                                         ->where('visible', '=', 1)
+                                         ->find_all()
+                                         ->as_array();
+
+                        foreach ($categories as $category) {
+
+                            ?>
+
+                            <a href="<?= $category->getHref() ?>"
+                               class="navigation-item navigation-item--sub <?php
+
+                               if (Model_ArticlesCategories::getCurrentCategory() == $category->id) {
+                                   echo " navigation-item--active ";
+                               }
+
+                               ?>">
+                                <?= $category->get(Common::getCurrentLang() . '_name') ?>
+                            </a>
+
+
+                            <?php
+                        }
+
+                    }
+
+                } elseif ($ormItem->module == Modules::$MOD_SHOP) {
+
+                    $class = "navigation-item";
+
+                    if ($main_item['active']) {
+                        $class = $class . ' ' . $class . '--active';
+                    }
+                    ?>
+
+                    <a href="<?= $main_item['href'] ?>"
+                       class="<?= $class ?> garden-item"
+                    >
+                        <?= $stringItem->getClone()
+                                       ->toUpperCaseFirst()
+                                       ->get() ?>
+                    </a>
+
+                    <?php
+
+                    $categories = Model_ShopCategories::getList(true)
+                                                      ->getItems();
+
+                    if ($mobile) {
+
+                        foreach ($categories as $category) {
+                            $orm = ORM::factory('ShopCategories', $category->getId());
+                            ?>
+
+                            <a href="<?= $orm->getHref() ?>"
+                               class="navigation-item navigation-item--sub <?php
+
+                               if (Model_ShopCategories::getCurrentCategory() == $category->getId()) {
+                                   echo " navigation-item--active ";
+                               }
+
+                               ?>">
+                                <?= $category->getDataProperty(Common::getCurrentLang() . '_name') ?>
+                            </a>
+
+
+                            <?php
+                        }
+                    }
+
                 }
             }
         }
