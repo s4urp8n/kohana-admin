@@ -5,14 +5,6 @@ html, body {
   height: 100%;
 }
 
-$paddingTop: 8px;
-$paddingLeft: 30px;
-$marginBottom: 5px;
-$logoAlign: left;
-$logoW: 80px;
-$logoH: 90px;
-$marginTopBars: 25px;
-
 .mobile-navigation {
 
   display: block;
@@ -159,15 +151,31 @@ $marginTopBars: 25px;
       font-size: 100%;
       padding: 15px;
       margin-bottom: 5px;
+      color: #7c7c7e;
+      &:hover {
+        background: none;
+      }
     }
-  }
 
-  .navigation-item--sub {
-    padding-left: 30px !important;
-  }
-  .navigation-item--active {
-    &:before {
-      content: "→" !important;
+    .navigation-item--sub {
+      padding-left: 30px !important;
+    }
+    .navigation-item--active {
+      color: #000 !important;
+      background: none !important;
+      &:before {
+        content: "→";
+        color: inherit;
+      }
+      &.garden-item {
+        background: $yellowColor !important;
+      }
+      &.group-item {
+        background: $greenColor !important;
+      }
+      &.home-item {
+        background: $blueColor !important;
+      }
     }
   }
 }
