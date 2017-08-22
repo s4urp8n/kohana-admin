@@ -25,6 +25,17 @@ class Model_ArticlesCategories extends ORM
         return false;
     }
 
+    public static function getCurrentCategoryORM()
+    {
+        $category = static::getCurrentCategory();
+
+        if ($category !== false) {
+            return ORM::factory('ArticlesCategories', $category);
+        }
+
+        return false;
+    }
+
     public function getHref()
     {
         return Common::getArticlesMainItem()

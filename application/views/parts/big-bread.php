@@ -1,6 +1,9 @@
 <?php
 $currentColor = Common::getCurrentColor();
 
+$mainItem = Common::getCurrentMainItem();
+$secondaryItem = Common::getCurrentSecondaryItem();
+
 $logo = getFileContent('inc/images/lusin_group_green.svg');
 $caption = 'Group';
 $href = '/' . Common::getCurrentLang() . '/';
@@ -27,14 +30,28 @@ if ($currentColor == Common::COLOR_BLUE) {
     }
 }
 
-$currentMainItem = Common::getCurrentMainItem()
-                         ->get(Common::getCurrentLang() . '_name');
+$additional = Common::getCurrentSpecialItem();
 
-if (!\Zver\StringHelper::load($currentMainItem)
-                       ->trimSpaces()
-                       ->isEqualsIgnoreCase($caption)
-) {
-    $caption .= ' / ' . $currentMainItem;
+if ($additional) {
+    $caption .= ' / ' . $additional->get(Common::getCurrentLang() . '_name');
+} else {
+
+    if ($secondaryItem) {
+        $caption .= ' / ' . $secondaryItem->get(Common::getCurrentLang() . '_name');
+    } elseif ($mainItem) {
+
+        $newCaption = \Zver\StringHelper::load($mainItem->get(Common::getCurrentLang() . '_name'))
+                                        ->trimSpaces()
+                                        ->get();
+
+        if (!\Zver\StringHelper::load($caption)
+                               ->trimSpaces()
+                               ->isEqualsIgnoreCase($newCaption)) {
+            $caption .= ' / ' . $newCaption;
+        }
+
+    }
+
 }
 
 ?>
@@ -45,9 +62,92 @@ if (!\Zver\StringHelper::load($currentMainItem)
             <?= $logo ?>
         </a>
         <div class="big-breads-caption">
-            <span class="big-breads-caption-text">
-            <?= $caption ?>
-            </span>
+
+            <?php
+
+            if (in_array($mainItem->module, [Modules::$MOD_SHOP, Modules::$MOD_ARTICLES])) {
+
+                $image = null;
+
+                /**
+                 * Categories
+                 */
+                $currentCategory = Model_ShopCategories::getCurrentCategoryORM();
+
+                if ($currentCategory === false) {
+                    $currentCategory = Model_ArticlesCategories::getCurrentCategoryORM();
+                }
+
+                if (!empty($currentCategory) && !empty($currentCategory->image)) {
+                    $image = $currentCategory->image;
+                }
+
+                /**
+                 * subshopcategories
+                 */
+                if (empty($image)
+                    &&
+                    !empty($currentCategory)
+                    &&
+                    $mainItem->module == Modules::$MOD_SHOP
+                    &&
+                    !empty($currentCategory->id_parent)) {
+
+                    $parent = ORM::factory('ShopCategories', $currentCategory->id_parent);
+
+                    if (!empty($parent->image)) {
+                        $image = $parent->image;
+                    }
+
+                }
+
+                $request = Request::initial();
+
+                $url = $request->url();
+
+                /**
+                 * subarticles
+                 */
+                if (empty($image) && preg_match('#/article/#i', $url) == 1) {
+
+                    $currentCategory = Model_Articles::getCurrentCategoryORM();
+
+                    if (!empty($currentCategory)) {
+
+                        $parent = ORM::factory('ArticlesCategories', $currentCategory->id_category);
+
+                        if (!empty($parent->image)) {
+                            $image = $parent->image;
+                        }
+
+                    }
+
+                }
+                /**
+                 * main item
+                 */
+                if (empty($image) && !empty($mainItem->image)) {
+                    $image = $mainItem->image;
+                }
+
+                if (!empty($image)) {
+                    ?>
+
+                    <div class="big-breads-caption-svg">
+                        <?= $image ?>
+                    </div>
+
+                    <?php
+
+                }
+            }
+            ?>
+
+            <div class="big-breads-caption-text">
+                <?= \Zver\StringHelper::load($caption)
+                                      ->toTitleCase()
+                                      ->get() ?>
+            </div>
         </div>
 
         <div class="clearfix"></div>

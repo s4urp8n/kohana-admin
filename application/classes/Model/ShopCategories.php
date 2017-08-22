@@ -25,6 +25,17 @@ class Model_ShopCategories extends ORM
         return false;
     }
 
+    public static function getCurrentCategoryORM()
+    {
+        $category = static::getCurrentCategory();
+
+        if ($category !== false) {
+            return ORM::factory('ShopCategories', $category);
+        }
+
+        return false;
+    }
+
     /**
      * @param bool $onlyVisible
      *

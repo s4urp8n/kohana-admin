@@ -9,12 +9,28 @@ class Model_Articles extends ORM
     {
         $request = Request::initial();
 
-        $category = $request->query('category');
+        $url = $request->url();
 
-        $orm = ORM::factory('Articles', $category);
+        if (preg_match('#/article/#i', $url) == 1) {
 
-        if ($orm->id) {
-            return $category;
+            $category = $request->param('id');
+
+            $orm = ORM::factory('Articles', $category);
+
+            if ($orm->id) {
+                return $category;
+            }
+        }
+
+        return false;
+    }
+
+    public static function getCurrentCategoryORM()
+    {
+        $category = static::getCurrentCategory();
+
+        if ($category !== false) {
+            return ORM::factory('Articles', $category);
         }
 
         return false;

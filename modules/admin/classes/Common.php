@@ -292,6 +292,24 @@ class Common
 
     }
 
+    public static function getCurrentSpecialItem()
+    {
+
+        $priority = [
+            Model_Articles::getCurrentCategoryORM(),
+            Model_ArticlesCategories::getCurrentCategoryORM(),
+            Model_ShopCategories::getCurrentCategoryORM(),
+        ];
+
+        foreach ($priority as $item) {
+            if ($item && !empty($item->id)) {
+                return $item;
+            }
+        }
+
+        return false;
+    }
+
     public static function getCurrentMainItem()
     {
         $request = Request::initial();

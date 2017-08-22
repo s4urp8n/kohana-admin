@@ -130,6 +130,10 @@ class Model_Admin_MainItems extends Model_Admin
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],
+            'image'          => [
+                'label' => 'Картинка',
+                'type'  => 'textarea',
+            ],
         ];
     }
 

@@ -47,6 +47,10 @@ class Model_Admin_ArticlesCategories extends Model_Admin
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],
+            'image'          => [
+                'label' => 'Картинка',
+                'type'  => 'textarea',
+            ],
         ];
     }
 

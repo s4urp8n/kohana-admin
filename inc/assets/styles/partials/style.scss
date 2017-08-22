@@ -245,7 +245,28 @@
       font-family: "Roboto Condensed";
       width: 100%;
       height: auto;
-      display: inline-block;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    &-svg {
+      color: #fff;
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      display: block;
+      margin-left: 60px;
+      margin-top: 25px;
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .big-breads-caption-svg + .big-breads-caption-text {
+      padding-left: 160px;
     }
   }
 }
@@ -498,7 +519,7 @@ html.blue_color {
             color: #000 !important;
           }
         }
-        &-child {
+        &-child.content-block-panel-item {
           font-weight: normal;
           font-style: italic;
           padding-left: 20px !important;
@@ -511,6 +532,10 @@ html.blue_color {
         }
       }
     }
+  }
+
+  .big-breads-caption-text {
+    color: $blueColor;
   }
 }
 
@@ -545,6 +570,10 @@ html.yellow_color {
         }
       }
     }
+  }
+
+  .big-breads-caption-text {
+    color: $yellowColor;
   }
 
 }

@@ -101,12 +101,17 @@ class Model_Admin_ShopCategories extends Model_Admin
                 'label' => 'Видимость',
                 'type'  => 'bool',
             ],
+            'image'          => [
+                'label' => 'Картинка',
+                'type'  => 'textarea',
+            ],
         ];
     }
 
     public function getValidatePost()
     {
         return function ($post) {
+
             if (
                 empty($post['ru_name']) ||
                 empty($post['am_name']) ||
@@ -117,6 +122,15 @@ class Model_Admin_ShopCategories extends Model_Admin
 
             return true;
         };
+    }
+
+    public function __construct()
+    {
+
+        if (!empty($_POST) && empty($_POST['id_parent'])) {
+            $_POST['id_parent'] = null;
+        }
+
     }
 
     public function getEditData($primary)
