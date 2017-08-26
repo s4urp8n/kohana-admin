@@ -1,3 +1,5 @@
+<?= View::factory('Admin/authLogo') ?>
+
 <div class="authFormNew">
     <form role="form" action='<?php echo AdminHREF::getDefaultAdminRouteUri('register'); ?>' method="post">
 

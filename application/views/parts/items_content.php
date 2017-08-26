@@ -5,7 +5,9 @@ $sec = Common::getSecondaryItems($current_main->id, true);
 $moduleOptions = Modules::getOptions($item);
 
 if (!empty($moduleOptions['no_content'])) {
+
     echo Modules::render($item);
+
 } else {
 
     if ($sec->count() > 0) {

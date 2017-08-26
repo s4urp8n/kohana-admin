@@ -1,3 +1,5 @@
+<?= View::factory('Admin/authLogo') ?>
+
 <div class="authFormNew">
 
     <?php
@@ -12,7 +14,8 @@
             }
             ?>
 
-            <?= AdminHTML::renderMessage(___('На Ваш почтовый ящик отправлен новый пароль. Используйте его для входа на сайт.'), 'info') ?>
+            <?= AdminHTML::renderMessage(___('На Ваш почтовый ящик отправлен новый пароль. Используйте его для входа на сайт.'),
+                                         'info') ?>
 
             <div class="form-group">
                 <div>
