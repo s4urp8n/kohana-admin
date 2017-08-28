@@ -1,6 +1,43 @@
 var blockA = 0;
 
+var getAbsoluteUrl = (function () {
+    var a;
+
+    return function (url) {
+        if (!a) a = document.createElement('a');
+        a.href = url;
+
+        return a.href;
+    };
+})();
+
 $(document).ready(function () {
+
+
+    if ($('.mobile-navigation--secondary').length > 0) {
+
+        var currentHref = window.location.href;
+
+        $('.mobile-navigation--secondary option').each(function () {
+
+            $(this).attr('href', getAbsoluteUrl($(this).attr('href')));
+
+            if ($(this).attr('href') == currentHref) {
+
+                $(this).prop('selected', true);
+
+            }
+        });
+
+    }
+
+    $('.mobile-navigation--secondary').on('change', function () {
+
+        var href = $(this).find('option:selected').attr('href');
+
+        window.location.href = href;
+
+    });
 
 
     /**

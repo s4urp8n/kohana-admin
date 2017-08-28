@@ -52,6 +52,34 @@ if (array_key_exists('callback', $currentData)) {
 
 <div class="content-block content-block--with-panel">
 
+
+    <select class="mobile-navigation--secondary">
+
+        <option value="">
+            <?= ___('Выберите категорию') ?>
+        </option>
+
+        <?php
+
+        foreach ($cabinetMenu as $menuKey => $menuItem) {
+
+            $class = 'mobile-navigation--secondary-item';
+
+            if ($currentMenu == $menuKey) {
+                $class = $class . ' ' . $class . "--active";
+            }
+
+            ?>
+            <option href="<?= AdminHREF::getFullCurrentHREF(['menu'], ['menu' => $menuKey]) ?>"
+                    class="<?= $class ?>">
+                <?= $menuItem['title'] ?>
+            </option>
+            <?php
+        }
+        ?>
+
+    </select>
+
     <div class="content-block-panel">
         <?php
 

@@ -430,7 +430,7 @@
   &-mid {
     text-align: center;
     .pagination-scroll-link {
-      font-size: 26px;
+      font-size: 20px;
     }
   }
   &-next {
@@ -1212,6 +1212,14 @@ i.fa {
   }
   &-current {
   }
+}
+
+.mobile-navigation--secondary {
+  display: block;
+  width: 100%;
+  border: 2px solid #b4b5b9;
+  margin: 20px 0;
+  padding: 5px;
 }
 
 @import "mobile-style";
