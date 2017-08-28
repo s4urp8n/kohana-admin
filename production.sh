@@ -7,6 +7,10 @@ git stash clear
 
 git pull origin master
 
+composer update
+npm update
+
+gulp
 
 
 
