@@ -1,8 +1,21 @@
 <div class="content-block-panel">
     <?php
 
+    $request = Request::initial();
+
     $categories = Model_ShopCategories::getList(true)
                                       ->getItems();
+
+    $active = [];
+    $activeCategory = Model_ShopCategories::getCurrentCategory();
+
+    if (!empty($activeCategory)) {
+        $active[] = $activeCategory;
+    }
+
+    if (!empty($request->query('category'))) {
+        $active[] = $request->query('category');
+    }
 
     foreach ($categories as $category) {
 
@@ -13,7 +26,7 @@
         <a href="<?= $orm->getHref() ?>"
            class="content-block-panel-item <?php
 
-           if (Model_ShopCategories::getCurrentCategory() == $category->getId()) {
+           if (in_array($category->getId(), $active)) {
                echo " content-block-panel-item--active ";
            }
 
@@ -30,7 +43,7 @@
                 <a href="<?= $ormChild->getHref() ?>"
                    class="content-block-panel-item content-block-panel-child <?php
 
-                   if (Model_ShopCategories::getCurrentCategory() == $child->getId()) {
+                   if (in_array($ormChild->id, $active)) {
                        echo " content-block-panel-child--active ";
                    }
 

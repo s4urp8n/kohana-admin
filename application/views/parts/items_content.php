@@ -10,6 +10,8 @@ if (!empty($moduleOptions['no_content'])) {
 
 } else {
 
+    echo View::factory('parts/breads');
+
     if ($sec->count() > 0) {
         ?>
         <div class="content-block content-block--with-panel">

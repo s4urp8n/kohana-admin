@@ -1,3 +1,6 @@
+<?= View::factory('parts/breads') ?>
+
+
 <div class="content-block content-block--with-panel">
 
     <div class="content-block-panel">
