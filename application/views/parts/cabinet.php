@@ -52,33 +52,24 @@ if (array_key_exists('callback', $currentData)) {
 
 <div class="content-block content-block--with-panel">
 
+    <?php
 
-    <select class="mobile-navigation--secondary">
+    $mobile = [];
 
-        <option value="">
-            <?= ___('Выберите категорию') ?>
-        </option>
+    foreach ($cabinetMenu as $menuKey => $menuItem) {
+        $mobile[AdminHREF::getFullCurrentHREF(['menu'], ['menu' => $menuKey])] = $menuItem['title'];
+    }
 
-        <?php
+    $mobile = array_merge([
+                              Common::getCurrentMainItem()
+                                    ->getHref() => ___('Выберите категорию'),
+                          ], $mobile);
 
-        foreach ($cabinetMenu as $menuKey => $menuItem) {
+    ?>
 
-            $class = 'mobile-navigation--secondary-item';
-
-            if ($currentMenu == $menuKey) {
-                $class = $class . ' ' . $class . "--active";
-            }
-
-            ?>
-            <option href="<?= AdminHREF::getFullCurrentHREF(['menu'], ['menu' => $menuKey]) ?>"
-                    class="<?= $class ?>">
-                <?= $menuItem['title'] ?>
-            </option>
-            <?php
-        }
-        ?>
-
-    </select>
+    <?= View::factory('parts/mobile-navigation', [
+        'items' => $mobile,
+    ]); ?>
 
     <div class="content-block-panel">
         <?php
