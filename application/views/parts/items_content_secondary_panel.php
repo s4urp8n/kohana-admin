@@ -1,14 +1,16 @@
 <?php
 $mobile = [
     Common::getCurrentMainItem()
-          ->getHref() => ___('Выберите категорию'),
+          ->getHref() => Common::getCurrentMainItem()
+                               ->get(Common::getCurrentLang() . '_name'),
 ];
 
 foreach ($sec as $s) {
-    $mobile[$s->getHref()] = $s->get(Common::getCurrentLang() . '_name');
+    $mobile[$s->getHref()] = Common::getMobileTab() . $s->get(Common::getCurrentLang() . '_name');
 }
 
 echo View::factory('parts/mobile-navigation', ['items' => $mobile]);
+
 ?>
 
 <div class="content-block-panel">

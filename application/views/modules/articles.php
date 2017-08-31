@@ -1,3 +1,8 @@
+
+<?= View::factory('parts/mobile-breads') ?>
+
+<?= View::factory('parts/mobile-navigation', ['items' => Common::getArticlesMobileNavigation()]) ?>
+
 <div class="content-block content-block--with-panel">
 
     <div class="content-block-panel">

@@ -53,7 +53,7 @@
 @media (max-width: $mobileTurn) {
 
   .breadcrumbs {
-    padding: 20px 0 10px 0;
+    display: none;
   }
 
   .big-breads,
@@ -76,6 +76,10 @@
 
     background: #0b4d41;
 
+    .mobile-navigation-bread {
+      display: none;
+    }
+
     .vegas-slide {
       display: none;
     }
@@ -94,7 +98,7 @@
         .radialContainer--1 {
           text-align: right;
           left: auto;
-          right: -2%;
+          right: -3%;
         }
       }
 
@@ -102,7 +106,7 @@
         .radialContainer--2 {
           text-align: left;
           right: auto;
-          left: -2%;
+          left: -3%;
         }
       }
 
@@ -136,6 +140,12 @@
         display: inline-block;
         width: auto;
       }
+    }
+  }
+
+  .new-content {
+    .new-content-img {
+      margin-top: 20px;
     }
   }
 }

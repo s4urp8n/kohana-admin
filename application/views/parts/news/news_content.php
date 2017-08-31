@@ -77,6 +77,27 @@
         </div>
 
     </div>
+
+    <?php
+    $news = Common::getNews();
+
+    $mobile = [
+        Common::getNewsMainItem()
+              ->getHref() => ___('Новости'),
+    ];
+
+    foreach ($news as $new) {
+        $mobile[$new->getHref()] = $new->get(Common::getCurrentLang() . '_caption');
+    }
+
+    ?>
+
+    <br>
+    <br>
+    <?= View::factory('parts/mobile-navigation', ['items' => $mobile]) ?>
+    <br>
+    <br>
+
     <div class="clearfix"></div>
 </div>
 

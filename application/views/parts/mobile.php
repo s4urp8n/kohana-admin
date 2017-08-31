@@ -4,6 +4,8 @@
         <img src="/inc/images/logo-m.svg" alt="logo" class="mobile-navigation__logo__img"/>
     </a>
 
+    <span class="mobile-navigation-bread"><?= Common::getCurrentMobileMainBreadCaption() ?></span>
+
     <input id="mobile-navigation__checkbox" type="checkbox" class="mobile-navigation__checkbox">
 
     <label for="mobile-navigation__checkbox" class="mobile-navigation__checkbox__label">

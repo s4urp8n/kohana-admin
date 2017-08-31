@@ -1190,9 +1190,14 @@ i.fa {
   padding: 20px 0 50px 0;
   text-align: left;
   width: 100%;
-  overflow: hidden;
+  display: block;
+  max-width: 100%;
+  overflow: hidden !important;
   text-overflow: ellipsis;
   white-space: nowrap;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   &-item,
   &-sep,
   &-current {
@@ -1201,6 +1206,11 @@ i.fa {
     font-size: 12px;
     text-decoration: none;
     color: #838486;
+    width: auto;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &-item {
     cursor: pointer;
@@ -1220,6 +1230,53 @@ i.fa {
   border: 2px solid #b4b5b9;
   margin: 20px 0;
   padding: 5px;
+}
+
+.mobile-breads {
+  background: #3b5260;
+  margin: 20px 0;
+  color: #fff;
+  .mobile-breads-caption-svg {
+    float: left;
+    display: block;
+    width: 70px;
+    height: auto;
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+      *[fill] {
+        fill: #fff !important;
+      }
+    }
+  }
+  .mobile-breads-caption-text {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    color: #fff;
+    line-height: 70px;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 90px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+.yellow_color .mobile-breads {
+  background: $yellowColor;
+}
+
+.mobile-navigation-bread {
+  color: #fff;
+  position: absolute;
+  left: 140px;
+  top: 35px;
+  font-size: 30px;
 }
 
 @import "mobile-style";

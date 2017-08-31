@@ -3,8 +3,9 @@
 class Common
 {
 
-    const GARDEN = 'garden';
-    const HOME   = 'home';
+    const GARDEN = 'Garden';
+    const HOME   = 'Home';
+    const GROUP  = 'Group';
 
     const STATUS_NEW     = 0;
     const STATUS_READY   = 20;
@@ -13,6 +14,211 @@ class Common
     const STATUS_DONE    = 50;
 
     const PHONE_PATTERN = '#^\+\d{11,15}$#';
+
+    public static function getMobileTab()
+    {
+        return str_repeat('&nbsp;', 5);
+    }
+
+    public static function getShopMobileItems()
+    {
+        $categories = Model_ShopCategories::getList(true)
+                                          ->getItems();
+
+        $mobile = [
+            Common::getShopMainItem()
+                  ->getHref() => Common::GARDEN,
+        ];
+
+        foreach ($categories as $category) {
+
+            $orm = ORM::factory('ShopCategories', $category->getId());
+
+            $mobile[$orm->getHref()] = $category->getDataProperty(Common::getCurrentLang() . '_name');
+
+            if ($category->haveChildren()) {
+
+                foreach ($category->getChildren() as $child) {
+
+                    $ormChild = ORM::factory('ShopCategories', $child->getId());
+
+                    $mobile[$ormChild->getHref()] = Common::getMobileTab() . $child->getDataProperty(Common::getCurrentLang() . '_name');
+                }
+            }
+        }
+
+        return $mobile;
+
+    }
+
+    public static function getCurrentMobileMainBreadCaption()
+    {
+        $mainItem = Common::getCurrentMainItem();
+
+        if ($mainItem->module == Modules::$MOD_ARTICLES) {
+            return Common::HOME;
+        } elseif ($mainItem->module == Modules::$MOD_SHOP) {
+            return Common::GARDEN;
+        }
+
+        return Common::GROUP;
+
+    }
+
+    public static function getCurrentMobileBreadCaption()
+    {
+        $mainItem = Common::getCurrentMainItem();
+
+        if (in_array($mainItem->module, [Modules::$MOD_SHOP, Modules::$MOD_ARTICLES])) {
+
+            $priorities = [
+                Model_ShopCategories::getCurrentCategoryORM(),
+                Model_ArticlesCategories::getCurrentCategoryORM(),
+                Model_Articles::getCurrentCategoryORM(),
+            ];
+
+            $currentCategory = false;
+
+            foreach ($priorities as $priority) {
+
+                $currentCategory = $priority;
+
+                if ($currentCategory !== false) {
+                    break;
+                }
+            }
+
+            if (!empty($currentCategory)) {
+
+                if ($currentCategory instanceof Model_Articles) {
+
+                    return ORM::factory('ArticlesCategories', $currentCategory->id_category)
+                              ->get(Common::getCurrentLang() . '_name');
+
+                } else {
+                    return $currentCategory->get(Common::getCurrentLang() . '_name');
+                }
+
+            }
+
+            if ($mainItem->module == Modules::$MOD_ARTICLES) {
+                return Common::HOME;
+            }
+
+            if ($mainItem->module == Modules::$MOD_SHOP) {
+                return Common::GARDEN;
+            }
+
+        }
+    }
+
+    public static function getCurrentItemImage()
+    {
+        $mainItem = Common::getCurrentMainItem();
+        $image = false;
+
+        if (in_array($mainItem->module, [Modules::$MOD_SHOP, Modules::$MOD_ARTICLES])) {
+
+            /**
+             * Categories
+             */
+            $currentCategory = Model_ShopCategories::getCurrentCategoryORM();
+
+            if ($currentCategory === false) {
+                $currentCategory = Model_ArticlesCategories::getCurrentCategoryORM();
+            }
+
+            if (!empty($currentCategory) && !empty($currentCategory->image)) {
+                $image = $currentCategory->image;
+            }
+
+            /**
+             * subshopcategories
+             */
+            if (empty($image)
+                &&
+                !empty($currentCategory)
+                &&
+                $mainItem->module == Modules::$MOD_SHOP
+                &&
+                !empty($currentCategory->id_parent)) {
+
+                $parent = ORM::factory('ShopCategories', $currentCategory->id_parent);
+
+                if (!empty($parent->image)) {
+                    $image = $parent->image;
+                }
+
+            }
+
+            $request = Request::initial();
+
+            $url = $request->url();
+
+            /**
+             * sub articles
+             */
+            if (empty($image) && preg_match('#/article/#i', $url) == 1) {
+
+                $currentCategory = Model_Articles::getCurrentCategoryORM();
+
+                if (!empty($currentCategory)) {
+
+                    $parent = ORM::factory('ArticlesCategories', $currentCategory->id_category);
+
+                    if (!empty($parent->image)) {
+                        $image = $parent->image;
+                    }
+
+                }
+
+            }
+            /**
+             * main item
+             */
+            if (empty($image) && !empty($mainItem->image)) {
+                $image = $mainItem->image;
+            }
+
+        }
+
+        return $image;
+    }
+
+    public static function getArticlesMobileNavigation()
+    {
+
+        $mobile = [
+            Common::getArticlesMainItem()
+                  ->getHref() => Common::HOME,
+        ];
+
+        $categories = ORM::factory('ArticlesCategories')
+                         ->where('visible', '=', 1)
+                         ->find_all()
+                         ->as_array();
+
+        foreach ($categories as $category) {
+
+            $mobile[$category->getHref()] = $category->get(Common::getCurrentLang() . '_name');
+
+            $subCategories = ORM::factory('Articles')
+                                ->where('visible', '=', 1)
+                                ->where('id_category', '=', $category->id)
+                                ->find_all()
+                                ->as_array();
+
+            foreach ($subCategories as $subCategory) {
+
+                $mobile[$subCategory->getHref()] = Common::getMobileTab() . $subCategory->get(Common::getCurrentLang() . '_name');
+
+            }
+
+        }
+
+        return $mobile;
+
+    }
 
     public static function getDefaultCurrency()
     {

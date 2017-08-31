@@ -1,5 +1,8 @@
 <?= View::factory('parts/breads') ?>
 
+<?= View::factory('parts/mobile-breads') ?>
+<?= View::factory('parts/mobile-navigation', ['items' => Common::getShopMobileItems()]) ?>
+
 <div class="content-block content-block--with-panel">
 
     <?= View::factory('modules/shop-categories') ?>

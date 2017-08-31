@@ -18,13 +18,13 @@ $homeLink = ORM::factory('MainItem')
 
 if ($currentColor == Common::COLOR_BLUE) {
     $logo = getFileContent('inc/images/lusin_home.svg');
-    $caption = "Home";
+    $caption = Common::HOME;
     if ($homeLink) {
         $href = $homeLink->getHref();
     }
 } elseif ($currentColor == Common::COLOR_YELLOW) {
     $logo = getFileContent('inc/images/lusin_garden.svg');
-    $caption = "Garden";
+    $caption = Common::GARDEN;
     if ($gardenLink) {
         $href = $gardenLink->getHref();
     }
@@ -65,81 +65,17 @@ if ($additional) {
 
             <?php
 
-            if (in_array($mainItem->module, [Modules::$MOD_SHOP, Modules::$MOD_ARTICLES])) {
+            $image = Common::getCurrentItemImage();
 
-                $image = null;
+            if (!empty($image)) {
+                ?>
 
-                /**
-                 * Categories
-                 */
-                $currentCategory = Model_ShopCategories::getCurrentCategoryORM();
+                <div class="big-breads-caption-svg">
+                    <?= $image ?>
+                </div>
 
-                if ($currentCategory === false) {
-                    $currentCategory = Model_ArticlesCategories::getCurrentCategoryORM();
-                }
+                <?php
 
-                if (!empty($currentCategory) && !empty($currentCategory->image)) {
-                    $image = $currentCategory->image;
-                }
-
-                /**
-                 * subshopcategories
-                 */
-                if (empty($image)
-                    &&
-                    !empty($currentCategory)
-                    &&
-                    $mainItem->module == Modules::$MOD_SHOP
-                    &&
-                    !empty($currentCategory->id_parent)) {
-
-                    $parent = ORM::factory('ShopCategories', $currentCategory->id_parent);
-
-                    if (!empty($parent->image)) {
-                        $image = $parent->image;
-                    }
-
-                }
-
-                $request = Request::initial();
-
-                $url = $request->url();
-
-                /**
-                 * subarticles
-                 */
-                if (empty($image) && preg_match('#/article/#i', $url) == 1) {
-
-                    $currentCategory = Model_Articles::getCurrentCategoryORM();
-
-                    if (!empty($currentCategory)) {
-
-                        $parent = ORM::factory('ArticlesCategories', $currentCategory->id_category);
-
-                        if (!empty($parent->image)) {
-                            $image = $parent->image;
-                        }
-
-                    }
-
-                }
-                /**
-                 * main item
-                 */
-                if (empty($image) && !empty($mainItem->image)) {
-                    $image = $mainItem->image;
-                }
-
-                if (!empty($image)) {
-                    ?>
-
-                    <div class="big-breads-caption-svg">
-                        <?= $image ?>
-                    </div>
-
-                    <?php
-
-                }
             }
             ?>
 
