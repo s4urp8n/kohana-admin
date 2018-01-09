@@ -1,0 +1,28 @@
+.pager {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: $containerPadding 0;
+  &-counter,
+  &-prev,
+  &-next {
+    flex: 0 1 auto;
+    text-decoration: none;
+    border: 1px solid $greyColor;
+    padding: 15px 60px;
+    font-size: 20pt;
+    color: #000;
+  }
+  &-counter {
+    border-left: 0;
+    border-right: 0;
+  }
+  &-prev,
+  &-next {
+    &:hover {
+      background: #fff;
+    }
+  }
+}

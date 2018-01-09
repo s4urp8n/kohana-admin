@@ -1,0 +1,123 @@
+
+.page {
+  .page-description {
+    display: none;
+  }
+  &.page--home {
+    .page-description {
+      display: flex;
+    }
+  }
+}
+
+.description {
+  line-height: 1.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  width: 100%;
+  text-decoration: none;
+  padding: $containerPadding*3 $containerPadding;
+  &-caption,
+  &-text,
+  &-link {
+    @include reset;
+    color: #fff;
+    text-shadow: 2px 1px 5px #000;
+  }
+  &-caption,
+  &-text {
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  &-caption {
+    font-size: 60pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: $containerPadding/2;
+  }
+  &-text {
+    font-size: 18pt;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 1000px) {
+  .description {
+    &-caption {
+      font-size: 48pt;
+    }
+    &-text {
+      font-size: 16pt;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .description {
+    &-caption {
+      font-size: 32pt;
+    }
+    &-text {
+      font-size: 14pt;
+    }
+  }
+}
+
+.description-choices {
+  @include reset;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: $containerPadding/2;
+  justify-content: space-between;
+  .description-choice {
+    @include reset;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-decoration: none;
+    max-width: 280px;
+    transition: all 0.2s ease-out;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 50%;
+    &-img {
+      @include reset;
+      width: 100%;
+      height: auto;
+      margin: auto;
+    }
+    &-text {
+      @include reset;
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 18pt;
+      text-shadow: 2px 1px 5px #000;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .description-choices {
+    .description-choice {
+      flex-basis: 50%;
+    }
+  }
+}

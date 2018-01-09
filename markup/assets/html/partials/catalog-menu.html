@@ -1,0 +1,21 @@
+<div class="catalog-categories">
+
+    <h2>Категории</h2>
+
+    {{#each (getcategories) }}
+    <a href="/{{this.url}}.html"
+       class="catalog-categories-url {{#ifpage this.url}} catalog-categories-url--active {{/ifpage}}">
+        {{this.name}}
+    </a>
+    {{/each }}
+
+    <br>
+    <hr>
+    <br>
+
+    <a href="/catalog-specs.html"
+       class="catalog-categories-url {{#ifpage 'catalog-specs'}} catalog-categories-url--active {{/ifpage}}">
+        Характеристики
+    </a>
+
+</div>

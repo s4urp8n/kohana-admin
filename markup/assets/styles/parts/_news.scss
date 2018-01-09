@@ -1,0 +1,102 @@
+.news-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  &-item {
+    @include reset;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+    flex-basis: 100%;
+    margin-bottom: $containerPadding/2;
+    padding: $containerPadding;
+    text-decoration: none;
+    border: 1px solid $greyColor;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      border-color: #000;
+      background: rgba(255, 255, 255, 0.6);
+    }
+    &-img {
+      @include reset;
+      flex: 1;
+      width: 200px;
+      max-width: 200px;
+      min-width: 200px;
+      height: 200px;
+      max-height: 200px;
+      min-height: 200px;
+      background-size: cover;
+      background-position: center center;
+    }
+    &-right {
+      @include reset;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      padding-left: $containerPadding;
+      &-date {
+        @include reset;
+        font-size: 12pt;
+        font-weight: 700;
+        flex: 1;
+        color: #000;
+        opacity: 0.5;
+      }
+      &-title {
+        @include reset;
+        flex: 1;
+        font-weight: 700;
+        font-size: 16pt;
+        color: #000;
+        padding: 5px 0;
+      }
+      &-preview {
+        @include reset;
+        font-size: 14pt;
+        line-height: 1.2;
+        font-weight: 300;
+        flex: 1;
+        color: #000;
+      }
+    }
+  }
+}
+
+@media(max-width: 700px) {
+  .news-list {
+    &-item {
+      flex-wrap: wrap;
+      &-img {
+        flex: 1 1 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      &-right {
+        padding-left: 0;
+        &-date {
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.news-content {
+  &-date {
+    @include reset;
+  }
+  &-image {
+    @include reset;
+    width: 300px;
+    height: 300px;
+    float: left;
+    margin: 0 $containerPadding $containerPadding 0;
+    background-size: cover;
+    background-position: center center;
+  }
+}

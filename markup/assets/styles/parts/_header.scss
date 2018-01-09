@@ -1,0 +1,168 @@
+
+.page {
+  .header {
+    border-bottom: 1px solid $headerFooterBorderColor;
+  }
+  &.page--home {
+    .header {
+      border: 0;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-basis: 100%;
+  width: 100%;
+  align-items: center;
+  background: $transparentColor;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  &-logo {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    &-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  &-contacts {
+    flex: 1;
+    text-align: right;
+    line-height: 1.2;
+    &-phone {
+      display: block;
+      font-size: 210%;
+      text-decoration: none;
+      white-space: nowrap;
+      color: $phoneColor;
+      font-weight: 700;
+    }
+    &-email,
+    &-map {
+      white-space: nowrap;
+      text-decoration: none;
+      display: block;
+      color: #000;
+      font-size: 80%;
+    }
+  }
+  &-search {
+    flex: 1;
+    text-align: center;
+    padding-right: $containerPadding;
+    padding-left: $containerPadding;
+    display: flex;
+    font-size: 80%;
+    transition: all 0.3s ease-in-out;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    &-input {
+      flex-grow: 1;
+      flex-shrink: 0;
+      @include reset;
+      border-bottom: 1px solid $greyColor;
+      padding: 10px;
+      text-align: left;
+      font-size: inherit;
+      background-color: $fullTransparentColor;
+      transition: all 0.3s ease-in-out;
+    }
+    &-input-icon {
+      @include reset;
+    }
+    &:hover {
+      .header-search-input {
+        border-bottom-color: #000;
+      }
+    }
+  }
+  &-menu {
+    @include reset;
+    padding-top: $containerPadding/2;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 0 0 100%;
+    &-item {
+      display: inline-block;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 120%;
+      text-decoration: none;
+      padding: 5px 10px;
+      white-space: nowrap;
+      color: #000;
+      flex: 1;
+      text-align: center;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background: $greyColor;
+      }
+      &--active,
+      &--active:hover {
+        background: #000;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .header {
+    &-logo {
+      order: 1;
+    }
+    &-search {
+      order: 3;
+      flex: 0 0 100%;
+      padding-left: 0;
+      padding-right: 0;
+      justify-content: flex-end;
+      .header-search-input {
+        max-width: 300px;
+      }
+    }
+    &-menu {
+      width: 100%;
+      order: 4;
+      justify-content: center;
+      align-items: center;
+    }
+    &-contacts {
+      order: 2;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: $containerPadding/2;
+    justify-content: center;
+    &-logo {
+      flex: 0 0 100%;
+    }
+    &-menu {
+      justify-content: center;
+      align-items: center;
+      &-item {
+        flex: 1;
+        flex-basis: 30%;
+        max-width: 30%;
+      }
+    }
+    &-search,
+    &-contacts {
+      display: none;
+    }
+  }
+}

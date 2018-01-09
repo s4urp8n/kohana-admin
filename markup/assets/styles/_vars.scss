@@ -1,0 +1,16 @@
+$minPageWidth: 400px;
+$maxPageContainerWidth: 100%;
+$maxContainerWidth: 1400px;
+$containerPadding: 40px;
+$defaultFontFamily: "OpenSans";
+$rootPath: "/assets";
+$fontsPath: "#{$rootPath}/fonts";
+
+$transparentColor: rgba(255, 255, 255, 0.8);
+$fullTransparentColor: rgba(255, 255, 255, 0);
+$greyColor: #b8b8b8;
+
+$headerFooterBorderColor: #ccc;
+$phoneColor: #700;
+
+$tableHoverColor: lightblue;

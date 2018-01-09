@@ -1,0 +1,23 @@
+<div class="catalog-products">
+
+    <h1 class="h2">{{ getcurrentcategory }}</h1>
+
+    <table class="catalog-products-table">
+        <tr>
+            <th>Наименование</th>
+            <th>Вес</th>
+            <th>Единица измерения</th>
+            <th>Цена с НДС, руб</th>
+        </tr>
+        {{#each products}}
+        {{#ifequal this.category (getcurrentcategory)}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.weight}}</td>
+            <td>{{this.unit}}</td>
+            <td>{{this.price}}</td>
+        </tr>
+        {{/ifequal}}
+        {{/each}}
+    </table>
+</div>

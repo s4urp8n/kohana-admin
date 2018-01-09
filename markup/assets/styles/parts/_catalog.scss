@@ -1,0 +1,67 @@
+.catalog {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  &-categories {
+    flex: 1;
+    max-width: 300px;
+    &-url {
+      @include reset;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        background: $greyColor;
+      }
+      &--active,
+      &--active:hover {
+        background: #000;
+        color: #fff;
+      }
+    }
+  }
+  &-products {
+    padding-left: $containerPadding;
+    flex: 1;
+    &-table {
+      table-layout: auto;
+      width: 100%;
+      border-collapse: collapse;
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        font-weight: 400;
+        font-size: 12pt;
+        border: 1px solid #000;
+        color: #000;
+      }
+      th {
+        background: #ccc;
+        font-weight: 700;
+      }
+      td {
+        background: #fff;
+      }
+
+      tr:hover {
+        background: $tableHoverColor;
+        td {
+          box-shadow: 0px 0px 10px $tableHoverColor;
+          background: none;
+        }
+      }
+      &-aimg {
+        img {
+          display: block;
+          width: 100%;
+          max-width: 100px;
+          height: auto;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
