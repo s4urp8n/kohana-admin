@@ -10,7 +10,9 @@ class Admin extends Migration
     {
 
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->index();
+            $table->boolean('is_admin')
+                  ->index()
+                  ->default(0);
         });
 
     }

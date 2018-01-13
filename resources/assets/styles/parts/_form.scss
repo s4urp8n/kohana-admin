@@ -1,0 +1,66 @@
+.form {
+
+  display: block;
+  margin: auto;
+  padding: $containerPadding;
+
+  &__label {
+
+    display: block;
+    text-align: left;
+
+    input {
+      margin: 5px 0 20px 0;
+      text-align: left;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #b8b8b8;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .form__label__error {
+      background: #f80000;
+      display: block;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      width: 100%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    &--checkbox {
+      input {
+        display: inline-block;
+        width: auto;
+        margin-top: 10px;
+      }
+    }
+  }
+  &__button {
+    display: block;
+    padding: 20px;
+    width: 100%;
+    border: 0;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    color: #0f74a8;
+  }
+
+  &--login {
+    max-width: 400px;
+  }
+}

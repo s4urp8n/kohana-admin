@@ -1,47 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+    <div class="page page--home">
+        <div class="page-top">
+            @include('parts/header')
+        </div>
+        <div class="page-center">
+            <div class="page-container content">
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                @include('parts/breads',['links'=>[
+                    ['name'=>'Вход',],
+                ]])
 
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
+                <h1 class="text-center">Вход</h1>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                <form class="form form--login" method="POST" action="{{ route('password.email') }}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                    {{ csrf_field() }}
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                    <label class="form__label">
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        Email
+
+                        <input type="email" name="email"
+                               value="{{ old('email') }}" required/>
+
+                        @if ($errors->has('email'))
+                            <span class="form__label__error">{{ $errors->first('email') }}</span>
+                        @endif
+
+                    </label>
+
+                    <button type="submit" class="form__button">
+                        Send Password Reset Link
+                    </button>
+
+
+                    <a class="form__link"
+                       href="{{ route('login') }}">
+                        Войти
+                    </a>
+
+                    <a class="form__link"
+                       href="{{ route('register') }}">
+                        Регистрация
+                    </a>
+
+                </form>
+
+
             </div>
         </div>
+        <div class="page-bottom">
+            @include('parts/footer')
+        </div>
     </div>
-</div>
 @endsection

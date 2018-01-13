@@ -1,0 +1,10 @@
+{
+  "--version--.css": [
+    "resources/assets/styles/style.scss"
+  ],
+  "--version--.js": [
+    "resources/assets/scripts/jquery-3.2.1.min.js",
+    "resources/assets/lightGallery-1.6.5/js/lightgallery-all.js",
+    "resources/assets/scripts/script.js"
+  ]
+}

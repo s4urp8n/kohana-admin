@@ -12,7 +12,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 
 /*
@@ -51,5 +51,26 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
+
+if (!function_exists('getAssetsVersion')) {
+    function getAssetsVersion()
+    {
+        $versionFile = base_path() . DIRECTORY_SEPARATOR . 'gulpfile.version.txt';
+
+        return \Zver\StringHelper::load(file_get_contents($versionFile))
+                                 ->trimSpaces()
+                                 ->get();
+    }
+}
+
+if (!function_exists('getHtmlElementActiveClass')) {
+    function getHtmlElementActiveClass($activeCondition, $class)
+    {
+        if ($activeCondition) {
+            return $class . ' ' . $class . '--active';
+        }
+        return $class;
+    }
+}
 
 return $app;

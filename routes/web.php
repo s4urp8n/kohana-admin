@@ -11,6 +11,26 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'HomeController@index')
+     ->name('index');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->back();
+})
+     ->name('logout');
+
+Route::get('/specs', 'HomeController@specs');
+Route::get('/contacts', 'HomeController@contacts');
+Route::get('/search', 'HomeController@search');
+Route::get('/catalog/{category?}', 'HomeController@catalog');
+Route::get('/about', 'HomeController@about');
+Route::get('/news', 'HomeController@news');
+Route::get('/news/{id}-{title}', 'HomeController@newPage');
+Route::get('/product/{id}-{title}', 'HomeController@product')
+     ->where('id', '\d+')
+     ->where('title', '[^/]+');

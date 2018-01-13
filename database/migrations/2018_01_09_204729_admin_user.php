@@ -9,17 +9,27 @@ class AdminUser extends Migration
 
     public function up()
     {
-        $admin = new \App\User();
 
-        $admin->password = '$2y$10$p8dkrDGqfin08BIfCpFSP.6GIxWsnuAdTH8P1dgv6GmDf.l.qVA0m';
-        $admin->email = 'admin@admin.admin';
-        $admin->name = 'admin';
-        $admin->is_admin = 1;
-        $admin->save();
+        $users = [
+            'admin' => 1,
+            'user'  => 0
+        ];
+
+        foreach ($users as $user => $isAdmin) {
+
+            $dbUser = new \App\User();
+            $dbUser->password = bcrypt($user);
+            $dbUser->email = $user . '@' . $user . '.' . $user;
+            $dbUser->name = $user;
+            $dbUser->is_admin = $isAdmin;
+            $dbUser->save();
+
+        }
     }
 
     public function down()
     {
-        DB::table('users')->delete();
+        DB::table('users')
+          ->delete();
     }
 }
