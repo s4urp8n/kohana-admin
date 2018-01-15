@@ -21,6 +21,20 @@
       box-sizing: border-box;
     }
 
+    textarea {
+      margin: 5px 0 20px 0;
+      text-align: left;
+      display: block;
+      width: 100%;
+      min-height: 70px;
+      padding: 10px;
+      border: 1px solid #b8b8b8;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      resize: none;
+    }
+
     .form__label__error {
       background: #f80000;
       display: block;
@@ -63,4 +77,20 @@
   &--login {
     max-width: 400px;
   }
+  &--email {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+  }
+}
+
+.flash-message {
+  display: block;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  max-width: 200px;
+  margin-left: -100px;
+  background: #fff;
+  z-index: 10;
 }

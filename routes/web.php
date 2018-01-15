@@ -25,6 +25,8 @@ Route::get('/logout', function () {
      ->name('logout');
 
 Route::get('/specs', 'HomeController@specs');
+Route::post('/email', 'HomeController@email');
+Route::get('/sitemap.xml', 'HomeController@sitemapXml');
 Route::get('/contacts', 'HomeController@contacts');
 Route::get('/search', 'HomeController@search');
 Route::get('/catalog/{category?}', 'HomeController@catalog');

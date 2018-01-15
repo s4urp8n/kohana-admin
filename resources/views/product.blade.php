@@ -39,6 +39,8 @@
                             </tr>
                         </table>
 
+                        @include('parts/form')
+
                     </div>
 
                 </div>

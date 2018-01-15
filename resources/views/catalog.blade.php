@@ -22,6 +22,7 @@
 
                         @include('parts/products-table',['products'=>$products])
 
+                        @include('parts/form')
 
                     </div>
                 </div>
